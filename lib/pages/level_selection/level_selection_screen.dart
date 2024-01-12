@@ -1,14 +1,14 @@
-import 'package:endless_runner/level_selection/instructions_dialog.dart';
+import 'package:endless_runner/pages/level_selection/instructions_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
 
-import '../audio/audio_controller.dart';
-import '../audio/sounds.dart';
-import '../player_progress/player_progress.dart';
-import '../style/wobbly_button.dart';
-import '../style/palette.dart';
+import '../../atomic/palette.dart';
+import '../../atomic/wobbly_button.dart';
+import '../../features/audio/audio_controller.dart';
+import '../../features/audio/sounds.dart';
+import '../../features/player_progress/player_progress.dart';
 import 'levels.dart';
 
 class LevelSelectionScreen extends StatelessWidget {

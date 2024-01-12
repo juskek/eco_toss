@@ -2,9 +2,9 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-import '../audio/audio_controller.dart';
+import '../../features/audio/audio_controller.dart';
+import '../../features/player_progress/player_progress.dart';
 import '../level_selection/levels.dart';
-import '../player_progress/player_progress.dart';
 import 'components/background.dart';
 import 'endless_world.dart';
 

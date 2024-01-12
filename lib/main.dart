@@ -4,12 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
 
+import 'atomic/palette.dart';
+import 'features/app_lifecycle/app_lifecycle.dart';
+import 'features/audio/audio_controller.dart';
+import 'features/player_progress/player_progress.dart';
+import 'pages/settings/settings.dart';
 import 'router.dart';
-import 'app_lifecycle/app_lifecycle.dart';
-import 'audio/audio_controller.dart';
-import 'player_progress/player_progress.dart';
-import 'settings/settings.dart';
-import 'style/palette.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
