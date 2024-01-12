@@ -1,12 +1,12 @@
-import 'flame_game/game_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'level_selection/level_selection_screen.dart';
-import 'level_selection/levels.dart';
-import 'main_menu/main_menu_screen.dart';
-import 'settings/settings_screen.dart';
+import 'pages/flame_game/game_screen.dart';
+import 'pages/level_selection/level_selection_screen.dart';
+import 'pages/level_selection/levels.dart';
+import 'pages/main_menu/main_menu_screen.dart';
+import 'pages/settings/settings_screen.dart';
 import 'style/page_transition.dart';
 import 'style/palette.dart';
 

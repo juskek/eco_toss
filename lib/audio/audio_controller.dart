@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
 import '../app_lifecycle/app_lifecycle.dart';
-import '../settings/settings.dart';
+import '../pages/settings/settings.dart';
 import 'songs.dart';
 import 'sounds.dart';
 
