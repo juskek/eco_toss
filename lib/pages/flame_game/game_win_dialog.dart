@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
 
-import '../../style/palette.dart';
+import '../../atomic/palette.dart';
 import '../level_selection/levels.dart';
 
 /// This dialog is shown when a level is completed.

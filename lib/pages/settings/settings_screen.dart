@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../player_progress/player_progress.dart';
-import '../../style/palette.dart';
-import '../../style/wobbly_button.dart';
+import '../../atomic/palette.dart';
+import '../../atomic/wobbly_button.dart';
+import '../../features/player_progress/player_progress.dart';
 import 'custom_name_dialog.dart';
 import 'settings.dart';
 

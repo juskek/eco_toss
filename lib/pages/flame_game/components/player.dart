@@ -2,7 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/animation.dart';
 
-import '../../../audio/sounds.dart';
+import '../../../features/audio/sounds.dart';
 import '../effects/hurt_effect.dart';
 import '../effects/jump_effect.dart';
 import '../endless_runner.dart';

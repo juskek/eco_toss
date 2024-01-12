@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../audio/audio_controller.dart';
-import '../../audio/sounds.dart';
-import '../../style/palette.dart';
-import '../../style/responsive_screen.dart';
-import '../../style/wobbly_button.dart';
+import '../../atomic/palette.dart';
+import '../../atomic/responsive_screen.dart';
+import '../../atomic/wobbly_button.dart';
+import '../../features/audio/audio_controller.dart';
+import '../../features/audio/sounds.dart';
 import '../settings/settings.dart';
 
 class MainMenuScreen extends StatelessWidget {
