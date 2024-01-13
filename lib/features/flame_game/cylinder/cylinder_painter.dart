@@ -18,13 +18,14 @@ class CylinderCustomPainter extends CustomPainter {
 
     final circleRotationX = rotationX + pi / 2;
     final circleRotationY = rotationY;
-
+    canvas.save();
     canvas
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
       ..transform(Matrix4.rotationZ(rotationZ).storage)
       ..drawCircle(const Offset(0, circleOffset), 15, redPaintStyle);
     canvas.restore();
+    canvas.save();
     canvas
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
@@ -32,6 +33,7 @@ class CylinderCustomPainter extends CustomPainter {
       ..drawRect(Rect.fromCenter(center: Offset.zero, width: 30, height: 60),
           paintStyle);
     canvas.restore();
+    canvas.save();
     canvas
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
