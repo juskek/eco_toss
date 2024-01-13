@@ -13,7 +13,7 @@ class CylinderComponent extends CustomPainterComponent
   final double rotationY;
   final double rotationZ;
 
-  static const speed = 150;
+  static const speed = 50;
 
   int direction = 1;
 
@@ -31,8 +31,7 @@ class CylinderComponent extends CustomPainterComponent
 
     x += speed * direction * dt;
 
-    if ((x + width >= game.size.x && direction > 0) ||
-        (x <= 0 && direction < 0)) {
+    if ((x + width >= 100 && direction > 0) || (x <= 0 && direction < 0)) {
       direction *= -1;
     }
     super.update(dt);
