@@ -1,4 +1,4 @@
-import 'package:endless_runner/features/flame_game/cylinder/cylinder_painter.dart';
+import 'package:endless_runner/features/cylinder/cylinder/cylinder_painter.dart';
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:flame/components.dart';
 

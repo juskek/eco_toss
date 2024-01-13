@@ -1,11 +1,13 @@
+import 'dart:math';
+
 import 'package:endless_runner/features/cylinder/cylinder/cylinder_component.dart';
 import 'package:flame/components.dart';
 
-class EcoTossWorld extends World {
+class CylinderWorld extends World {
   @override
   Future<void> onLoad() async {
     await add(PositionComponent(position: Vector2(0, 0), children: [
-      CylinderComponent(rotationX: 0, rotationY: 0, rotationZ: 0)
+      CylinderComponent(rotationX: pi / 4, rotationY: pi / 4, rotationZ: pi / 4)
     ]));
     await add(PositionComponent(position: Vector2(100, 100), children: [
       CylinderComponent(rotationX: 0, rotationY: 0, rotationZ: 0)

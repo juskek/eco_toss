@@ -1,4 +1,4 @@
-import 'package:endless_runner/pages/flame_playground/flame_playground_page.dart';
+import 'package:endless_runner/pages/cylinder_playground/cylinder_playground_page.dart';
 import 'package:go_router/go_router.dart';
 
 /// The router describes the game's navigational hierarchy, from the main
@@ -7,11 +7,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const FlamePlaygroundPage(level: (
-        number: 1,
-        winScore: 3,
-        canSpawnTall: false,
-      )),
+      builder: (context, state) => const CylinderPlaygroundPage(),
     ),
     // GoRoute(
     //   path: '/',
