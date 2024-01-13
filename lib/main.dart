@@ -13,7 +13,7 @@ import 'router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Flame.device.setLandscape();
+  await Flame.device.setPortraitUpOnly();
   await Flame.device.fullScreen();
   runApp(const MyGame());
 }
