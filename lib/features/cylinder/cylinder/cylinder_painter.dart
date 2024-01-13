@@ -14,7 +14,10 @@ class CylinderCustomPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paintStyle = Paint()..color = Colors.red;
     final redPaintStyle = Paint()..color = Colors.grey.shade300;
-    const circleOffset = 30.0;
+    const width = 20.0;
+    const height = 30.0;
+    const circleRadius = width / 2;
+    const circleOffset = height / 2;
 
     final circleRotationX = rotationX + pi / 2;
     final circleRotationY = rotationY;
@@ -23,14 +26,15 @@ class CylinderCustomPainter extends CustomPainter {
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
       ..transform(Matrix4.rotationZ(rotationZ).storage)
-      ..drawCircle(const Offset(0, circleOffset), 15, redPaintStyle);
+      ..drawCircle(const Offset(0, circleOffset), circleRadius, redPaintStyle);
     canvas.restore();
     canvas.save();
     canvas
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
       ..transform(Matrix4.rotationZ(rotationZ).storage)
-      ..drawRect(Rect.fromCenter(center: Offset.zero, width: 30, height: 60),
+      ..drawRect(
+          Rect.fromCenter(center: Offset.zero, width: width, height: height),
           paintStyle);
     canvas.restore();
     canvas.save();
@@ -38,7 +42,7 @@ class CylinderCustomPainter extends CustomPainter {
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
       ..transform(Matrix4.rotationZ(rotationZ).storage)
-      ..drawCircle(const Offset(0, -circleOffset), 15, redPaintStyle);
+      ..drawCircle(const Offset(0, -circleOffset), circleRadius, redPaintStyle);
 
     canvas.restore();
   }
