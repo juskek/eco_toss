@@ -1,42 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CylinderCustomPainter extends CustomPainter {
-  late final facePaint = Paint()..color = Colors.yellow;
-
-  late final eyesPaint = Paint()..color = Colors.white;
-
   @override
   void paint(Canvas canvas, Size size) {
-    final faceRadius = size.height / 2;
-
-    canvas.drawCircle(
-      Offset(
-        faceRadius,
-        faceRadius,
-      ),
-      faceRadius,
-      facePaint,
-    );
-
-    final eyeSize = faceRadius * 0.15;
-
-    canvas.drawCircle(
-      Offset(
-        faceRadius - (eyeSize * 2),
-        faceRadius - eyeSize,
-      ),
-      eyeSize,
-      eyesPaint,
-    );
-
-    canvas.drawCircle(
-      Offset(
-        faceRadius + (eyeSize * 2),
-        faceRadius - eyeSize,
-      ),
-      eyeSize,
-      eyesPaint,
-    );
+    final paintStyle = Paint()..color = Colors.red;
+    canvas
+      ..transform(Matrix4.rotationX(pi / 4).storage)
+      ..drawRect(Rect.fromCenter(center: Offset.zero, width: 30, height: 30),
+          paintStyle);
   }
 
   @override

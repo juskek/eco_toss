@@ -10,22 +10,21 @@ class CylinderComponent extends CustomPainterComponent
 
   @override
   Future<void> onLoad() async {
-    painter = CylinderCustomPainter();
-
     size = Vector2.all(100);
 
+    painter = CylinderCustomPainter();
     // y = 0;
   }
 
-  @override
-  void update(double dt) {
-    super.update(dt);
+  // @override
+  // void update(double dt) {
+  //   super.update(dt);
 
-    x += speed * direction * dt;
+  //   x += speed * direction * dt;
 
-    if ((x + width >= game.size.x && direction > 0) ||
-        (x <= 0 && direction < 0)) {
-      direction *= -1;
-    }
-  }
+  //   if ((x + width >= game.size.x && direction > 0) ||
+  //       (x <= 0 && direction < 0)) {
+  //     direction *= -1;
+  //   }
+  // }
 }
