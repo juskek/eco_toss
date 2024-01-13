@@ -3,14 +3,22 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CylinderCustomPainter extends CustomPainter {
+  CylinderCustomPainter(
+      {required this.rotationX,
+      required this.rotationY,
+      required this.rotationZ});
+  final double rotationX;
+  final double rotationY;
+  final double rotationZ;
   @override
   void paint(Canvas canvas, Size size) {
-    final paintStyle = Paint()..color = Colors.white;
-    final redPaintStyle = Paint()..color = Colors.red;
+    final paintStyle = Paint()..color = Colors.red;
+    final redPaintStyle = Paint()..color = Colors.grey.shade300;
     const circleOffset = 30.0;
-    const rotationX = pi / 4;
-    const rotationY = pi / 4;
-    const rotationZ = pi / 4;
+
+    final circleRotationX = rotationX + pi / 2;
+    final circleRotationY = rotationY;
+
     canvas
       ..transform(Matrix4.rotationX(rotationX).storage)
       ..transform(Matrix4.rotationY(rotationY).storage)
