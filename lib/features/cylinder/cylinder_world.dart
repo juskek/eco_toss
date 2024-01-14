@@ -72,10 +72,32 @@ class CylinderWorld extends World {
     }
   }
 
+  FutureOr<void> addRotationsAroundXWithSomeY() async {
+    const int numberOfComponents = 9;
+    const double positionY = 0;
+
+    for (int i = 0; i < numberOfComponents; i++) {
+      double positionX = startPositionX + (i * positionIncrementX);
+      double rotation = -pi + (i * (rotationalIncrement));
+
+      add(PositionComponent(
+        position: Vector2(positionX, positionY),
+        children: [
+          CylinderComponent(
+            rotationX: rotation,
+            rotationY: pi / 4,
+            rotationZ: 0,
+          ),
+        ],
+      ));
+    }
+  }
+
   @override
   Future<void> onLoad() async {
     addRotationsAroundX();
     addRotationsAroundY();
     addRotationsAroundZ();
+    addRotationsAroundXWithSomeY();
   }
 }
