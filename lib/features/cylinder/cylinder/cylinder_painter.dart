@@ -24,6 +24,8 @@ class CylinderCustomPainter extends CustomPainter {
     final circleRotationX = rotationX + pi / 2;
 
     final rectangleRotationX = rotationX;
+    final rectangleRotationY =
+        rotationX % pi == 0 && rotationZ == 0 ? 0.0 : rotationY;
     canvas.save();
     canvas
       ..transform(Matrix4.rotationX(circleRotationX).storage)
@@ -35,7 +37,7 @@ class CylinderCustomPainter extends CustomPainter {
     canvas.save();
     canvas
       ..transform(Matrix4.rotationX(rectangleRotationX).storage)
-      ..transform(Matrix4.rotationY(rotationY).storage)
+      ..transform(Matrix4.rotationY(rectangleRotationY).storage)
       ..transform(Matrix4.rotationZ(rotationZ).storage)
       ..drawRect(
           Rect.fromCenter(center: Offset.zero, width: width, height: height),
