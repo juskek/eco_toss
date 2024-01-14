@@ -5,15 +5,17 @@ import 'package:endless_runner/features/cylinder/cylinder/cylinder_component.dar
 import 'package:flame/components.dart';
 
 class CylinderWorld extends World {
+  static const double startPositionX = -150;
+  static const double positionIncrementX = 35;
+  static const double rotationalIncrement = pi / 4;
   FutureOr<void> addRotationsAroundY() async {
-    const int numberOfComponents = 5;
-    const double startPositionX = -100;
-    const double positionIncrementX = 50;
+    const int numberOfComponents = 9;
+
     const double positionY = -200;
 
     for (int i = 0; i < numberOfComponents; i++) {
       double positionX = startPositionX + (i * positionIncrementX);
-      double rotation = -pi + (i * (pi / 2));
+      double rotation = -pi + (i * (rotationalIncrement));
 
       add(PositionComponent(
         position: Vector2(positionX, positionY),
@@ -29,14 +31,12 @@ class CylinderWorld extends World {
   }
 
   FutureOr<void> addRotationsAroundX() async {
-    const int numberOfComponents = 5;
-    const double startPositionX = -100;
-    const double positionIncrementX = 50;
+    const int numberOfComponents = 9;
     const double positionY = -300;
 
     for (int i = 0; i < numberOfComponents; i++) {
       double positionX = startPositionX + (i * positionIncrementX);
-      double rotation = -pi + (i * (pi / 2));
+      double rotation = -pi + (i * (rotationalIncrement));
 
       add(PositionComponent(
         position: Vector2(positionX, positionY),
@@ -52,14 +52,12 @@ class CylinderWorld extends World {
   }
 
   FutureOr<void> addRotationsAroundZ() async {
-    const int numberOfComponents = 5;
-    const double startPositionX = -100;
-    const double positionIncrementX = 50;
+    const int numberOfComponents = 9;
     const double positionY = -100;
 
     for (int i = 0; i < numberOfComponents; i++) {
       double positionX = startPositionX + (i * positionIncrementX);
-      double rotation = -pi + (i * (pi / 2));
+      double rotation = -pi + (i * (rotationalIncrement));
 
       add(PositionComponent(
         position: Vector2(positionX, positionY),
