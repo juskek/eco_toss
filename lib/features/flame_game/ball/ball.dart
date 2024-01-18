@@ -11,7 +11,7 @@ class BallComponent extends CircleComponent
     required this.xVelocity,
     required this.yVelocity,
     required this.zVelocity,
-  }) : super(anchor: Anchor.center);
+  }) : super(anchor: Anchor.center, priority: 2);
 
   double radiusStart;
 
@@ -29,6 +29,7 @@ class BallComponent extends CircleComponent
   double zVelocity;
 
   bool hasHitBackboard = false;
+  bool hasPassedBinStart = false;
 
   @override
   Future<void> onLoad() {
@@ -56,6 +57,10 @@ class BallComponent extends CircleComponent
     }
     if (hasHitBackboard) {
       zVelocity = 0;
+    }
+    if (zPosition >= zBinStartMetres && !hasPassedBinStart) {
+      hasPassedBinStart = true;
+      notifyListeners();
     }
     if (yPosition <= yFloorPixels) {
       yVelocity = applyGravityToYVelocity(dt, yVelocity);

@@ -3,6 +3,7 @@
 // z is into the screen
 
 const zStartMetres = 1;
+const zBinStartMetres = 200;
 const zEndMetres = 250;
 const yFloorPixels = 250.0;
 

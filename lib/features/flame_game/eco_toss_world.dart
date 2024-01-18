@@ -14,23 +14,32 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       size: Vector2(findGame()!.canvasSize.x, 10),
       anchor: Anchor.center,
     ));
-    await add(
-        BackboardComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 100)));
+    await add(BackboardComponent(
+      size: Vector2(findGame()!.canvasSize.x * 0.3, 100),
+    ));
+    final binComponent =
+        BinComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 200));
+    await add(binComponent);
     await add(BallComponent(
         radiusStart: 50,
         xVelocity: 0,
         yVelocity: yVelocity,
         zVelocity: zVelocity));
-    await add(BinComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 200)));
-    final playerNotifier = gameRef.componentsNotifier<BallComponent>();
-    playerNotifier.addListener(() {
-      final player = playerNotifier.single;
-      if (player == null) {
+    final ballNotifier = gameRef.componentsNotifier<BallComponent>();
+    ballNotifier.addListener(() {
+      final ball = ballNotifier.single;
+      if (ball == null) {
+        binComponent.priority = 1;
         add(BallComponent(
             radiusStart: 50,
             xVelocity: 0,
             yVelocity: yVelocity,
             zVelocity: zVelocity));
+      }
+      if (ball != null && ball.zPosition >= zBinStartMetres) {
+        print('ball behind bin');
+        binComponent.priority = 2;
+        ball.priority = 1;
       }
     });
   }
