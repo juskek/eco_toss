@@ -3,8 +3,10 @@ import 'package:endless_runner/features/flame_game/ball/ball.dart';
 import 'package:endless_runner/features/flame_game/bin/bin_component.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 
 class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
+  final scoreNotifier = ValueNotifier(0);
   @override
   Future<void> onLoad() async {
     const yVelocity = -50.0;
