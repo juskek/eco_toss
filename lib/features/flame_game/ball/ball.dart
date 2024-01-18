@@ -47,10 +47,14 @@ class BallComponent extends CircleComponent
     if (hasHitBackboard) {
       zVelocity = 0;
     }
-    yVelocity = applyGravityToYVelocity(dt, yVelocity);
+    if (yPosition <= yFloor) {
+      yVelocity = applyGravityToYVelocity(dt, yVelocity);
+      yPosition += getDistanceTravelled(dt, yVelocity);
+    } else {
+      yVelocity = 0;
+    }
 
     xPosition += getDistanceTravelled(dt, xVelocity);
-    yPosition += getDistanceTravelled(dt, yVelocity);
     zPosition += getDistanceTravelled(dt, zVelocity);
 
     super.position = Vector2(xPosition, yPosition);
