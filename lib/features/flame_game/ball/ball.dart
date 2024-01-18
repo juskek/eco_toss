@@ -2,6 +2,7 @@ import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 
 class BallComponent extends CircleComponent
     with HasGameReference<EcoTossGame>, CollisionCallbacks, Notifier {
@@ -13,7 +14,12 @@ class BallComponent extends CircleComponent
   }) : super(anchor: Anchor.center);
 
   double radiusStart;
+
+  @Deprecated('not in use since we are using getDistance()')
   double timeElapsed = 0;
+
+  double timeSinceMissSeconds = 0;
+
   double xPosition = 0;
   double yPosition = 0;
   double zPosition = 0;
@@ -41,6 +47,13 @@ class BallComponent extends CircleComponent
 
   @override
   void update(double dt) {
+    if (zPosition >= zEndMetres && !hasHitBackboard) {
+      timeSinceMissSeconds += dt;
+      super.setColor(Colors.red);
+      if (timeSinceMissSeconds >= 1) {
+        removeFromParent();
+      }
+    }
     if (hasHitBackboard) {
       zVelocity = 0;
     }
