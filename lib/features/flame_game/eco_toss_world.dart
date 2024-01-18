@@ -7,7 +7,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
   @override
   Future<void> onLoad() async {
     await add(RectangleComponent(
-      position: Vector2(0, yFloor),
+      position: Vector2(0, yFloorPixels),
       size: Vector2(findGame()!.canvasSize.x, 10),
       anchor: Anchor.center,
     ));

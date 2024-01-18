@@ -32,7 +32,7 @@ class BallComponent extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (zPosition >= zEnd) {
+    if (zPosition >= zEndMetres) {
       hasHitBackboard = true;
     }
 
@@ -44,7 +44,7 @@ class BallComponent extends CircleComponent
     if (hasHitBackboard) {
       zVelocity = 0;
     }
-    if (yPosition <= yFloor) {
+    if (yPosition <= yFloorPixels) {
       yVelocity = applyGravityToYVelocity(dt, yVelocity);
       yPosition += getDistanceTravelled(dt, yVelocity);
     } else {

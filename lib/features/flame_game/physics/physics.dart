@@ -2,25 +2,25 @@
 // y is down
 // z is into the screen
 
-const zStart = 1;
-const zEnd = 250;
-const yFloor = 250.0;
+const zStartMetres = 1;
+const zEndMetres = 250;
+const yFloorPixels = 250.0;
 
 const scaleStart = 1;
 const scaleEnd = 0.1;
 
-const gravity = 9.81;
+const gravityMps2 = 9.81;
 
-const scaleRate = (scaleStart - scaleEnd) / (zEnd - zStart);
+const scaleRate = (scaleStart - scaleEnd) / (zEndMetres - zStartMetres);
 
 double getScaleFactor(double zCurrent) {
-  return scaleStart - (scaleRate * (zCurrent - zStart));
+  return scaleStart - (scaleRate * (zCurrent - zStartMetres));
 }
 
-double getDistanceTravelled(double time, double velocity) {
-  return velocity * time;
+double getDistanceTravelled(double timeSeconds, double velocityMps) {
+  return velocityMps * timeSeconds;
 }
 
-double applyGravityToYVelocity(double time, double yVelocity) {
-  return yVelocity + (gravity * time);
+double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
+  return yVelocityMps + (gravityMps2 * timeSeconds);
 }
