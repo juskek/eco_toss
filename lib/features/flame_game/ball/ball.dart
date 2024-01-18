@@ -4,7 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 class BallComponent extends CircleComponent
-    with HasGameReference<EcoTossGame>, CollisionCallbacks {
+    with HasGameReference<EcoTossGame>, CollisionCallbacks, Notifier {
   BallComponent({
     required this.radiusStart,
     required this.xVelocity,
@@ -32,9 +32,7 @@ class BallComponent extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    print("OVERLAP");
     if (zPosition >= zEnd) {
-      print("COLLISION");
       hasHitBackboard = true;
     }
 
@@ -43,7 +41,6 @@ class BallComponent extends CircleComponent
 
   @override
   void update(double dt) {
-    print(zPosition);
     if (hasHitBackboard) {
       zVelocity = 0;
     }
@@ -52,6 +49,7 @@ class BallComponent extends CircleComponent
       yPosition += getDistanceTravelled(dt, yVelocity);
     } else {
       yVelocity = 0;
+      removeFromParent();
     }
 
     xPosition += getDistanceTravelled(dt, xVelocity);
