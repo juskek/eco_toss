@@ -8,7 +8,7 @@ class BackboardComponent extends RectangleComponent with CollisionCallbacks {
 
   @override
   void onLoad() {
-    add(RectangleHitbox());
+    add(RectangleHitbox(isSolid: true));
     super.paint = (Paint()..color = Colors.red);
   }
 }

@@ -4,46 +4,56 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 class BallComponent extends CircleComponent
-    with HasGameReference<EcoTossGame>, CollisionCallbacks {
+    with HasGameReference<EcoTossGame>, CollisionCallbacks, Notifier {
   BallComponent({
     required this.radiusStart,
-    required this.xPosition,
-    required this.yPosition,
-    required this.zPosition,
+    required this.xVelocity,
+    required this.yVelocity,
+    required this.zVelocity,
   }) : super(anchor: Anchor.center);
 
   double radiusStart;
   double timeElapsed = 0;
-  double xPosition;
-  double yPosition;
-  double zPosition;
+  double xPosition = 0;
+  double yPosition = 0;
+  double zPosition = 0;
+
+  double xVelocity;
+  double yVelocity;
+  double zVelocity;
 
   bool hasHitBackboard = false;
 
   @override
   Future<void> onLoad() {
-    add(CircleHitbox());
+    add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    print("OVERLAP");
-    if (zPosition >= Z_END) {
-      print("COLLISION");
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (zPosition >= zEndMetres) {
       hasHitBackboard = true;
     }
 
-    super.onCollision(points, other);
+    super.onCollision(intersectionPoints, other);
   }
 
   @override
   void update(double dt) {
-    print(zPosition);
-    timeElapsed += dt;
-    xPosition = hasHitBackboard ? xPosition : getXPosition(timeElapsed, 0);
-    yPosition = hasHitBackboard ? yPosition : getYPosition(timeElapsed, -50);
-    zPosition = hasHitBackboard ? zPosition : getZPosition(timeElapsed, 25);
+    if (hasHitBackboard) {
+      zVelocity = 0;
+    }
+    if (yPosition <= yFloorPixels) {
+      yVelocity = applyGravityToYVelocity(dt, yVelocity);
+      yPosition += getDistanceTravelled(dt, yVelocity);
+    } else {
+      yVelocity = 0;
+      removeFromParent();
+    }
+
+    xPosition += getDistanceTravelled(dt, xVelocity);
+    zPosition += getDistanceTravelled(dt, zVelocity);
 
     super.position = Vector2(xPosition, yPosition);
     double scaleFactor = getScaleFactor(zPosition);
