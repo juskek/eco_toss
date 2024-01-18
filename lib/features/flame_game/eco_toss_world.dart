@@ -13,7 +13,8 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       size: Vector2(findGame()!.canvasSize.x, 10),
       anchor: Anchor.center,
     ));
-    await add(BackboardComponent(size: findGame()!.canvasSize * 0.3));
+    await add(
+        BackboardComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 100)));
     await add(BallComponent(
         radiusStart: 50,
         xVelocity: 0,
