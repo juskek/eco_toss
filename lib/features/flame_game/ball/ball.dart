@@ -44,13 +44,12 @@ class BallComponent extends CircleComponent
   @override
   void update(double dt) {
     // print(zPosition);
-    timeElapsed += dt;
-    xPosition =
-        hasHitBackboard ? xPosition : getXPosition(timeElapsed, xVelocity);
-    yPosition =
-        hasHitBackboard ? yPosition : getYPosition(timeElapsed, yVelocity);
-    zPosition =
-        hasHitBackboard ? zPosition : getZPosition(timeElapsed, zVelocity);
+
+    yVelocity = applyGravityToYVelocity(dt, yVelocity);
+
+    xPosition += getDistanceTravelled(dt, xVelocity);
+    yPosition += getDistanceTravelled(dt, yVelocity);
+    zPosition += getDistanceTravelled(dt, zVelocity);
 
     super.position = Vector2(xPosition, yPosition);
     double scaleFactor = getScaleFactor(zPosition);
