@@ -7,16 +7,20 @@ class BallComponent extends CircleComponent
     with HasGameReference<EcoTossGame>, CollisionCallbacks {
   BallComponent({
     required this.radiusStart,
-    required this.xPosition,
-    required this.yPosition,
-    required this.zPosition,
+    required this.xVelocity,
+    required this.yVelocity,
+    required this.zVelocity,
   }) : super(anchor: Anchor.center);
 
   double radiusStart;
   double timeElapsed = 0;
-  double xPosition;
-  double yPosition;
-  double zPosition;
+  double xPosition = 0;
+  double yPosition = 0;
+  double zPosition = 0;
+
+  double xVelocity;
+  double yVelocity;
+  double zVelocity;
 
   bool hasHitBackboard = false;
 
@@ -41,9 +45,12 @@ class BallComponent extends CircleComponent
   void update(double dt) {
     // print(zPosition);
     timeElapsed += dt;
-    xPosition = hasHitBackboard ? xPosition : getXPosition(timeElapsed, 0);
-    yPosition = hasHitBackboard ? yPosition : getYPosition(timeElapsed, -50);
-    zPosition = hasHitBackboard ? zPosition : getZPosition(timeElapsed, 25);
+    xPosition =
+        hasHitBackboard ? xPosition : getXPosition(timeElapsed, xVelocity);
+    yPosition =
+        hasHitBackboard ? yPosition : getYPosition(timeElapsed, yVelocity);
+    zPosition =
+        hasHitBackboard ? zPosition : getZPosition(timeElapsed, zVelocity);
 
     super.position = Vector2(xPosition, yPosition);
     double scaleFactor = getScaleFactor(zPosition);

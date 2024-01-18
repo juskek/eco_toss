@@ -7,6 +7,6 @@ class EcoTossWorld extends World with HasCollisionDetection {
   Future<void> onLoad() async {
     await add(BackboardComponent(size: findGame()!.canvasSize * 0.3));
     await add(BallComponent(
-        radiusStart: 50, xPosition: 0, yPosition: 0, zPosition: 0));
+        radiusStart: 50, xVelocity: 0, yVelocity: -50, zVelocity: 25));
   }
 }
