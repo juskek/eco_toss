@@ -1,34 +1,32 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:math';
 
-const X_START = 1;
-const Y_START = 1;
-const Z_START = 1;
-const Z_END = 250;
-const Y_FLOOR = -50;
+const xStart = 1;
+const yStart = 1;
+const zStart = 1;
+const zEnd = 250;
+const yFloor = -50;
 
-const SCALE_START = 1;
-const SCALE_END = 0.1;
+const scaleStart = 1;
+const scaleEnd = 0.1;
 
-const GRAVITY = 9.81;
+const gravity = 9.81;
 
-const SCALE_RATE = (SCALE_START - SCALE_END) / (Z_END - Z_START);
+const scaleRate = (scaleStart - scaleEnd) / (zEnd - zStart);
 
 double getScaleFactor(double zCurrent) {
-  return SCALE_START - (SCALE_RATE * (zCurrent - Z_START));
+  return scaleStart - (scaleRate * (zCurrent - zStart));
 }
 
 double getXPosition(double timeElapsed, double xVelocity) {
-  return X_START + xVelocity * timeElapsed;
+  return xStart + xVelocity * timeElapsed;
 }
 
 double getYPosition(double timeElapsed, double yVelocity) {
-  return Y_START +
+  return yStart +
       (yVelocity * timeElapsed) +
-      (0.5 * GRAVITY * pow(timeElapsed, 2));
+      (0.5 * gravity * pow(timeElapsed, 2));
 }
 
 double getZPosition(double timeElapsed, double zVelocity) {
-  return Z_START + zVelocity * timeElapsed;
+  return zStart + zVelocity * timeElapsed;
 }

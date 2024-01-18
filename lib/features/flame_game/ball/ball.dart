@@ -27,19 +27,19 @@ class BallComponent extends CircleComponent
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    print("OVERLAP");
-    if (zPosition >= Z_END) {
-      print("COLLISION");
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    // print("OVERLAP");
+    if (zPosition >= zEnd) {
+      // print("COLLISION");
       hasHitBackboard = true;
     }
 
-    super.onCollision(points, other);
+    super.onCollision(intersectionPoints, other);
   }
 
   @override
   void update(double dt) {
-    print(zPosition);
+    // print(zPosition);
     timeElapsed += dt;
     xPosition = hasHitBackboard ? xPosition : getXPosition(timeElapsed, 0);
     yPosition = hasHitBackboard ? yPosition : getYPosition(timeElapsed, -50);
