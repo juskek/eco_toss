@@ -28,9 +28,9 @@ class BallComponent extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    // print("OVERLAP");
+    print("OVERLAP");
     if (zPosition >= zEnd) {
-      // print("COLLISION");
+      print("COLLISION");
       hasHitBackboard = true;
     }
 

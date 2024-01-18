@@ -17,16 +17,30 @@ double getScaleFactor(double zCurrent) {
   return scaleStart - (scaleRate * (zCurrent - zStart));
 }
 
-double getXPosition(double timeElapsed, double xVelocity) {
-  return xStart + xVelocity * timeElapsed;
+@Deprecated(
+    'use getDistanceTravelled instead, so that an objects velocity can change after it has been thrown e.g. with wind')
+double getXPosition(double timeElapsed, double xInitialVelocity) {
+  return xStart + xInitialVelocity * timeElapsed;
 }
 
-double getYPosition(double timeElapsed, double yVelocity) {
+@Deprecated(
+    'use getDistanceTravelled instead, so that an objects velocity can change after it has been thrown e.g. with wind')
+double getYPosition(double timeElapsed, double yInitialVelocity) {
   return yStart +
-      (yVelocity * timeElapsed) +
+      (yInitialVelocity * timeElapsed) +
       (0.5 * gravity * pow(timeElapsed, 2));
 }
 
-double getZPosition(double timeElapsed, double zVelocity) {
-  return zStart + zVelocity * timeElapsed;
+@Deprecated(
+    'use getDistanceTravelled instead, so that an objects velocity can change after it has been thrown e.g. with wind')
+double getZPosition(double timeElapsed, double zInitialVelocity) {
+  return zStart + zInitialVelocity * timeElapsed;
+}
+
+double getDistanceTravelled(double time, double velocity) {
+  return velocity * time;
+}
+
+double applyGravityToYVelocity(double time, double yVelocity) {
+  return yVelocity + (gravity * time);
 }
