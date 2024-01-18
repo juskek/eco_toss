@@ -1,10 +1,14 @@
 import 'dart:math';
 
+// x is right
+// y is down
+// z is into the screen
+
 const xStart = 1;
 const yStart = 1;
 const zStart = 1;
 const zEnd = 250;
-const yFloor = -50;
+const yFloor = 250.0;
 
 const scaleStart = 1;
 const scaleEnd = 0.1;
