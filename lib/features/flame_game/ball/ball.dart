@@ -21,7 +21,7 @@ class BallComponent extends CircleComponent
   double timeSinceMissSeconds = 0;
 
   double xPosition = 0;
-  double yPosition = 0;
+  double yPosition = 100;
   double zPosition = 0;
 
   double xVelocity;
