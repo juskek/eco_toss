@@ -1,5 +1,6 @@
 import 'package:endless_runner/features/flame_game/backboard/backboard.dart';
 import 'package:endless_runner/features/flame_game/ball/ball.dart';
+import 'package:endless_runner/features/flame_game/bin/bin_component.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/components.dart';
 
@@ -20,8 +21,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         xVelocity: 0,
         yVelocity: yVelocity,
         zVelocity: zVelocity));
-    // await add(BallComponent(
-    //     radiusStart: 50, xVelocity: 0, yVelocity: -10, zVelocity: 25));
+    await add(BinComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 200)));
     final playerNotifier = gameRef.componentsNotifier<BallComponent>();
     playerNotifier.addListener(() {
       final player = playerNotifier.single;
