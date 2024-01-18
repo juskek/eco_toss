@@ -6,6 +6,8 @@ import 'package:flame/components.dart';
 class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
   @override
   Future<void> onLoad() async {
+    const yVelocity = -20.0;
+    const zVelocity = 50.0;
     await add(RectangleComponent(
       position: Vector2(0, yFloorPixels),
       size: Vector2(findGame()!.canvasSize.x, 10),
@@ -13,13 +15,21 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     ));
     await add(BackboardComponent(size: findGame()!.canvasSize * 0.3));
     await add(BallComponent(
-        radiusStart: 50, xVelocity: 0, yVelocity: -10, zVelocity: 25));
+        radiusStart: 50,
+        xVelocity: 0,
+        yVelocity: yVelocity,
+        zVelocity: zVelocity));
+    // await add(BallComponent(
+    //     radiusStart: 50, xVelocity: 0, yVelocity: -10, zVelocity: 25));
     final playerNotifier = gameRef.componentsNotifier<BallComponent>();
     playerNotifier.addListener(() {
       final player = playerNotifier.single;
       if (player == null) {
         add(BallComponent(
-            radiusStart: 50, xVelocity: 0, yVelocity: -10, zVelocity: 25));
+            radiusStart: 50,
+            xVelocity: 0,
+            yVelocity: yVelocity,
+            zVelocity: zVelocity));
       }
     });
   }
