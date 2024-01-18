@@ -8,12 +8,15 @@ class BallComponent extends CircleComponent
     with HasGameReference<EcoTossGame>, CollisionCallbacks, Notifier {
   BallComponent({
     required this.radiusStart,
+    required this.addScore,
     required this.xVelocity,
     required this.yVelocity,
     required this.zVelocity,
-  }) : super(anchor: Anchor.center);
+  }) : super(anchor: Anchor.center, priority: 2);
 
   double radiusStart;
+
+  final void Function({int amount}) addScore;
 
   @Deprecated('not in use since we are using getDistance()')
   double timeElapsed = 0;
@@ -21,7 +24,7 @@ class BallComponent extends CircleComponent
   double timeSinceMissSeconds = 0;
 
   double xPosition = 0;
-  double yPosition = 0;
+  double yPosition = 100;
   double zPosition = 0;
 
   double xVelocity;
@@ -29,6 +32,7 @@ class BallComponent extends CircleComponent
   double zVelocity;
 
   bool hasHitBackboard = false;
+  bool hasPassedBinStart = false;
 
   @override
   Future<void> onLoad() {
@@ -57,11 +61,18 @@ class BallComponent extends CircleComponent
     if (hasHitBackboard) {
       zVelocity = 0;
     }
+    if (zPosition >= zBinStartMetres && !hasPassedBinStart) {
+      hasPassedBinStart = true;
+      notifyListeners();
+    }
     if (yPosition <= yFloorPixels) {
       yVelocity = applyGravityToYVelocity(dt, yVelocity);
       yPosition += getDistanceTravelled(dt, yVelocity);
     } else {
       yVelocity = 0;
+      if (hasHitBackboard) {
+        addScore();
+      }
       removeFromParent();
     }
 
