@@ -44,7 +44,9 @@ class BallComponent extends CircleComponent
   @override
   void update(double dt) {
     // print(zPosition);
-
+    if (hasHitBackboard) {
+      zVelocity = 0;
+    }
     yVelocity = applyGravityToYVelocity(dt, yVelocity);
 
     xPosition += getDistanceTravelled(dt, xVelocity);
