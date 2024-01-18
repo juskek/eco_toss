@@ -26,7 +26,7 @@ class BallComponent extends CircleComponent
 
   @override
   Future<void> onLoad() {
-    add(CircleHitbox());
+    add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
 
@@ -43,7 +43,7 @@ class BallComponent extends CircleComponent
 
   @override
   void update(double dt) {
-    // print(zPosition);
+    print(zPosition);
     if (hasHitBackboard) {
       zVelocity = 0;
     }
