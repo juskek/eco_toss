@@ -7,7 +7,7 @@ import 'package:flame/components.dart';
 class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
   @override
   Future<void> onLoad() async {
-    const yVelocity = -20.0;
+    const yVelocity = -50.0;
     const zVelocity = 50.0;
     await add(RectangleComponent(
       position: Vector2(0, yFloorPixels),
@@ -25,6 +25,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         xVelocity: 0,
         yVelocity: yVelocity,
         zVelocity: zVelocity));
+
     final ballNotifier = gameRef.componentsNotifier<BallComponent>();
     ballNotifier.addListener(() {
       final ball = ballNotifier.single;
@@ -37,7 +38,6 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
             zVelocity: zVelocity));
       }
       if (ball != null && ball.zPosition >= zBinStartMetres) {
-        print('ball behind bin');
         binComponent.priority = 2;
         ball.priority = 1;
       }
