@@ -7,6 +7,11 @@ import 'package:flutter/material.dart';
 
 class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
   final scoreNotifier = ValueNotifier(0);
+
+  void addScore({int amount = 1}) {
+    scoreNotifier.value += amount;
+  }
+
   @override
   Future<void> onLoad() async {
     const yVelocity = -50.0;
@@ -24,6 +29,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     await add(binComponent);
     await add(BallComponent(
         radiusStart: 50,
+        addScore: addScore,
         xVelocity: 0,
         yVelocity: yVelocity,
         zVelocity: zVelocity));
@@ -35,6 +41,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         binComponent.priority = 1;
         add(BallComponent(
             radiusStart: 50,
+            addScore: addScore,
             xVelocity: 0,
             yVelocity: yVelocity,
             zVelocity: zVelocity));
