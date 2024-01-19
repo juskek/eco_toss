@@ -16,14 +16,16 @@ import 'dart:math';
 ///
 /// These spatial coordinates are different from the 2D pixel coordinates
 abstract class EcoToss3DSpace {
-  static const xMinMetres = 0;
-  static const xMaxMetres = 2;
+  static const xMinMetres = 0.0;
+  static const xMaxMetres = 2.0;
+  static double get xMidMetres => (xMaxMetres - xMinMetres) / 2;
 
-  static const yMinMetres = 0;
-  static const yMaxMetres = 3;
+  static const yMinMetres = 0.0;
+  static const yMaxMetres = 3.0;
+  static double get yMidMetres => (yMaxMetres - yMinMetres) / 2;
 
-  static const zMinMetres = 0;
-  static const zMaxMetres = 5;
+  static const zMinMetres = 0.0;
+  static const zMaxMetres = 5.0;
 }
 
 const pixelsPerMetre = 300;
@@ -61,9 +63,9 @@ double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
   return yVelocityMps + (gravityMps2 * timeSeconds);
 }
 
-double getYPixelPositionFromDepth(
-    double screenHeightPixels, double zPositionMetres) {
-  final yPixelsPerZMetre =
-      screenHeightPixels * 0.9 / (zStartMetres - zEndMetres).abs();
-  return zPositionMetres * yPixelsPerZMetre;
-}
+// double getYPixelPositionFromDepth(
+//     double screenHeightPixels, double zPositionMetres) {
+//   final yPixelsPerZMetre =
+//       screenHeightPixels * 0.9 / (zStartMetres - zEndMetres).abs();
+//   return zPositionMetres * yPixelsPerZMetre;
+// }

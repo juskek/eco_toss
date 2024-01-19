@@ -1,3 +1,5 @@
+import 'package:endless_runner/features/flame_game/physics/physics.dart';
+import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +12,13 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
 
   @override
   Future<void> onLoad() async {
+    final canvasSize = findGame()!.canvasSize;
+    EcoTossPostioning.setCanvasSize(canvasSize.y, canvasSize.x);
+    // await add(RectangleComponent(
+    //   position: Vector2(0, 0),
+    //   size: Vector2(canvasSize.x, canvasSize.y),
+    //   anchor: Anchor.center,
+    // ));
     showXYZDimensions();
     // await add(RectangleComponent(
     //   position: Vector2(0, yFloorPixels),
@@ -54,7 +63,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     for (var x = leftX; x < rightX; x += 100) {
       add(
         TextComponent(
-          text: 'xPixels: ${x.toInt()}',
+          text: 'x: ${x.toInt()}m',
           position: Vector2(x, 0),
           anchor: Anchor.center,
           textRenderer: TextPaint(
@@ -66,11 +75,14 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         ),
       );
     }
-    for (var y = topY; y < bottomY; y += 100) {
+    for (var yMetres = EcoToss3DSpace.yMinMetres;
+        yMetres <= EcoToss3DSpace.yMaxMetres;
+        yMetres += 0.5) {
+      final yPixels = EcoTossPostioning.yMetresToYPixels(yMetres);
       add(
         TextComponent(
-          text: 'yPixels: ${y.toInt()}',
-          position: Vector2(leftX, y),
+          text: 'y: ${yMetres.toStringAsFixed(1)}m, ${yPixels.toInt()}px',
+          position: Vector2(leftX, yPixels),
           textRenderer: TextPaint(
             style: const TextStyle(
               fontSize: 10,
@@ -83,7 +95,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     for (var z = topY; z < bottomY; z += 100) {
       add(
         TextComponent(
-          text: 'zPixels: ${z.toInt()}',
+          text: 'z: ${z.toInt()}m',
           position: Vector2(rightX, z),
           anchor: Anchor.centerRight,
           textRenderer: TextPaint(
