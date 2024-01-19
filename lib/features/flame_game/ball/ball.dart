@@ -37,6 +37,9 @@ class BallComponent extends CircleComponent
 
   @override
   void onDragEnd(DragEndEvent event) {
+    if (isThrown) {
+      return;
+    }
     isThrown = true;
     xVelocity = event.velocity[0];
     yVelocity = event.velocity[1];
