@@ -60,11 +60,15 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     final canvasHeightY = findGame()!.canvasSize.y;
     final bottomY = canvasHeightY / 2;
     final topY = -canvasHeightY / 2;
-    for (var x = leftX; x < rightX; x += 100) {
+    for (var xMetres = EcoToss3DSpace.xMinMetres;
+        xMetres < EcoToss3DSpace.xMaxMetres;
+        xMetres += 0.5) {
+      final xPixels = EcoTossPostioning.xMetresToXPixels(xMetres);
+
       add(
         TextComponent(
-          text: 'x: ${x.toInt()}m',
-          position: Vector2(x, 0),
+          text: 'x: ${xMetres.toStringAsFixed(1)}m, ${xPixels.toInt()}px',
+          position: Vector2(xPixels, 0),
           anchor: Anchor.center,
           textRenderer: TextPaint(
             style: const TextStyle(
