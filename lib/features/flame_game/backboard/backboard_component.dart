@@ -17,9 +17,9 @@ class BackboardComponent extends RectangleComponent with CollisionCallbacks {
         BackboardDimensions.heightMetres);
     final width =
         EcoTossPositioning.xSizeMetresToPixels(BackboardDimensions.widthMetres);
-
+    final sizeScale = getScaleFactor(EcoToss3DSpace.zMaxMetres);
     super.position = Vector2(pixelCoordinates.x, pixelCoordinates.y);
-    super.size = Vector2(width, height);
+    super.size = Vector2(width * sizeScale, height * sizeScale);
     super.anchor = Anchor.bottomCenter;
     super.priority = 1;
     super.paint = (Paint()..color = Colors.green);
