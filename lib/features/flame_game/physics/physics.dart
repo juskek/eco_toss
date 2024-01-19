@@ -2,7 +2,10 @@
 // y is down
 // z is into the screen
 
+import 'dart:math';
+
 const climbAngleDegrees = 45.0;
+const climbAngleRadians = climbAngleDegrees * pi / 180;
 
 const zStartMetres = 1;
 const zBinStartMetres = 200;

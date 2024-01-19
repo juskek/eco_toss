@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/collisions.dart';
@@ -42,7 +44,8 @@ class BallComponent extends CircleComponent
     }
     isThrown = true;
     xVelocity = event.velocity[0];
-    yVelocity = event.velocity[1];
+    yVelocity = event.velocity[1] * sin(climbAngleRadians);
+    zVelocity = -event.velocity[1] * cos(climbAngleRadians);
     super.onDragEnd(event);
   }
 
