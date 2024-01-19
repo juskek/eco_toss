@@ -8,6 +8,24 @@ import 'dart:math';
 /// e.g. velocity in m/s = pixels per second / pixels per metre
 /// Also used to scale dimensions of objects on screen
 /// e.g. size in pixels = size in metres * pixels per metre
+
+/// Describes the 3D space in which the player's object is thrown.
+/// Object travels into the screen from zMinMetres to zMaxMetres.
+/// Floor to ceiling goes from yMinMetres to yMaxMetres.
+/// Left wall to right wall goes from xMinMetres to xMaxMetres.
+///
+/// These spatial coordinates are different from the 2D pixel coordinates
+abstract class EcoToss3DSpace {
+  static const xMinMetres = 0;
+  static const xMaxMetres = 2;
+
+  static const yMinMetres = 0;
+  static const yMaxMetres = 3;
+
+  static const zMinMetres = 0;
+  static const zMaxMetres = 5;
+}
+
 const pixelsPerMetre = 300;
 
 const climbAngleDegrees = 45.0;
