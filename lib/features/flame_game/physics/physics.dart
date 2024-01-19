@@ -4,6 +4,8 @@
 
 import 'dart:math';
 
+const throwingVelocityScale = 0.1;
+
 const climbAngleDegrees = 45.0;
 const climbAngleRadians = climbAngleDegrees * pi / 180;
 
