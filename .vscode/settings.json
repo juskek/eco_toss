@@ -5,10 +5,10 @@
     "editor.wordWrap": "on",
     "editor.rulers": [80],
     "editor.codeActionsOnSave": {
-      "source.fixAll": true,
-      "source.organizeImports": true,
-      "editor.formatOnSave": true,
-      "quickfix.insertSemicolon": true
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit",
+      "editor.formatOnSave": "explicit",
+      "quickfix.insertSemicolon": "explicit"
     },
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,

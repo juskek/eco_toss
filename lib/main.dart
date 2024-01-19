@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import 'atomic/palette.dart';
 import 'features/app_lifecycle/app_lifecycle.dart';
-import 'features/audio/audio_controller.dart';
 import 'features/player_progress/player_progress.dart';
 import 'pages/settings/settings.dart';
 import 'router.dart';
@@ -30,17 +29,17 @@ class MyGame extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => PlayerProgress()),
           Provider(create: (context) => SettingsController()),
           // Set up audio.
-          ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
-              AudioController>(
-            // Ensures that music starts immediately.
-            lazy: false,
-            create: (context) => AudioController(),
-            update: (context, settings, lifecycleNotifier, audio) {
-              audio!.attachDependencies(lifecycleNotifier, settings);
-              return audio;
-            },
-            dispose: (context, audio) => audio.dispose(),
-          ),
+          // ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
+          //     AudioController>(
+          //   // Ensures that music starts immediately.
+          //   lazy: false,
+          //   create: (context) => AudioController(),
+          //   update: (context, settings, lifecycleNotifier, audio) {
+          //     audio!.attachDependencies(lifecycleNotifier, settings);
+          //     return audio;
+          //   },
+          //   dispose: (context, audio) => audio.dispose(),
+          // ),
         ],
         child: Builder(builder: (context) {
           final palette = context.watch<Palette>();
