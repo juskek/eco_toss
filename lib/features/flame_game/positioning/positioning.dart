@@ -1,7 +1,7 @@
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/components.dart';
 
-abstract class EcoTossPostioning {
+abstract class EcoTossPositioning {
   static double? _height;
   static double? _width;
 
@@ -50,15 +50,23 @@ abstract class EcoTossPostioning {
   static double get zPixelsPerMetre =>
       height / 2 / (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
 
-  static Vector2 xyzToPixels(Vector3 xyz) {
-    final xPixels = _xMetresToXPixels(xyz.x);
-    final yPixelsFromYMetres = _yMetresToYPixels(xyz.y);
-    final yPixelsFromZMetres = _zMetresToYPixelsRelative(xyz.z);
+  static double xSizeMetresToPixels(double xSizeMetres) {
+    return xSizeMetres * xPixelsPerMetre;
+  }
+
+  static double ySizeMetresToPixels(double ySizeMetres) {
+    return ySizeMetres * yPixelsPerMetre;
+  }
+
+  static Vector2 xyzMetresToXyPixels(Vector3 xyz) {
+    final xPixels = _xPositionMetresToPixels(xyz.x);
+    final yPixelsFromYMetres = _yPositionMetresToPixels(xyz.y);
+    final yPixelsFromZMetres = _zPositionMetresToPixelsRelativeToY(xyz.z);
     final yPixels = yPixelsFromYMetres + yPixelsFromZMetres;
     return Vector2(xPixels, yPixels);
   }
 
-  static double _xMetresToXPixels(double xMetres) {
+  static double _xPositionMetresToPixels(double xMetres) {
     assert(xMetres >= EcoToss3DSpace.xMinMetres,
         'xMetres ($xMetres) must be >= xMinMetres (${EcoToss3DSpace.xMinMetres})');
     assert(xMetres <= EcoToss3DSpace.xMaxMetres,
@@ -67,7 +75,7 @@ abstract class EcoTossPostioning {
     return distanceFromMidMetres * xPixelsPerMetre;
   }
 
-  static double _yMetresToYPixels(double yMetres) {
+  static double _yPositionMetresToPixels(double yMetres) {
     assert(yMetres >= EcoToss3DSpace.yMinMetres,
         'yMetres ($yMetres) must be >= yMinMetres (${EcoToss3DSpace.yMinMetres})');
     assert(yMetres <= EcoToss3DSpace.yMaxMetres,
@@ -76,7 +84,7 @@ abstract class EcoTossPostioning {
     return distanceFromMidMetres * yPixelsPerMetre;
   }
 
-  static double _zMetresToYPixelsRelative(double zMetres) {
+  static double _zPositionMetresToPixelsRelativeToY(double zMetres) {
     assert(zMetres >= EcoToss3DSpace.zMinMetres,
         'zMetres ($zMetres) must be >= zMinMetres (${EcoToss3DSpace.zMinMetres})');
     assert(zMetres <= EcoToss3DSpace.zMaxMetres,
