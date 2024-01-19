@@ -42,6 +42,9 @@ class BallComponent extends CircleComponent
     if (isThrown) {
       return;
     }
+    if (event.velocity.y > 0) {
+      return;
+    }
     isThrown = true;
     xVelocity = event.velocity[0];
     yVelocity = event.velocity[1] * sin(climbAngleRadians);
