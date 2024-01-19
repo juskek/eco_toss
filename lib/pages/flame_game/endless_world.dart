@@ -25,6 +25,7 @@ import 'game_screen.dart';
 ///  - The [HasGameReference] that gives the world access to a variable called
 ///  `game`, which is a reference to the game class that the world is attached
 ///  to.
+@Deprecated('Use EcoTossWorld instead')
 class EndlessWorld extends World with TapCallbacks, HasGameReference {
   EndlessWorld({
     required this.level,

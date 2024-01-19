@@ -2,6 +2,8 @@
 // y is down
 // z is into the screen
 
+const climbAngleDegrees = 45.0;
+
 const zStartMetres = 1;
 const zBinStartMetres = 200;
 const zEndMetres = 250;
