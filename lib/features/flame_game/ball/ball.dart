@@ -68,6 +68,7 @@ class BallComponent extends CircleComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (zPosition >= zEndMetres) {
       hasHitBackboard = true;
+      zVelocity = 0;
     }
 
     super.onCollision(intersectionPoints, other);
@@ -75,15 +76,48 @@ class BallComponent extends CircleComponent
 
   @override
   void update(double dt) {
-    double scaleFactor = getScaleFactor(zPosition);
-
     if (!isThrown) {
-      super.position = Vector2(xPosition, yPosition);
-      super.radius = radiusStart * scaleFactor;
-      super.update(dt);
+      updatePositionAndRadius();
       return;
     }
+    removeIfOutOfBounds();
 
+    removeIfMissed(dt);
+
+    notifyListenersIfPassedBinStart();
+
+    removeIfHitFloor();
+
+    applyGravity(dt);
+
+    calculatePosition(dt);
+
+    updatePositionAndRadius();
+    super.update(dt);
+  }
+
+  void calculatePosition(double dt) {
+    yPosition += getDistanceTravelled(dt, yVelocity);
+    xPosition += getDistanceTravelled(dt, xVelocity);
+    zPosition += getDistanceTravelled(dt, zVelocity);
+  }
+
+  void updatePositionAndRadius() {
+    super.position = Vector2(xPosition, yPosition);
+    super.radius = radiusStart * getScaleFactor(zPosition);
+  }
+
+  void removeIfOutOfBounds() {
+    if (yPosition.abs() > findGame()!.canvasSize.y / 2) {
+      removeFromParent();
+    }
+
+    if (xPosition.abs() > findGame()!.canvasSize.x / 2) {
+      removeFromParent();
+    }
+  }
+
+  void removeIfMissed(double dt) {
     if (zPosition >= zEndMetres && !hasHitBackboard) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
@@ -91,29 +125,29 @@ class BallComponent extends CircleComponent
         removeFromParent();
       }
     }
-    if (hasHitBackboard) {
-      zVelocity = 0;
+  }
+
+  void removeIfHitFloor() {
+    if (yPosition <= yFloorPixels) {
+      return;
     }
+    yVelocity = 0;
+    if (hasHitBackboard) {
+      addScore();
+    }
+    removeFromParent();
+  }
+
+  void applyGravity(double dt) {
+    if (yPosition <= yFloorPixels) {
+      yVelocity = applyGravityToYVelocity(dt, yVelocity);
+    }
+  }
+
+  void notifyListenersIfPassedBinStart() {
     if (zPosition >= zBinStartMetres && !hasPassedBinStart) {
       hasPassedBinStart = true;
       notifyListeners();
     }
-    if (yPosition <= yFloorPixels) {
-      yVelocity = applyGravityToYVelocity(dt, yVelocity);
-      yPosition += getDistanceTravelled(dt, yVelocity);
-    } else {
-      yVelocity = 0;
-      if (hasHitBackboard) {
-        addScore();
-      }
-      removeFromParent();
-    }
-
-    xPosition += getDistanceTravelled(dt, xVelocity);
-    zPosition += getDistanceTravelled(dt, zVelocity);
-
-    super.position = Vector2(xPosition, yPosition);
-    super.radius = radiusStart * scaleFactor;
-    super.update(dt);
   }
 }
