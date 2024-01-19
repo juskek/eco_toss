@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/collisions.dart';
@@ -14,17 +16,11 @@ class BallComponent extends CircleComponent
   BallComponent({
     required this.radiusStart,
     required this.addScore,
-    required this.xVelocity,
-    required this.yVelocity,
-    required this.zVelocity,
   }) : super(anchor: Anchor.center, priority: 2);
 
   double radiusStart;
 
   final void Function({int amount}) addScore;
-
-  @Deprecated('not in use since we are using getDistance()')
-  double timeElapsed = 0;
 
   double timeSinceMissSeconds = 0;
 
@@ -32,9 +28,9 @@ class BallComponent extends CircleComponent
   double yPosition = 100;
   double zPosition = 0;
 
-  double xVelocity;
-  double yVelocity;
-  double zVelocity;
+  double xVelocity = 0;
+  double yVelocity = 0;
+  double zVelocity = 0;
 
   bool hasHitBackboard = false;
   bool hasPassedBinStart = false;
@@ -43,9 +39,22 @@ class BallComponent extends CircleComponent
 
   @override
   void onDragEnd(DragEndEvent event) {
+    if (isThrown) {
+      return;
+    }
+    if (event.velocity.y > 0) {
+      return;
+    }
+    if (atan(event.velocity.x.abs() / event.velocity.y.abs()) >
+        coneAngleRadians / 2) {
+      return;
+    }
     isThrown = true;
-    xVelocity = event.velocity[0];
-    yVelocity = event.velocity[1];
+    xVelocity = throwingVelocityScale * event.velocity.x;
+    yVelocity =
+        throwingVelocityScale * event.velocity.y * sin(climbAngleRadians);
+    zVelocity =
+        throwingVelocityScale * -event.velocity.y * cos(climbAngleRadians);
     super.onDragEnd(event);
   }
 
@@ -66,6 +75,15 @@ class BallComponent extends CircleComponent
 
   @override
   void update(double dt) {
+    double scaleFactor = getScaleFactor(zPosition);
+
+    if (!isThrown) {
+      super.position = Vector2(xPosition, yPosition);
+      super.radius = radiusStart * scaleFactor;
+      super.update(dt);
+      return;
+    }
+
     if (zPosition >= zEndMetres && !hasHitBackboard) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
@@ -94,7 +112,6 @@ class BallComponent extends CircleComponent
     xPosition += getDistanceTravelled(dt, xVelocity);
     zPosition += getDistanceTravelled(dt, zVelocity);
 
-    double scaleFactor = getScaleFactor(zPosition);
     super.position = Vector2(xPosition, yPosition);
     super.radius = radiusStart * scaleFactor;
     super.update(dt);

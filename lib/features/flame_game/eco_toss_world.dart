@@ -14,8 +14,6 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
 
   @override
   Future<void> onLoad() async {
-    const yVelocity = -50.0;
-    const zVelocity = 50.0;
     await add(RectangleComponent(
       position: Vector2(0, yFloorPixels),
       size: Vector2(findGame()!.canvasSize.x, 10),
@@ -28,11 +26,9 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         BinComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 200));
     await add(binComponent);
     await add(BallComponent(
-        radiusStart: 50,
-        addScore: addScore,
-        xVelocity: 0,
-        yVelocity: yVelocity,
-        zVelocity: zVelocity));
+      radiusStart: 50,
+      addScore: addScore,
+    ));
 
     final ballNotifier = gameRef.componentsNotifier<BallComponent>();
     ballNotifier.addListener(() {
@@ -40,11 +36,9 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       if (ball == null) {
         binComponent.priority = 1;
         add(BallComponent(
-            radiusStart: 50,
-            addScore: addScore,
-            xVelocity: 0,
-            yVelocity: yVelocity,
-            zVelocity: zVelocity));
+          radiusStart: 50,
+          addScore: addScore,
+        ));
       }
       if (ball != null && ball.zPosition >= zBinStartMetres) {
         binComponent.priority = 2;
