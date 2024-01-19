@@ -84,6 +84,10 @@ class BallComponent extends CircleComponent
       return;
     }
 
+    if (yPosition.abs() > findGame()!.canvasSize.y / 2) {
+      removeFromParent();
+    }
+
     if (zPosition >= zEndMetres && !hasHitBackboard) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
