@@ -1,4 +1,6 @@
 import 'package:endless_runner/features/flame_game/backboard/backboard_component.dart';
+import 'package:endless_runner/features/flame_game/ball/ball.dart';
+import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
 import 'package:endless_runner/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
@@ -18,35 +20,32 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     final canvasSize = findGame()!.canvasSize;
     EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
     add(FloorFarEdge());
-    add(BinFrontSurfaceComponent());
+    final binFrontSurface = BinFrontSurfaceComponent();
+    add(binFrontSurface);
     add(BackboardComponent());
+    await add(BallComponent(
+      radiusStart: 50,
+      addScore: addScore,
+    ));
     showXYZDimensions();
-    // await add(BackboardComponent(
-    //   size: Vector2(findGame()!.canvasSize.x * 0.3, 100),
-    // ));
-    // final binComponent =
-    //     BinComponent(size: Vector2(findGame()!.canvasSize.x * 0.3, 200));
-    // await add(binComponent);
-    // await add(BallComponent(
-    //   radiusStart: 50,
-    //   addScore: addScore,
-    // ));
 
-    // final ballNotifier = gameRef.componentsNotifier<BallComponent>();
-    // ballNotifier.addListener(() {
-    //   final ball = ballNotifier.single;
-    //   if (ball == null) {
-    //     binComponent.priority = 1;
-    //     add(BallComponent(
-    //       radiusStart: 50,
-    //       addScore: addScore,
-    //     ));
-    //   }
-    //   if (ball != null && ball.zPositionMetres >= zBinStartMetres) {
-    //     binComponent.priority = 2;
-    //     ball.priority = 1;
-    //   }
-    // });
+    final ballNotifier = gameRef.componentsNotifier<BallComponent>();
+    ballNotifier.addListener(() {
+      final ball = ballNotifier.single;
+      if (ball == null) {
+        binFrontSurface.priority = 1;
+        add(BallComponent(
+          radiusStart: 50,
+          addScore: addScore,
+        ));
+      }
+      if (ball != null &&
+          ball.zPositionMetres >=
+              EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres) {
+        binFrontSurface.priority = 2;
+        ball.priority = 1;
+      }
+    });
   }
 
   void showXYZDimensions() {
