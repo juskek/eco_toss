@@ -45,6 +45,10 @@ class BallComponent extends CircleComponent
     if (event.velocity.y > 0) {
       return;
     }
+    if (atan(event.velocity.x.abs() / event.velocity.y.abs()) >
+        coneAngleRadians / 2) {
+      return;
+    }
     isThrown = true;
     xVelocity = event.velocity.x;
     yVelocity = event.velocity.y * sin(climbAngleRadians);
