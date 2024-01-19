@@ -3,23 +3,41 @@ import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flutter/material.dart';
 
 class BallComponent extends CircleComponent
-    with HasGameReference<EcoTossGame>, CollisionCallbacks, DragCallbacks {
+    with
+        HasGameReference<EcoTossGame>,
+        CollisionCallbacks,
+        Notifier,
+        DragCallbacks {
   BallComponent({
     required this.radiusStart,
-    required this.xPosition,
-    required this.yPosition,
-    required this.zPosition,
-  }) : super(anchor: Anchor.center);
+    required this.addScore,
+    required this.xVelocity,
+    required this.yVelocity,
+    required this.zVelocity,
+  }) : super(anchor: Anchor.center, priority: 2);
 
   double radiusStart;
-  double timeSinceThrow = 0;
-  double xPosition;
-  double yPosition;
-  double zPosition;
+
+  final void Function({int amount}) addScore;
+
+  @Deprecated('not in use since we are using getDistance()')
+  double timeElapsed = 0;
+
+  double timeSinceMissSeconds = 0;
+
+  double xPosition = 0;
+  double yPosition = 100;
+  double zPosition = 0;
+
+  double xVelocity;
+  double yVelocity;
+  double zVelocity;
 
   bool hasHitBackboard = false;
+  bool hasPassedBinStart = false;
 
   bool isThrown = false;
   double xThrowVelocity = 0;
@@ -35,34 +53,48 @@ class BallComponent extends CircleComponent
 
   @override
   Future<void> onLoad() {
-    add(CircleHitbox());
+    add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
 
   @override
-  void onCollision(Set<Vector2> points, PositionComponent other) {
-    if (zPosition >= Z_END) {
-      print("COLLISION");
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (zPosition >= zEndMetres) {
       hasHitBackboard = true;
     }
 
-    super.onCollision(points, other);
+    super.onCollision(intersectionPoints, other);
   }
 
   @override
   void update(double dt) {
-    // print(zPosition);
-    if (isThrown) {
-      timeSinceThrow += dt;
-      xPosition = hasHitBackboard
-          ? xPosition
-          : getXPosition(timeSinceThrow, xThrowVelocity);
-      yPosition = hasHitBackboard
-          ? yPosition
-          : getYPosition(timeSinceThrow, yThrowVelocity);
-      zPosition =
-          hasHitBackboard ? zPosition : getZPosition(timeSinceThrow, 25);
+    if (zPosition >= zEndMetres && !hasHitBackboard) {
+      timeSinceMissSeconds += dt;
+      super.setColor(Colors.red);
+      if (timeSinceMissSeconds >= 1) {
+        removeFromParent();
+      }
     }
+    if (hasHitBackboard) {
+      zVelocity = 0;
+    }
+    if (zPosition >= zBinStartMetres && !hasPassedBinStart) {
+      hasPassedBinStart = true;
+      notifyListeners();
+    }
+    if (yPosition <= yFloorPixels) {
+      yVelocity = applyGravityToYVelocity(dt, yVelocity);
+      yPosition += getDistanceTravelled(dt, yVelocity);
+    } else {
+      yVelocity = 0;
+      if (hasHitBackboard) {
+        addScore();
+      }
+      removeFromParent();
+    }
+
+    xPosition += getDistanceTravelled(dt, xVelocity);
+    zPosition += getDistanceTravelled(dt, zVelocity);
 
     double scaleFactor = getScaleFactor(zPosition);
     super.position = Vector2(xPosition, yPosition);
