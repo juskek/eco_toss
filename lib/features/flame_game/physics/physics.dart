@@ -26,6 +26,7 @@ abstract class EcoToss3DSpace {
 
   static const zMinMetres = 0.0;
   static const zMaxMetres = 5.0;
+  static double get zMidMetres => (zMaxMetres - zMinMetres) / 2;
 }
 
 const pixelsPerMetre = 300;

@@ -27,6 +27,8 @@ abstract class EcoTossPostioning {
       width / (EcoToss3DSpace.xMaxMetres - EcoToss3DSpace.xMinMetres);
   static double get yPixelsPerMetre =>
       height / (EcoToss3DSpace.yMaxMetres - EcoToss3DSpace.yMinMetres);
+  static double get zPixelsPerMetre =>
+      height / 2 / (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
 
   static double xMetresToXPixels(double xMetres) {
     assert(xMetres >= EcoToss3DSpace.xMinMetres,
@@ -51,10 +53,7 @@ abstract class EcoTossPostioning {
         'zMetres ($zMetres) must be >= zMinMetres (${EcoToss3DSpace.zMinMetres})');
     assert(zMetres <= EcoToss3DSpace.zMaxMetres,
         'zMetres ($zMetres) must be <= zMaxMetres (${EcoToss3DSpace.zMaxMetres})');
-    final percentageOfScreenDepth = zMetres -
-        EcoToss3DSpace.zMinMetres /
-            (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
-
-    return percentageOfScreenDepth * height;
+    final distanceFromMidMetres = -(zMetres - EcoToss3DSpace.zMinMetres);
+    return distanceFromMidMetres * zPixelsPerMetre + height / 2;
   }
 }

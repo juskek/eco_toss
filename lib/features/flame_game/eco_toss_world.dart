@@ -61,7 +61,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     final bottomY = canvasHeightY / 2;
     final topY = -canvasHeightY / 2;
     for (var xMetres = EcoToss3DSpace.xMinMetres;
-        xMetres < EcoToss3DSpace.xMaxMetres;
+        xMetres <= EcoToss3DSpace.xMaxMetres;
         xMetres += 0.5) {
       final xPixels = EcoTossPostioning.xMetresToXPixels(xMetres);
 
@@ -87,6 +87,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         TextComponent(
           text: 'y: ${yMetres.toStringAsFixed(1)}m, ${yPixels.toInt()}px',
           position: Vector2(leftX, yPixels),
+          anchor: Anchor.bottomLeft,
           textRenderer: TextPaint(
             style: const TextStyle(
               fontSize: 10,
@@ -96,12 +97,16 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         ),
       );
     }
-    for (var z = topY; z < bottomY; z += 100) {
+    for (var zMetres = EcoToss3DSpace.zMinMetres;
+        zMetres <= EcoToss3DSpace.zMaxMetres;
+        zMetres += 0.5) {
+      final zPixels = EcoTossPostioning.zMetresToZPixels(zMetres);
+
       add(
         TextComponent(
-          text: 'z: ${z.toInt()}m',
-          position: Vector2(rightX, z),
-          anchor: Anchor.centerRight,
+          text: 'zMetres: ${zMetres.toStringAsFixed(1)}m, ${zPixels.toInt()}px',
+          position: Vector2(rightX, zPixels),
+          anchor: Anchor.bottomRight,
           textRenderer: TextPaint(
             style: const TextStyle(
               fontSize: 10,
