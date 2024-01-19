@@ -114,11 +114,13 @@ class BallComponent extends CircleComponent
   }
 
   void removeIfOutOfBounds() {
-    if (yPositionMetres.abs() > findGame()!.canvasSize.y / 2) {
+    if (yPositionMetres > EcoToss3DSpace.yMaxMetres ||
+        yPositionMetres < EcoToss3DSpace.xMinMetres) {
       removeFromParent();
     }
 
-    if (xPositionMetres.abs() > findGame()!.canvasSize.x / 2) {
+    if (xPositionMetres > EcoToss3DSpace.xMaxMetres ||
+        xPositionMetres < EcoToss3DSpace.xMinMetres) {
       removeFromParent();
     }
   }
@@ -134,10 +136,9 @@ class BallComponent extends CircleComponent
   }
 
   void removeIfHitFloor() {
-    if (yPositionMetres <= yFloorMetres) {
+    if (yPositionMetres > EcoToss3DSpace.yMinMetres) {
       return;
     }
-    print('hit floor, yPosition: $yPositionMetres');
     yVelocityMps = 0;
     if (hasHitBackboard) {
       addScore();
@@ -146,9 +147,7 @@ class BallComponent extends CircleComponent
   }
 
   void applyGravity(double dt) {
-    if (yPositionMetres <= yFloorMetres) {
-      yVelocityMps = applyGravityToYVelocity(dt, yVelocityMps);
-    }
+    yVelocityMps = applyGravityToYVelocity(dt, yVelocityMps);
   }
 
   void notifyListenersIfPassedBinStart() {

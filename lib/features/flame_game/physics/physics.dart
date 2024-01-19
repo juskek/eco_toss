@@ -37,9 +37,6 @@ const climbAngleRadians = climbAngleDegrees * pi / 180;
 const coneAngleDegrees = 120.0;
 const coneAngleRadians = coneAngleDegrees * pi / 180;
 
-const yFloorMetres = 1.0;
-const yFloorPixels = yFloorMetres * pixelsPerMetre;
-
 const scaleStart = 1;
 const scaleEnd = 0.9;
 
