@@ -41,7 +41,7 @@ const yFloorMetres = 1.0;
 const yFloorPixels = yFloorMetres * pixelsPerMetre;
 
 const scaleStart = 1;
-const scaleEnd = 0.7;
+const scaleEnd = 0.9;
 
 const gravityMps2 = 9.81;
 
