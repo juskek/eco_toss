@@ -8,8 +8,10 @@ import 'bin_dimensions.dart';
 
 class BinFrontSurfaceComponent extends RectangleComponent {
   BinFrontSurfaceComponent({super.size}) {
-    final pixelCoordinates = EcoTossPositioning.xyzMetresToXyPixels(
-        Vector3(EcoToss3DSpace.xMidMetres, 0, EcoToss3DSpace.zMaxMetres - 0.1));
+    final pixelCoordinates = EcoTossPositioning.xyzMetresToXyPixels(Vector3(
+        EcoToss3DSpace.xMidMetres,
+        0,
+        EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres));
     final height =
         EcoTossPositioning.ySizeMetresToPixels(BinDimensions.heightMetres);
     final width =
