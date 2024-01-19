@@ -1,5 +1,6 @@
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
+import 'package:endless_runner/features/flame_game/room/floor_far_edge.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +15,8 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
   Future<void> onLoad() async {
     final canvasSize = findGame()!.canvasSize;
     EcoTossPostioning.setCanvasSize(canvasSize.y, canvasSize.x);
-    // await add(RectangleComponent(
-    //   position: Vector2(0, 0),
-    //   size: Vector2(canvasSize.x, canvasSize.y),
-    //   anchor: Anchor.center,
-    // ));
+    add(FloorFarEdge());
     showXYZDimensions();
-    // await add(RectangleComponent(
-    //   position: Vector2(0, yFloorPixels),
-    //   size: Vector2(findGame()!.canvasSize.x, 10),
-    //   anchor: Anchor.center,
-    // ));
     // await add(BackboardComponent(
     //   size: Vector2(findGame()!.canvasSize.x * 0.3, 100),
     // ));
@@ -63,7 +55,9 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     for (var xMetres = EcoToss3DSpace.xMinMetres;
         xMetres <= EcoToss3DSpace.xMaxMetres;
         xMetres += 0.5) {
-      final xPixels = EcoTossPostioning.xMetresToXPixels(xMetres);
+      final xPixels = EcoTossPostioning.xyzToPixels(
+              Vector3(xMetres, EcoToss3DSpace.yMidMetres, 0))
+          .x;
 
       add(
         TextComponent(
@@ -82,7 +76,9 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     for (var yMetres = EcoToss3DSpace.yMinMetres;
         yMetres <= EcoToss3DSpace.yMaxMetres;
         yMetres += 0.5) {
-      final yPixels = EcoTossPostioning.yMetresToYPixels(yMetres);
+      final yPixels = EcoTossPostioning.xyzToPixels(Vector3(
+              EcoToss3DSpace.xMinMetres, yMetres, EcoToss3DSpace.zMinMetres))
+          .y;
       add(
         TextComponent(
           text: 'y: ${yMetres.toStringAsFixed(1)}m, ${yPixels.toInt()}px',
@@ -100,7 +96,9 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     for (var zMetres = EcoToss3DSpace.zMinMetres;
         zMetres <= EcoToss3DSpace.zMaxMetres;
         zMetres += 0.5) {
-      final zPixels = EcoTossPostioning.zMetresToZPixels(zMetres);
+      final zPixels = EcoTossPostioning.xyzToPixels(Vector3(
+              EcoToss3DSpace.xMaxMetres, EcoToss3DSpace.yMinMetres, zMetres))
+          .y;
 
       add(
         TextComponent(
