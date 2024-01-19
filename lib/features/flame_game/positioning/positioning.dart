@@ -30,7 +30,6 @@ abstract class EcoTossPositioning {
   static void setCanvasSize(double height, double width) {
     _height = height;
     _width = width;
-    print('canvasSize: $height x $width');
   }
 
   static double get height {
@@ -43,17 +42,15 @@ abstract class EcoTossPositioning {
     return _width!;
   }
 
-  static double get xyPixelsPerMetre =>
+  static double get xyzPixelsPerMetre =>
       width / (EcoToss3DSpace.xMaxMetres - EcoToss3DSpace.xMinMetres);
-  static double get zPixelsPerMetre =>
-      height / 2 / (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
 
   static double xSizeMetresToPixels(double xSizeMetres) {
-    return xSizeMetres * xyPixelsPerMetre;
+    return xSizeMetres * xyzPixelsPerMetre;
   }
 
   static double ySizeMetresToPixels(double ySizeMetres) {
-    return ySizeMetres * xyPixelsPerMetre;
+    return ySizeMetres * xyzPixelsPerMetre;
   }
 
   static Vector2 xyzMetresToXyPixels(Vector3 xyz) {
@@ -70,7 +67,7 @@ abstract class EcoTossPositioning {
     assert(xMetres <= EcoToss3DSpace.xMaxMetres,
         'xMetres ($xMetres) must be <= xMaxMetres (${EcoToss3DSpace.xMaxMetres})');
     final distanceFromMidMetres = xMetres - EcoToss3DSpace.xMidMetres;
-    return distanceFromMidMetres * xyPixelsPerMetre;
+    return distanceFromMidMetres * xyzPixelsPerMetre;
   }
 
   static double _yPositionMetresToPixels(double yMetres) {
@@ -79,7 +76,7 @@ abstract class EcoTossPositioning {
     assert(yMetres <= EcoToss3DSpace.yMaxMetres,
         'yMetres ($yMetres) must be <= yMaxMetres (${EcoToss3DSpace.yMaxMetres})');
     final distanceFromMidMetres = -(yMetres - EcoToss3DSpace.yMidMetres);
-    return distanceFromMidMetres * xyPixelsPerMetre;
+    return distanceFromMidMetres * xyzPixelsPerMetre;
   }
 
   static double _zPositionMetresToPixelsRelativeToY(double zMetres) {
@@ -88,6 +85,6 @@ abstract class EcoTossPositioning {
     assert(zMetres <= EcoToss3DSpace.zMaxMetres,
         'zMetres ($zMetres) must be <= zMaxMetres (${EcoToss3DSpace.zMaxMetres})');
     final distanceFromMidMetres = -(zMetres - EcoToss3DSpace.zMinMetres);
-    return distanceFromMidMetres * zPixelsPerMetre;
+    return distanceFromMidMetres * xyzPixelsPerMetre / 2;
   }
 }
