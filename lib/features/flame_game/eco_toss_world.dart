@@ -14,6 +14,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
 
   @override
   Future<void> onLoad() async {
+    showXandYDimensions();
     await add(RectangleComponent(
       position: Vector2(0, yFloorPixels),
       size: Vector2(findGame()!.canvasSize.x, 10),
@@ -40,10 +41,50 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
           addScore: addScore,
         ));
       }
-      if (ball != null && ball.zPosition >= zBinStartMetres) {
+      if (ball != null && ball.zPositionMetres >= zBinStartMetres) {
         binComponent.priority = 2;
         ball.priority = 1;
       }
     });
+  }
+
+  void showXandYDimensions() {
+    final canvasWidthX = findGame()!.canvasSize.x;
+    final leftX = -canvasWidthX / 2;
+    final rightX = canvasWidthX / 2;
+    final canvasHeightY = findGame()!.canvasSize.y;
+    final bottomY = canvasHeightY / 2;
+    final topY = -canvasHeightY / 2;
+
+    for (var y = topY; y < bottomY; y += 100) {
+      add(
+        TextComponent(
+          text: 'yPixels: ${y.toInt()}',
+          position: Vector2(leftX, y),
+          textRenderer: TextPaint(
+            style: const TextStyle(
+              fontSize: 10,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    }
+
+    for (var x = leftX; x < rightX; x += 100) {
+      add(
+        TextComponent(
+          text: 'xPixels: ${x.toInt()}',
+          position: Vector2(x, 0),
+          anchor: Anchor.center,
+          textRenderer: TextPaint(
+            style: const TextStyle(
+              fontSize: 10,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
