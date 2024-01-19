@@ -46,9 +46,9 @@ class BallComponent extends CircleComponent
       return;
     }
     isThrown = true;
-    xVelocity = event.velocity[0];
-    yVelocity = event.velocity[1] * sin(climbAngleRadians);
-    zVelocity = -event.velocity[1] * cos(climbAngleRadians);
+    xVelocity = event.velocity.x;
+    yVelocity = event.velocity.y * sin(climbAngleRadians);
+    zVelocity = -event.velocity.y * cos(climbAngleRadians);
     super.onDragEnd(event);
   }
 
