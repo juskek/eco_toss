@@ -37,11 +37,6 @@ const climbAngleRadians = climbAngleDegrees * pi / 180;
 const coneAngleDegrees = 120.0;
 const coneAngleRadians = coneAngleDegrees * pi / 180;
 
-const zStartMetres = 1;
-const zEndMetres = 5.0;
-const zBinDepth = 0.3;
-const zBinStartMetres = zEndMetres - zBinDepth;
-
 const yFloorMetres = 1.0;
 const yFloorPixels = yFloorMetres * pixelsPerMetre;
 
@@ -50,10 +45,12 @@ const scaleEnd = 0.7;
 
 const gravityMps2 = 9.81;
 
-const scaleRate = (scaleStart - scaleEnd) / (zEndMetres - zStartMetres);
+const scaleRate = (scaleStart - scaleEnd) /
+    (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
 
-double getScaleFactor(double zCurrent) {
-  return scaleStart - (scaleRate * (zCurrent - zStartMetres));
+double getScaleFactor(double zPositionMetres) {
+  return scaleStart -
+      (scaleRate * (zPositionMetres - EcoToss3DSpace.zMinMetres));
 }
 
 double getDistanceTravelled(double timeSeconds, double velocityMps) {

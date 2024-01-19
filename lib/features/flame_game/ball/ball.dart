@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:flame/collisions.dart';
@@ -67,7 +68,7 @@ class BallComponent extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (zPositionMetres >= zEndMetres) {
+    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
       hasHitBackboard = true;
       zVelocityMps = 0;
     }
@@ -120,7 +121,7 @@ class BallComponent extends CircleComponent
   }
 
   void removeIfMissed(double dt) {
-    if (zPositionMetres >= zEndMetres && !hasHitBackboard) {
+    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres && !hasHitBackboard) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
       if (timeSinceMissSeconds >= 1) {
@@ -148,7 +149,9 @@ class BallComponent extends CircleComponent
   }
 
   void notifyListenersIfPassedBinStart() {
-    if (zPositionMetres >= zBinStartMetres && !hasPassedBinStart) {
+    if (zPositionMetres >=
+            EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres &&
+        !hasPassedBinStart) {
       hasPassedBinStart = true;
       notifyListeners();
     }
