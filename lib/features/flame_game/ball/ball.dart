@@ -40,15 +40,13 @@ class BallComponent extends CircleComponent
   bool hasPassedBinStart = false;
 
   bool isThrown = false;
-  double xThrowVelocity = 0;
-  double yThrowVelocity = 0;
 
   @override
   void onDragEnd(DragEndEvent event) {
     isThrown = true;
-    xThrowVelocity = event.velocity[0];
-    yThrowVelocity = event.velocity[1];
-    print(event);
+    xVelocity = event.velocity[0];
+    yVelocity = event.velocity[1];
+    super.onDragEnd(event);
   }
 
   @override
