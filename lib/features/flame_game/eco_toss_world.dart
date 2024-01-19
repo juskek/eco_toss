@@ -1,3 +1,4 @@
+import 'package:endless_runner/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
 import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
 import 'package:endless_runner/features/flame_game/room/floor_far_edge.dart';
@@ -16,6 +17,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     final canvasSize = findGame()!.canvasSize;
     EcoTossPostioning.setCanvasSize(canvasSize.y, canvasSize.x);
     add(FloorFarEdge());
+    add(BinFrontSurfaceComponent());
     showXYZDimensions();
     // await add(BackboardComponent(
     //   size: Vector2(findGame()!.canvasSize.x * 0.3, 100),
