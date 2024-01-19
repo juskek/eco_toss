@@ -7,6 +7,26 @@ abstract class EcoTossPostioning {
 
   static Anchor get anchor => Anchor.center;
 
+  static double get leftX {
+    assert(_width != null, 'did you forget to call setCanvasSize?');
+    return -_width! / 2;
+  }
+
+  static double get rightX {
+    assert(_width != null, 'did you forget to call setCanvasSize?');
+    return _width! / 2;
+  }
+
+  static double get topY {
+    assert(_height != null, 'did you forget to call setCanvasSize?');
+    return -_height! / 2;
+  }
+
+  static double get bottomY {
+    assert(_height != null, 'did you forget to call setCanvasSize?');
+    return _height! / 2;
+  }
+
   static void setCanvasSize(double height, double width) {
     _height = height;
     _width = width;

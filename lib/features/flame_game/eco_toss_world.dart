@@ -46,12 +46,6 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
   }
 
   void showXYZDimensions() {
-    final canvasWidthX = findGame()!.canvasSize.x;
-    final leftX = -canvasWidthX / 2;
-    final rightX = canvasWidthX / 2;
-    final canvasHeightY = findGame()!.canvasSize.y;
-    final bottomY = canvasHeightY / 2;
-    final topY = -canvasHeightY / 2;
     for (var xMetres = EcoToss3DSpace.xMinMetres;
         xMetres <= EcoToss3DSpace.xMaxMetres;
         xMetres += 0.5) {
@@ -82,7 +76,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       add(
         TextComponent(
           text: 'y: ${yMetres.toStringAsFixed(1)}m, ${yPixels.toInt()}px',
-          position: Vector2(leftX, yPixels),
+          position: Vector2(EcoTossPostioning.leftX, yPixels),
           anchor: Anchor.bottomLeft,
           textRenderer: TextPaint(
             style: const TextStyle(
@@ -103,7 +97,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       add(
         TextComponent(
           text: 'zMetres: ${zMetres.toStringAsFixed(1)}m, ${zPixels.toInt()}px',
-          position: Vector2(rightX, zPixels),
+          position: Vector2(EcoTossPostioning.rightX, zPixels),
           anchor: Anchor.bottomRight,
           textRenderer: TextPaint(
             style: const TextStyle(
