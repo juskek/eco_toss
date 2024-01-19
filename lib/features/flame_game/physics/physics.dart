@@ -42,3 +42,10 @@ double getDistanceTravelled(double timeSeconds, double velocityMps) {
 double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
   return yVelocityMps + (gravityMps2 * timeSeconds);
 }
+
+double getYPixelPositionFromDepth(
+    double screenHeightPixels, double zPositionMetres) {
+  final yPixelsPerZMetre =
+      screenHeightPixels * 0.9 / (zStartMetres - zEndMetres).abs();
+  return zPositionMetres * yPixelsPerZMetre;
+}
