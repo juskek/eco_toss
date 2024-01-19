@@ -43,19 +43,17 @@ abstract class EcoTossPositioning {
     return _width!;
   }
 
-  static double get xPixelsPerMetre =>
+  static double get xyPixelsPerMetre =>
       width / (EcoToss3DSpace.xMaxMetres - EcoToss3DSpace.xMinMetres);
-  static double get yPixelsPerMetre =>
-      height / (EcoToss3DSpace.yMaxMetres - EcoToss3DSpace.yMinMetres);
   static double get zPixelsPerMetre =>
       height / 2 / (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
 
   static double xSizeMetresToPixels(double xSizeMetres) {
-    return xSizeMetres * xPixelsPerMetre;
+    return xSizeMetres * xyPixelsPerMetre;
   }
 
   static double ySizeMetresToPixels(double ySizeMetres) {
-    return ySizeMetres * yPixelsPerMetre;
+    return ySizeMetres * xyPixelsPerMetre;
   }
 
   static Vector2 xyzMetresToXyPixels(Vector3 xyz) {
@@ -72,7 +70,7 @@ abstract class EcoTossPositioning {
     assert(xMetres <= EcoToss3DSpace.xMaxMetres,
         'xMetres ($xMetres) must be <= xMaxMetres (${EcoToss3DSpace.xMaxMetres})');
     final distanceFromMidMetres = xMetres - EcoToss3DSpace.xMidMetres;
-    return distanceFromMidMetres * xPixelsPerMetre;
+    return distanceFromMidMetres * xyPixelsPerMetre;
   }
 
   static double _yPositionMetresToPixels(double yMetres) {
@@ -81,7 +79,7 @@ abstract class EcoTossPositioning {
     assert(yMetres <= EcoToss3DSpace.yMaxMetres,
         'yMetres ($yMetres) must be <= yMaxMetres (${EcoToss3DSpace.yMaxMetres})');
     final distanceFromMidMetres = -(yMetres - EcoToss3DSpace.yMidMetres);
-    return distanceFromMidMetres * yPixelsPerMetre;
+    return distanceFromMidMetres * xyPixelsPerMetre;
   }
 
   static double _zPositionMetresToPixelsRelativeToY(double zMetres) {
