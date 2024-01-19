@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
+import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -25,9 +26,9 @@ class BallComponent extends CircleComponent
 
   double timeSinceMissSeconds = 0;
 
-  double xPositionMetres = 0;
-  double yPositionMetres = 0;
-  double zPositionMetres = 0;
+  double xPositionMetres = EcoToss3DSpace.xMidMetres;
+  double yPositionMetres = EcoToss3DSpace.yMidMetres - 1;
+  double zPositionMetres = EcoToss3DSpace.zMinMetres;
 
   double xVelocityMps = 0;
   double yVelocityMps = 0;
@@ -105,8 +106,10 @@ class BallComponent extends CircleComponent
   }
 
   void updatePositionAndRadius() {
-    super.position = Vector2(
-        xPositionMetres / pixelsPerMetre, yPositionMetres / pixelsPerMetre);
+    final xyPixels = EcoTossPositioning.xyzMetresToXyPixels(
+      Vector3(xPositionMetres, yPositionMetres, zPositionMetres),
+    );
+    super.position = Vector2(xyPixels.x, xyPixels.y);
     super.radius = radiusStart * getScaleFactor(zPositionMetres);
   }
 
