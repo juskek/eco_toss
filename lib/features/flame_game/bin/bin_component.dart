@@ -3,7 +3,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-class BinComponent extends RectangleComponent with CollisionCallbacks {
+class BinComponent extends RectangleComponent {
   BinComponent({super.size})
       : super(
           anchor: Anchor.bottomCenter,

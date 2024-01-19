@@ -24,13 +24,13 @@ class BallComponent extends CircleComponent
 
   double timeSinceMissSeconds = 0;
 
-  double xPosition = 0;
-  double yPosition = 100;
-  double zPosition = 0;
+  double xPositionMetres = 0;
+  double yPositionMetres = 0;
+  double zPositionMetres = 0;
 
-  double xVelocity = 0;
-  double yVelocity = 0;
-  double zVelocity = 0;
+  double xVelocityMps = 0;
+  double yVelocityMps = 0;
+  double zVelocityMps = 0;
 
   bool hasHitBackboard = false;
   bool hasPassedBinStart = false;
@@ -50,11 +50,12 @@ class BallComponent extends CircleComponent
       return;
     }
     isThrown = true;
-    xVelocity = throwingVelocityScale * event.velocity.x;
-    yVelocity =
-        throwingVelocityScale * event.velocity.y * sin(climbAngleRadians);
-    zVelocity =
-        throwingVelocityScale * -event.velocity.y * cos(climbAngleRadians);
+    xVelocityMps = event.velocity.x / pixelsPerMetre;
+    yVelocityMps = event.velocity.y * sin(climbAngleRadians) / pixelsPerMetre;
+    zVelocityMps = -event.velocity.y * cos(climbAngleRadians) / pixelsPerMetre;
+    print('xVelocityMps: $xVelocityMps');
+    print('yVelocityMps: $yVelocityMps');
+    print('zVelocityMps: $zVelocityMps');
     super.onDragEnd(event);
   }
 
@@ -66,9 +67,9 @@ class BallComponent extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (zPosition >= zEndMetres) {
+    if (zPositionMetres >= zEndMetres) {
       hasHitBackboard = true;
-      zVelocity = 0;
+      zVelocityMps = 0;
     }
 
     super.onCollision(intersectionPoints, other);
@@ -97,28 +98,29 @@ class BallComponent extends CircleComponent
   }
 
   void calculatePosition(double dt) {
-    yPosition += getDistanceTravelled(dt, yVelocity);
-    xPosition += getDistanceTravelled(dt, xVelocity);
-    zPosition += getDistanceTravelled(dt, zVelocity);
+    yPositionMetres += getDistanceTravelled(dt, yVelocityMps);
+    xPositionMetres += getDistanceTravelled(dt, xVelocityMps);
+    zPositionMetres += getDistanceTravelled(dt, zVelocityMps);
   }
 
   void updatePositionAndRadius() {
-    super.position = Vector2(xPosition, yPosition);
-    super.radius = radiusStart * getScaleFactor(zPosition);
+    super.position = Vector2(
+        xPositionMetres / pixelsPerMetre, yPositionMetres / pixelsPerMetre);
+    super.radius = radiusStart * getScaleFactor(zPositionMetres);
   }
 
   void removeIfOutOfBounds() {
-    if (yPosition.abs() > findGame()!.canvasSize.y / 2) {
+    if (yPositionMetres.abs() > findGame()!.canvasSize.y / 2) {
       removeFromParent();
     }
 
-    if (xPosition.abs() > findGame()!.canvasSize.x / 2) {
+    if (xPositionMetres.abs() > findGame()!.canvasSize.x / 2) {
       removeFromParent();
     }
   }
 
   void removeIfMissed(double dt) {
-    if (zPosition >= zEndMetres && !hasHitBackboard) {
+    if (zPositionMetres >= zEndMetres && !hasHitBackboard) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
       if (timeSinceMissSeconds >= 1) {
@@ -128,10 +130,11 @@ class BallComponent extends CircleComponent
   }
 
   void removeIfHitFloor() {
-    if (yPosition <= yFloorPixels) {
+    if (yPositionMetres <= yFloorMetres) {
       return;
     }
-    yVelocity = 0;
+    print('hit floor, yPosition: $yPositionMetres');
+    yVelocityMps = 0;
     if (hasHitBackboard) {
       addScore();
     }
@@ -139,13 +142,13 @@ class BallComponent extends CircleComponent
   }
 
   void applyGravity(double dt) {
-    if (yPosition <= yFloorPixels) {
-      yVelocity = applyGravityToYVelocity(dt, yVelocity);
+    if (yPositionMetres <= yFloorMetres) {
+      yVelocityMps = applyGravityToYVelocity(dt, yVelocityMps);
     }
   }
 
   void notifyListenersIfPassedBinStart() {
-    if (zPosition >= zBinStartMetres && !hasPassedBinStart) {
+    if (zPositionMetres >= zBinStartMetres && !hasPassedBinStart) {
       hasPassedBinStart = true;
       notifyListeners();
     }

@@ -13,6 +13,8 @@ class EcoTossGame extends FlameGame<EcoTossWorld> {
 
   @override
   Future<void> onLoad() async {
+    camera.viewfinder.anchor = Anchor.center;
+    // camera.viewfinder.position = Vector2(0, 100);
     const scoreText = 'Recycled: 0';
 
     final textRenderer = TextPaint(
