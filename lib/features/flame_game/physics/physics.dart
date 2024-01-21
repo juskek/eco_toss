@@ -29,11 +29,15 @@ abstract class EcoToss3DSpace {
   static double get zMidMetres => (zMaxMetres - zMinMetres) / 2;
 }
 
-const climbAngleDegrees = 45.0;
-const climbAngleRadians = climbAngleDegrees * pi / 180;
+abstract class EcoTossThrow {
+  static const climbAngleDegrees = 30.0;
+  static const climbAngleRadians = climbAngleDegrees * pi / 180;
 
-const coneAngleDegrees = 120.0;
-const coneAngleRadians = coneAngleDegrees * pi / 180;
+  static const coneAngleDegrees = 120.0;
+  static const coneAngleRadians = coneAngleDegrees * pi / 180;
+
+  static const powerScale = 0.5;
+}
 
 const scaleStart = 1;
 const scaleEnd = 0.5;

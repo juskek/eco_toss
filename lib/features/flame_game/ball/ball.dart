@@ -49,16 +49,20 @@ class BallComponent extends CircleComponent
       return;
     }
     if (atan(event.velocity.x.abs() / event.velocity.y.abs()) >
-        coneAngleRadians / 2) {
+        EcoTossThrow.coneAngleRadians / 2) {
       return;
     }
     isThrown = true;
-    xVelocityMps = event.velocity.x / EcoTossPositioning.xyzPixelsPerMetre;
-    yVelocityMps = -event.velocity.y *
-        sin(climbAngleRadians) /
+    xVelocityMps = EcoTossThrow.powerScale *
+        event.velocity.x /
         EcoTossPositioning.xyzPixelsPerMetre;
-    zVelocityMps = -event.velocity.y *
-        cos(climbAngleRadians) /
+    yVelocityMps = EcoTossThrow.powerScale *
+        -event.velocity.y *
+        sin(EcoTossThrow.climbAngleRadians) /
+        EcoTossPositioning.xyzPixelsPerMetre;
+    zVelocityMps = EcoTossThrow.powerScale *
+        -event.velocity.y *
+        cos(EcoTossThrow.climbAngleRadians) /
         EcoTossPositioning.xyzPixelsPerMetre;
     super.onDragEnd(event);
   }
