@@ -53,9 +53,13 @@ class BallComponent extends CircleComponent
       return;
     }
     isThrown = true;
-    xVelocityMps = event.velocity.x / pixelsPerMetre;
-    yVelocityMps = -event.velocity.y * sin(climbAngleRadians) / pixelsPerMetre;
-    zVelocityMps = -event.velocity.y * cos(climbAngleRadians) / pixelsPerMetre;
+    xVelocityMps = event.velocity.x / EcoTossPositioning.xyzPixelsPerMetre;
+    yVelocityMps = -event.velocity.y *
+        sin(climbAngleRadians) /
+        EcoTossPositioning.xyzPixelsPerMetre;
+    zVelocityMps = -event.velocity.y *
+        cos(climbAngleRadians) /
+        EcoTossPositioning.xyzPixelsPerMetre;
     super.onDragEnd(event);
   }
 

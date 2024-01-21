@@ -29,8 +29,6 @@ abstract class EcoToss3DSpace {
   static double get zMidMetres => (zMaxMetres - zMinMetres) / 2;
 }
 
-const pixelsPerMetre = 300;
-
 const climbAngleDegrees = 45.0;
 const climbAngleRadians = climbAngleDegrees * pi / 180;
 
