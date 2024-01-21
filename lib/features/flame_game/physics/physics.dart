@@ -38,7 +38,7 @@ const coneAngleDegrees = 120.0;
 const coneAngleRadians = coneAngleDegrees * pi / 180;
 
 const scaleStart = 1;
-const scaleEnd = 0.9;
+const scaleEnd = 0.5;
 
 const gravityMps2 = 9.81;
 
@@ -55,7 +55,7 @@ double getDistanceTravelled(double timeSeconds, double velocityMps) {
 }
 
 double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
-  return yVelocityMps + (gravityMps2 * timeSeconds);
+  return yVelocityMps - (gravityMps2 * timeSeconds);
 }
 
 // double getYPixelPositionFromDepth(

@@ -54,11 +54,8 @@ class BallComponent extends CircleComponent
     }
     isThrown = true;
     xVelocityMps = event.velocity.x / pixelsPerMetre;
-    yVelocityMps = event.velocity.y * sin(climbAngleRadians) / pixelsPerMetre;
+    yVelocityMps = -event.velocity.y * sin(climbAngleRadians) / pixelsPerMetre;
     zVelocityMps = -event.velocity.y * cos(climbAngleRadians) / pixelsPerMetre;
-    print('xVelocityMps: $xVelocityMps');
-    print('yVelocityMps: $yVelocityMps');
-    print('zVelocityMps: $zVelocityMps');
     super.onDragEnd(event);
   }
 
