@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
+import 'package:endless_runner/features/flame_game/positioning/out_of_bounds_exception.dart';
+import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -24,13 +27,13 @@ class BallComponent extends CircleComponent
 
   double timeSinceMissSeconds = 0;
 
-  double xPosition = 0;
-  double yPosition = 100;
-  double zPosition = 0;
+  double xPositionMetres = EcoToss3DSpace.xMidMetres;
+  double yPositionMetres = EcoToss3DSpace.yMidMetres - 1;
+  double zPositionMetres = EcoToss3DSpace.zMinMetres;
 
-  double xVelocity = 0;
-  double yVelocity = 0;
-  double zVelocity = 0;
+  double xVelocityMps = 0;
+  double yVelocityMps = 0;
+  double zVelocityMps = 0;
 
   bool hasHitBackboard = false;
   bool hasPassedBinStart = false;
@@ -46,15 +49,21 @@ class BallComponent extends CircleComponent
       return;
     }
     if (atan(event.velocity.x.abs() / event.velocity.y.abs()) >
-        coneAngleRadians / 2) {
+        EcoTossThrow.coneAngleRadians / 2) {
       return;
     }
     isThrown = true;
-    xVelocity = throwingVelocityScale * event.velocity.x;
-    yVelocity =
-        throwingVelocityScale * event.velocity.y * sin(climbAngleRadians);
-    zVelocity =
-        throwingVelocityScale * -event.velocity.y * cos(climbAngleRadians);
+    xVelocityMps = EcoTossThrow.powerScale *
+        event.velocity.x /
+        EcoTossPositioning.xyzPixelsPerMetre;
+    yVelocityMps = EcoTossThrow.powerScale *
+        -event.velocity.y *
+        sin(EcoTossThrow.climbAngleRadians) /
+        EcoTossPositioning.xyzPixelsPerMetre;
+    zVelocityMps = EcoTossThrow.powerScale *
+        -event.velocity.y *
+        cos(EcoTossThrow.climbAngleRadians) /
+        EcoTossPositioning.xyzPixelsPerMetre;
     super.onDragEnd(event);
   }
 
@@ -66,9 +75,9 @@ class BallComponent extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (zPosition >= zEndMetres) {
+    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
       hasHitBackboard = true;
-      zVelocity = 0;
+      zVelocityMps = 0;
     }
 
     super.onCollision(intersectionPoints, other);
@@ -80,7 +89,6 @@ class BallComponent extends CircleComponent
       updatePositionAndRadius();
       return;
     }
-    removeIfOutOfBounds();
 
     removeIfMissed(dt);
 
@@ -92,33 +100,31 @@ class BallComponent extends CircleComponent
 
     calculatePosition(dt);
 
-    updatePositionAndRadius();
+    try {
+      updatePositionAndRadius();
+    } on OutOfBoundsException {
+      removeFromParent();
+    }
+
     super.update(dt);
   }
 
   void calculatePosition(double dt) {
-    yPosition += getDistanceTravelled(dt, yVelocity);
-    xPosition += getDistanceTravelled(dt, xVelocity);
-    zPosition += getDistanceTravelled(dt, zVelocity);
+    yPositionMetres += getDistanceTravelled(dt, yVelocityMps);
+    xPositionMetres += getDistanceTravelled(dt, xVelocityMps);
+    zPositionMetres += getDistanceTravelled(dt, zVelocityMps);
   }
 
   void updatePositionAndRadius() {
-    super.position = Vector2(xPosition, yPosition);
-    super.radius = radiusStart * getScaleFactor(zPosition);
-  }
-
-  void removeIfOutOfBounds() {
-    if (yPosition.abs() > findGame()!.canvasSize.y / 2) {
-      removeFromParent();
-    }
-
-    if (xPosition.abs() > findGame()!.canvasSize.x / 2) {
-      removeFromParent();
-    }
+    final xyPixels = EcoTossPositioning.xyzMetresToXyPixels(
+      Vector3(xPositionMetres, yPositionMetres, zPositionMetres),
+    );
+    super.position = Vector2(xyPixels.x, xyPixels.y);
+    super.radius = radiusStart * getScaleFactor(zPositionMetres);
   }
 
   void removeIfMissed(double dt) {
-    if (zPosition >= zEndMetres && !hasHitBackboard) {
+    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres && !hasHitBackboard) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
       if (timeSinceMissSeconds >= 1) {
@@ -128,10 +134,10 @@ class BallComponent extends CircleComponent
   }
 
   void removeIfHitFloor() {
-    if (yPosition <= yFloorPixels) {
+    if (yPositionMetres > EcoToss3DSpace.yMinMetres) {
       return;
     }
-    yVelocity = 0;
+    yVelocityMps = 0;
     if (hasHitBackboard) {
       addScore();
     }
@@ -139,13 +145,13 @@ class BallComponent extends CircleComponent
   }
 
   void applyGravity(double dt) {
-    if (yPosition <= yFloorPixels) {
-      yVelocity = applyGravityToYVelocity(dt, yVelocity);
-    }
+    yVelocityMps = applyGravityToYVelocity(dt, yVelocityMps);
   }
 
   void notifyListenersIfPassedBinStart() {
-    if (zPosition >= zBinStartMetres && !hasPassedBinStart) {
+    if (zPositionMetres >=
+            EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres &&
+        !hasPassedBinStart) {
       hasPassedBinStart = true;
       notifyListeners();
     }
