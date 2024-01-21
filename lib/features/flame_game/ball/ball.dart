@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
+import 'package:endless_runner/features/flame_game/positioning/out_of_bounds_exception.dart';
 import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -83,7 +84,6 @@ class BallComponent extends CircleComponent
       updatePositionAndRadius();
       return;
     }
-    removeIfOutOfBounds();
 
     removeIfMissed(dt);
 
@@ -95,7 +95,12 @@ class BallComponent extends CircleComponent
 
     calculatePosition(dt);
 
-    updatePositionAndRadius();
+    try {
+      updatePositionAndRadius();
+    } on OutOfBoundsException {
+      removeFromParent();
+    }
+
     super.update(dt);
   }
 
@@ -111,18 +116,6 @@ class BallComponent extends CircleComponent
     );
     super.position = Vector2(xyPixels.x, xyPixels.y);
     super.radius = radiusStart * getScaleFactor(zPositionMetres);
-  }
-
-  void removeIfOutOfBounds() {
-    if (yPositionMetres > EcoToss3DSpace.yMaxMetres ||
-        yPositionMetres < EcoToss3DSpace.xMinMetres) {
-      removeFromParent();
-    }
-
-    if (xPositionMetres > EcoToss3DSpace.xMaxMetres ||
-        xPositionMetres < EcoToss3DSpace.xMinMetres) {
-      removeFromParent();
-    }
   }
 
   void removeIfMissed(double dt) {
