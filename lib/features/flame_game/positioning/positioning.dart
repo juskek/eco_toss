@@ -1,6 +1,8 @@
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
-import 'package:endless_runner/features/flame_game/positioning/out_of_bounds_exception.dart';
 import 'package:flame/components.dart';
+import 'package:logging/logging.dart';
+
+final _log = Logger('Positioning');
 
 abstract class EcoTossPositioning {
   static double? _height;
@@ -64,11 +66,11 @@ abstract class EcoTossPositioning {
 
   static double _xPositionMetresToPixels(double xMetres) {
     if (xMetres > EcoToss3DSpace.xMaxMetres) {
-      throw OutOfBoundsException(
+      _log.info(
           'xMetres ($xMetres) must be <= xMaxMetres (${EcoToss3DSpace.xMinMetres})');
     }
     if (xMetres < EcoToss3DSpace.xMinMetres) {
-      throw OutOfBoundsException(
+      _log.info(
           'xMetres ($xMetres) must be >= xMinMetres (${EcoToss3DSpace.xMaxMetres})');
     }
     final distanceFromMidMetres = xMetres - EcoToss3DSpace.xMidMetres;
@@ -77,11 +79,11 @@ abstract class EcoTossPositioning {
 
   static double _yPositionMetresToPixels(double yMetres) {
     if (yMetres > EcoToss3DSpace.yMaxMetres) {
-      throw OutOfBoundsException(
+      _log.info(
           'yMetres ($yMetres) must be <= yMaxMetres (${EcoToss3DSpace.yMinMetres})');
     }
     if (yMetres < EcoToss3DSpace.yMinMetres) {
-      throw OutOfBoundsException(
+      _log.info(
           'yMetres ($yMetres) must be >= yMinMetres (${EcoToss3DSpace.yMaxMetres})');
     }
     final distanceFromMidMetres = -(yMetres - EcoToss3DSpace.yMidMetres);
@@ -90,11 +92,11 @@ abstract class EcoTossPositioning {
 
   static double _zPositionMetresToPixelsRelativeToY(double zMetres) {
     if (zMetres > EcoToss3DSpace.zMaxMetres) {
-      throw OutOfBoundsException(
+      _log.info(
           'zMetres ($zMetres) must be <= zMaxMetres (${EcoToss3DSpace.zMinMetres})');
     }
     if (zMetres < EcoToss3DSpace.zMinMetres) {
-      throw OutOfBoundsException(
+      _log.info(
           'zMetres ($zMetres) must be >= zMinMetres (${EcoToss3DSpace.zMaxMetres})');
     }
     final distanceFromMidMetres = -(zMetres - EcoToss3DSpace.zMinMetres);
