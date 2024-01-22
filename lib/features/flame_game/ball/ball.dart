@@ -145,10 +145,10 @@ class BallComponent extends CircleComponent
 
   void bounceIfHitWalls() {
     if (xPositionMetres > EcoToss3DSpace.xMaxMetres) {
-      xVelocityMps = -xVelocityMps;
+      xVelocityMps = -xVelocityMps * 0.9;
     }
     if (xPositionMetres < EcoToss3DSpace.xMinMetres) {
-      xVelocityMps = -xVelocityMps;
+      xVelocityMps = -xVelocityMps * 0.9;
     }
   }
 
