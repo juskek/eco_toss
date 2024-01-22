@@ -22,7 +22,7 @@ class BackboardComponent extends RectangleComponent with CollisionCallbacks {
     super.size = Vector2(width * sizeScale, height * sizeScale);
     super.anchor = Anchor.bottomCenter;
     super.priority = 1;
-    super.paint = (Paint()..color = Colors.green);
+    super.paint = (Paint()..color = Colors.blue);
   }
 
   @override

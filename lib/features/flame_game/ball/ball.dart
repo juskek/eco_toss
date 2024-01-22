@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
 import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
 import 'package:endless_runner/features/flame_game/physics/physics.dart';
-import 'package:endless_runner/features/flame_game/positioning/out_of_bounds_exception.dart';
 import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -17,11 +16,11 @@ class BallComponent extends CircleComponent
         Notifier,
         DragCallbacks {
   BallComponent({
-    required this.radiusStart,
+    required this.radiusStartMetres,
     required this.addScore,
   }) : super(anchor: Anchor.center, priority: 2);
 
-  double radiusStart;
+  double radiusStartMetres;
 
   final void Function({int amount}) addScore;
 
@@ -77,6 +76,7 @@ class BallComponent extends CircleComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
       hasHitBackboard = true;
+      super.setColor(Colors.green);
       zVelocityMps = 0;
     }
 
@@ -89,6 +89,7 @@ class BallComponent extends CircleComponent
       updatePositionAndRadius();
       return;
     }
+    bounceIfHitWalls();
 
     removeIfMissed(dt);
 
@@ -100,11 +101,7 @@ class BallComponent extends CircleComponent
 
     calculatePosition(dt);
 
-    try {
-      updatePositionAndRadius();
-    } on OutOfBoundsException {
-      removeFromParent();
-    }
+    updatePositionAndRadius();
 
     super.update(dt);
   }
@@ -120,7 +117,9 @@ class BallComponent extends CircleComponent
       Vector3(xPositionMetres, yPositionMetres, zPositionMetres),
     );
     super.position = Vector2(xyPixels.x, xyPixels.y);
-    super.radius = radiusStart * getScaleFactor(zPositionMetres);
+    super.radius = radiusStartMetres *
+        EcoTossPositioning.xyzPixelsPerMetre *
+        getScaleFactor(zPositionMetres);
   }
 
   void removeIfMissed(double dt) {
@@ -142,6 +141,15 @@ class BallComponent extends CircleComponent
       addScore();
     }
     removeFromParent();
+  }
+
+  void bounceIfHitWalls() {
+    if (xPositionMetres > EcoToss3DSpace.xMaxMetres) {
+      xVelocityMps = -xVelocityMps * 0.9;
+    }
+    if (xPositionMetres < EcoToss3DSpace.xMinMetres) {
+      xVelocityMps = -xVelocityMps * 0.9;
+    }
   }
 
   void applyGravity(double dt) {
