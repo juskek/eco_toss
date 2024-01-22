@@ -76,6 +76,7 @@ class BallComponent extends CircleComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
       hasHitBackboard = true;
+      super.setColor(Colors.green);
       zVelocityMps = 0;
     }
 
