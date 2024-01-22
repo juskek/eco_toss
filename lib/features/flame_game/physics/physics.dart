@@ -21,11 +21,11 @@ abstract class EcoToss3DSpace {
   static double get xMidMetres => (xMaxMetres - xMinMetres) / 2;
 
   static const yMinMetres = 0.0;
-  static const yMaxMetres = 5.0;
+  static const yMaxMetres = 4.0;
   static double get yMidMetres => (yMaxMetres - yMinMetres) / 2;
 
   static const zMinMetres = 0.0;
-  static const zMaxMetres = 5.0;
+  static const zMaxMetres = 4.0;
   static double get zMidMetres => (zMaxMetres - zMinMetres) / 2;
 }
 
