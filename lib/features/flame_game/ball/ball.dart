@@ -88,6 +88,7 @@ class BallComponent extends CircleComponent
       updatePositionAndRadius();
       return;
     }
+    bounceIfHitWalls();
 
     removeIfMissed(dt);
 
@@ -139,6 +140,15 @@ class BallComponent extends CircleComponent
       addScore();
     }
     removeFromParent();
+  }
+
+  void bounceIfHitWalls() {
+    if (xPositionMetres > EcoToss3DSpace.xMaxMetres) {
+      xVelocityMps = -xVelocityMps;
+    }
+    if (xPositionMetres < EcoToss3DSpace.xMinMetres) {
+      xVelocityMps = -xVelocityMps;
+    }
   }
 
   void applyGravity(double dt) {
