@@ -36,7 +36,9 @@ abstract class EcoTossThrow {
   static const coneAngleDegrees = 120.0;
   static const coneAngleRadians = coneAngleDegrees * pi / 180;
 
-  static const powerScale = 0.5;
+  static const powerScale = 0.65;
+
+  static const airResistanceVelocityMultiplier = 0.03;
 }
 
 const scaleStart = 3.0;
@@ -59,10 +61,3 @@ double getDistanceTravelled(double timeSeconds, double velocityMps) {
 double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
   return yVelocityMps - (gravityMps2 * timeSeconds);
 }
-
-// double getYPixelPositionFromDepth(
-//     double screenHeightPixels, double zPositionMetres) {
-//   final yPixelsPerZMetre =
-//       screenHeightPixels * 0.9 / (zStartMetres - zEndMetres).abs();
-//   return zPositionMetres * yPixelsPerZMetre;
-// }

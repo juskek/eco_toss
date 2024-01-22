@@ -97,6 +97,8 @@ class BallComponent extends CircleComponent
 
     removeIfHitFloor();
 
+    applyAirResistance();
+
     applyGravity(dt);
 
     calculatePosition(dt);
@@ -150,6 +152,19 @@ class BallComponent extends CircleComponent
     if (xPositionMetres < EcoToss3DSpace.xMinMetres) {
       xVelocityMps = -xVelocityMps * 0.9;
     }
+  }
+
+  void applyAirResistance() {
+    xVelocityMps -=
+        xVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
+    yVelocityMps -=
+        yVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
+    zVelocityMps -=
+        zVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
+
+    if (xVelocityMps.abs() < 0.01) xVelocityMps = 0;
+    if (yVelocityMps.abs() < 0.01) yVelocityMps = 0;
+    if (zVelocityMps.abs() < 0.01) zVelocityMps = 0;
   }
 
   void applyGravity(double dt) {
