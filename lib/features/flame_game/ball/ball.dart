@@ -17,11 +17,11 @@ class BallComponent extends CircleComponent
         Notifier,
         DragCallbacks {
   BallComponent({
-    required this.radiusStart,
+    required this.radiusStartMetres,
     required this.addScore,
   }) : super(anchor: Anchor.center, priority: 2);
 
-  double radiusStart;
+  double radiusStartMetres;
 
   final void Function({int amount}) addScore;
 
@@ -120,7 +120,9 @@ class BallComponent extends CircleComponent
       Vector3(xPositionMetres, yPositionMetres, zPositionMetres),
     );
     super.position = Vector2(xyPixels.x, xyPixels.y);
-    super.radius = radiusStart * getScaleFactor(zPositionMetres);
+    super.radius = radiusStartMetres *
+        EcoTossPositioning.xyzPixelsPerMetre *
+        getScaleFactor(zPositionMetres);
   }
 
   void removeIfMissed(double dt) {

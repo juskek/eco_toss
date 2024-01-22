@@ -39,7 +39,7 @@ abstract class EcoTossThrow {
   static const powerScale = 0.5;
 }
 
-const scaleStart = 1;
+const scaleStart = 3.0;
 const scaleEnd = 0.5;
 
 const gravityMps2 = 9.81;
