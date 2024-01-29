@@ -7,9 +7,10 @@ import 'package:endless_runner/features/flame_game/positioning/positioning.dart'
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
-class BallComponent extends CircleComponent
+class BallComponent extends SpriteComponent
     with
         HasGameReference<EcoTossGame>,
         CollisionCallbacks,
@@ -18,7 +19,10 @@ class BallComponent extends CircleComponent
   BallComponent({
     required this.radiusStartMetres,
     required this.addScore,
-  }) : super(anchor: Anchor.center, priority: 2);
+  }) : super(
+            anchor: Anchor.center,
+            priority: 2,
+            size: Vector2(radiusStartMetres, radiusStartMetres));
 
   double radiusStartMetres;
 
@@ -67,7 +71,9 @@ class BallComponent extends CircleComponent
   }
 
   @override
-  Future<void> onLoad() {
+  Future<void> onLoad() async {
+    var image = await Flame.images.load('paper-ball.png');
+    super.sprite = Sprite(image);
     add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
@@ -119,9 +125,13 @@ class BallComponent extends CircleComponent
       Vector3(xPositionMetres, yPositionMetres, zPositionMetres),
     );
     super.position = Vector2(xyPixels.x, xyPixels.y);
-    super.radius = radiusStartMetres *
-        EcoTossPositioning.xyzPixelsPerMetre *
-        getScaleFactor(zPositionMetres);
+    super.size = Vector2(
+        radiusStartMetres *
+            EcoTossPositioning.xyzPixelsPerMetre *
+            getScaleFactor(zPositionMetres),
+        radiusStartMetres *
+            EcoTossPositioning.xyzPixelsPerMetre *
+            getScaleFactor(zPositionMetres));
   }
 
   void removeIfMissed(double dt) {

@@ -24,7 +24,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     add(binFrontSurface);
     add(BackboardComponent());
     await add(BallComponent(
-      radiusStartMetres: 0.05,
+      radiusStartMetres: 0.1,
       addScore: addScore,
     ));
     showXYZDimensions();
@@ -35,7 +35,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       if (ball == null) {
         binFrontSurface.priority = 1;
         add(BallComponent(
-          radiusStartMetres: 0.05,
+          radiusStartMetres: 0.1,
           addScore: addScore,
         ));
       }
