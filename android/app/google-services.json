@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "26615248153",
+    "project_id": "eco-toss",
+    "storage_bucket": "eco-toss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26615248153:android:78a6ee514b2e849c9b0188",
+        "android_client_info": {
+          "package_name": "com.example.eco_toss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIOoirST1wvq0UobQ_a1gc4HqNiSS_160"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26615248153:android:a7b363cecf5a7d6a9b0188",
+        "android_client_info": {
+          "package_name": "com.justinkek.eco_toss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIOoirST1wvq0UobQ_a1gc4HqNiSS_160"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
