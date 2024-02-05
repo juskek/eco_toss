@@ -1,5 +1,6 @@
+import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/features/version_control/app_view_model.dart';
 import 'package:flame/flame.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ import 'pages/settings/settings.dart';
 import 'router.dart';
 
 void main() async {
+  configureDependencyInjection(Env.prod);
+
   WidgetsFlutterBinding.ensureInitialized();
   await Flame.device.setPortraitUpOnly();
   await Flame.device.fullScreen();
@@ -28,6 +31,8 @@ class MyGame extends StatelessWidget {
           Provider(create: (context) => Palette()),
           ChangeNotifierProvider(create: (context) => PlayerProgress()),
           Provider(create: (context) => SettingsController()),
+          ChangeNotifierProvider(create: (context) => getIt<AppViewModel>()),
+
           // Set up audio.
           // ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
           //     AudioController>(

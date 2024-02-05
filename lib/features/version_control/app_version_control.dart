@@ -23,13 +23,14 @@ class AppVersionControl {
   factory AppVersionControl(String response) {
     dynamic responseJson = jsonDecode(response);
 
-    return AppVersionControl._(
+    final appVersionControl = AppVersionControl._(
       latest: AppVersion(responseJson['latest'] as String),
       deprecating: DeprecatingAppVersion(
           responseJson['deprecating']['version'] as String,
           responseJson['deprecating']['date'] as String),
       deprecated: AppVersion(responseJson['deprecated'] as String),
     );
+    return appVersionControl;
   }
 
   AppVersionStatus isAppUpdateRequired(AppVersion appVersion) {

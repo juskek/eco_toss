@@ -11,8 +11,9 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../data/app_info/app_info_repository.dart' as _i4;
-import '../data/app_info/i_app_info_repository.dart' as _i3;
+import '../data/app_info/app_info_repository.dart' as _i5;
+import '../data/app_info/i_app_info_repository.dart' as _i4;
+import '../features/version_control/app_view_model.dart' as _i3;
 
 const String _prod = 'prod';
 
@@ -27,8 +28,9 @@ _i1.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  gh.singleton<_i3.IAppInfoRepository>(
-    _i4.AppInfoRepository(),
+  gh.singleton<_i3.AppViewModel>(_i3.AppViewModel());
+  gh.singleton<_i4.IAppInfoRepository>(
+    _i5.AppInfoRepository(),
     registerFor: {_prod},
   );
   return getIt;

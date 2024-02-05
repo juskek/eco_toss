@@ -5,13 +5,19 @@ class AppVersion {
 
   /// majorMinorRevisionBuildString must be formatted as X.Y.Z+A
   factory AppVersion(String majorMinorRevisionBuildString) {
-    int major = int.parse(majorMinorRevisionBuildString.split('.')[0]);
-    int minor = int.parse(majorMinorRevisionBuildString.split('.')[1]);
-    int revision =
-        int.parse((majorMinorRevisionBuildString.split('.')[2]).split('+')[0]);
-    int build =
-        int.parse((majorMinorRevisionBuildString.split('.')[2]).split('+')[1]);
-    return AppVersion._(major, minor, revision, build);
+    try {
+      int major = int.parse(majorMinorRevisionBuildString.split('.')[0]);
+      int minor = int.parse(majorMinorRevisionBuildString.split('.')[1]);
+      int revision = int.parse(
+          (majorMinorRevisionBuildString.split('.')[2]).split('+')[0]);
+      int build = int.parse(
+          (majorMinorRevisionBuildString.split('.')[2]).split('+')[1]);
+
+      return AppVersion._(major, minor, revision, build);
+    } catch (e) {
+      print('AppVersion: error: $e');
+      rethrow;
+    }
   }
 
   final int major;
@@ -22,9 +28,9 @@ class AppVersion {
 }
 
 class DeprecatingAppVersion extends AppVersion {
-  DeprecatingAppVersion._(
-      int major, int minor, int revision, int build, this.deprecatingDateTime)
-      : super._(major, minor, revision, build);
+  DeprecatingAppVersion._(super.major, super.minor, super.revision, super.build,
+      this.deprecatingDateTime)
+      : super._();
 
   factory DeprecatingAppVersion(
       String majorMinorRevisionBuildString, String dateTimeString) {
