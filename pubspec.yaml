@@ -4,6 +4,12 @@ description: A Flame game template built with Flutter.
 # Prevent accidental publishing to pub.dev.
 publish_to: "none"
 
+# MAJOR.MINOR.REVISION+X
+# X is the version number, which has to increment for every release
+# In Android, X represents versionCode
+# In iOS, X represents CFBundleVersion
+# Version Control works by setting X, and updating the Firestore /admin/minVersionNo document
+# See AppVersionRepository.checkIfAppUpdateIsNecessary() for logic
 version: 0.1.0+1
 
 environment:
