@@ -1,9 +1,8 @@
 import 'package:eco_toss/common_imports.dart';
-import 'package:eco_toss/features/version_control/app_view_model.dart';
+import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:flame/flame.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:provider/provider.dart';
 
 import 'atomic/palette.dart';
 import 'features/app_lifecycle/app_lifecycle.dart';
@@ -31,7 +30,6 @@ class MyGame extends StatelessWidget {
           Provider(create: (context) => Palette()),
           ChangeNotifierProvider(create: (context) => PlayerProgress()),
           Provider(create: (context) => SettingsController()),
-          ChangeNotifierProvider(create: (context) => getIt<AppViewModel>()),
 
           // Set up audio.
           // ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
@@ -64,9 +62,13 @@ class MyGame extends StatelessWidget {
             routeInformationProvider: router.routeInformationProvider,
             routeInformationParser: router.routeInformationParser,
             routerDelegate: router.routerDelegate,
+            builder: (context, child) =>
+                AppVersionControlWrapper(child: child!),
           );
         }),
       ),
     );
   }
 }
+
+class AppViewModel {}

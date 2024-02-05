@@ -1,4 +1,3 @@
-import 'package:eco_toss/features/version_control/run_first_init.dart';
 import 'package:eco_toss/pages/flame_playground/flame_playground_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,13 +7,11 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const RunFirstInit(
-        child: FlamePlaygroundPage(level: (
-          number: 1,
-          winScore: 3,
-          canSpawnTall: false,
-        )),
-      ),
+      builder: (context, state) => const FlamePlaygroundPage(level: (
+        number: 1,
+        winScore: 3,
+        canSpawnTall: false,
+      )),
     ),
     // GoRoute(
     //   path: '/',
