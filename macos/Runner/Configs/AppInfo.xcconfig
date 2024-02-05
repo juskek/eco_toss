@@ -8,7 +8,7 @@
 PRODUCT_NAME = eco_toss
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.ecoToss
+PRODUCT_BUNDLE_IDENTIFIER = com.justinkek.ecoToss
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.justinkek. All rights reserved.
