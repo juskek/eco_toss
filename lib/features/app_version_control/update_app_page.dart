@@ -14,7 +14,8 @@ class UpdateAppPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset('assets/images/navigation/jigsaw.png'),
+          // Image.asset('assets/images/navigation/jigsaw.png'),
+          const FlutterLogo(size: 100),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

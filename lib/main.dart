@@ -1,5 +1,6 @@
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nes_ui/nes_ui.dart';
@@ -7,13 +8,18 @@ import 'package:nes_ui/nes_ui.dart';
 import 'atomic/palette.dart';
 import 'features/app_lifecycle/app_lifecycle.dart';
 import 'features/player_progress/player_progress.dart';
+import 'firebase_options.dart';
 import 'pages/settings/settings.dart';
 import 'router.dart';
 
 void main() async {
-  configureDependencyInjection(Env.prod);
-
+  /// Required for package_info_plus
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  configureDependencyInjection(Env.prod);
   await Flame.device.setPortraitUpOnly();
   await Flame.device.fullScreen();
   runApp(const MyGame());
@@ -54,10 +60,14 @@ class MyGame extends StatelessWidget {
                 seedColor: palette.seed.color,
                 background: palette.backgroundMain.color,
               ),
-              textTheme: GoogleFonts.pressStart2pTextTheme().apply(
+              textTheme: GoogleFonts.aBeeZeeTextTheme().apply(
                 bodyColor: palette.text.color,
                 displayColor: palette.text.color,
               ),
+              // textTheme: GoogleFonts.pressStart2pTextTheme().apply(
+              //   bodyColor: palette.text.color,
+              //   displayColor: palette.text.color,
+              // ),
             ),
             routeInformationProvider: router.routeInformationProvider,
             routeInformationParser: router.routeInformationParser,
