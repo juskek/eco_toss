@@ -1,4 +1,4 @@
-package com.example.endless_runner
+package com.justinkek.eco_toss
 
 import io.flutter.embedding.android.FlutterActivity
 

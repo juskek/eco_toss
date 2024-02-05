@@ -63,6 +63,7 @@ in a desktop window on a Mac. That way, you don't need to use a
 simulator/emulator or attach a mobile device. This template supports
 desktop development by disabling integrations like AdMob for desktop.
 
+`flutter packages pub run build_runner watch --delete-conflicting-outputs`
 
 ## Code organization
 
