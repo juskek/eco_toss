@@ -18,7 +18,7 @@ class AppVersionControlWrapper extends StatelessWidget {
           if (snapshot.connectionState != ConnectionState.done &&
               !Provider.of<AppVersionControlViewModel>(context)
                   .appVersionChecked) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
           switch (snapshot.data) {
             case AppVersionStatus.supported:

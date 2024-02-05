@@ -13,7 +13,7 @@ class AppVersionRemoteDataSource {
       return data['minVersionNo'] as int;
     } catch (e) {
       debugPrint(e.toString());
-      return 0;
+      rethrow;
     }
   }
 }
