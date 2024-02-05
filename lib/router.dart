@@ -1,4 +1,4 @@
-import 'package:endless_runner/pages/flame_playground/flame_playground_page.dart';
+import 'package:eco_toss/pages/flame_playground/flame_playground_page.dart';
 import 'package:go_router/go_router.dart';
 
 /// The router describes the game's navigational hierarchy, from the main

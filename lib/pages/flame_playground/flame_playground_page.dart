@@ -1,5 +1,5 @@
-import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
-import 'package:endless_runner/pages/flame_game/endless_runner.dart';
+import 'package:eco_toss/features/flame_game/eco_toss_game.dart';
+import 'package:eco_toss/pages/flame_game/endless_runner.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 

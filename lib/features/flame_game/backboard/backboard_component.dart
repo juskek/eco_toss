@@ -1,7 +1,7 @@
-import 'package:endless_runner/features/flame_game/backboard/backboard_dimensions.dart';
-import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
-import 'package:endless_runner/features/flame_game/physics/physics.dart';
-import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
+import 'package:eco_toss/features/flame_game/backboard/backboard_dimensions.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
+import 'package:eco_toss/features/flame_game/physics/physics.dart';
+import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';

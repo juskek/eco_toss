@@ -1,5 +1,5 @@
-import 'package:endless_runner/features/flame_game/physics/physics.dart';
-import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
+import 'package:eco_toss/features/flame_game/physics/physics.dart';
+import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 

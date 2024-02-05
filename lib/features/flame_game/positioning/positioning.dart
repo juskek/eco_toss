@@ -1,4 +1,4 @@
-import 'package:endless_runner/features/flame_game/physics/physics.dart';
+import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:flame/components.dart';
 import 'package:logging/logging.dart';
 

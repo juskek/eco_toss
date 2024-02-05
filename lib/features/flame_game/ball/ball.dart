@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:endless_runner/features/flame_game/bin/bin_dimensions.dart';
-import 'package:endless_runner/features/flame_game/eco_toss_game.dart';
-import 'package:endless_runner/features/flame_game/physics/physics.dart';
-import 'package:endless_runner/features/flame_game/positioning/positioning.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
+import 'package:eco_toss/features/flame_game/eco_toss_game.dart';
+import 'package:eco_toss/features/flame_game/physics/physics.dart';
+import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
