@@ -85,15 +85,22 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     var image = await Flame.images.load('paper-ball.png');
     animations = {
       ObjectState.thrown: await game.loadSpriteAnimation(
-        'dash/dash_running.png',
+        'throwables/paper_ball.png',
         SpriteAnimationData.sequenced(
-          amount: 4,
-          textureSize: Vector2.all(16),
-          stepTime: 0.15,
+          amount: 24,
+          textureSize: Vector2.all(128),
+          texturePosition: Vector2(0, 0),
+          stepTime: 0.01,
         ),
       ),
       ObjectState.stationary: SpriteAnimation.spriteList(
-        [await game.loadSprite('dash/dash_jumping.png')],
+        [
+          await game.loadSprite(
+            'throwables/paper_ball.png',
+            srcSize: Vector2.all(128),
+            srcPosition: Vector2(0, 0),
+          )
+        ],
         stepTime: double.infinity,
       ),
     };
