@@ -10,7 +10,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
-class BallComponent extends SpriteComponent
+class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     with
         HasGameReference<EcoTossGame>,
         CollisionCallbacks,
@@ -43,6 +43,15 @@ class BallComponent extends SpriteComponent
 
   bool isThrown = false;
 
+  final List<double> _angles = [];
+
+  @override
+  void onDragUpdate(DragUpdateEvent event) {
+    double angle = atan2(event.canvasDelta.y, event.canvasDelta.x);
+    _angles.add(angle);
+    super.onDragUpdate(event);
+  }
+
   @override
   void onDragEnd(DragEndEvent event) {
     if (isThrown) {
@@ -55,25 +64,47 @@ class BallComponent extends SpriteComponent
         EcoTossThrow.coneAngleRadians / 2) {
       return;
     }
-    isThrown = true;
-    xVelocityMps = EcoTossThrow.powerScale *
-        event.velocity.x /
-        EcoTossPositioning.xyzPixelsPerMetre;
-    yVelocityMps = EcoTossThrow.powerScale *
-        -event.velocity.y *
-        sin(EcoTossThrow.climbAngleRadians) /
-        EcoTossPositioning.xyzPixelsPerMetre;
-    zVelocityMps = EcoTossThrow.powerScale *
-        -event.velocity.y *
-        cos(EcoTossThrow.climbAngleRadians) /
-        EcoTossPositioning.xyzPixelsPerMetre;
+
+    if (_angles.isNotEmpty) {
+      isThrown = true;
+      current = ObjectState.thrown;
+
+      double averageAngle = _angles.reduce((a, b) => a + b) / _angles.length;
+      xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
+      yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
+      zVelocityMps = EcoTossThrow.zVelocityMps;
+
+      _angles.clear();
+    }
+
     super.onDragEnd(event);
   }
 
   @override
   Future<void> onLoad() async {
     var image = await Flame.images.load('paper-ball.png');
-    super.sprite = Sprite(image);
+    animations = {
+      ObjectState.thrown: await game.loadSpriteAnimation(
+        'throwables/paper_ball.png',
+        SpriteAnimationData.sequenced(
+          amount: 24,
+          textureSize: Vector2.all(128),
+          texturePosition: Vector2(0, 0),
+          stepTime: 0.01,
+        ),
+      ),
+      ObjectState.stationary: SpriteAnimation.spriteList(
+        [
+          await game.loadSprite(
+            'throwables/paper_ball.png',
+            srcSize: Vector2.all(128),
+            srcPosition: Vector2(0, 0),
+          )
+        ],
+        stepTime: double.infinity,
+      ),
+    };
+    current = ObjectState.stationary;
     add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
@@ -189,4 +220,9 @@ class BallComponent extends SpriteComponent
       notifyListeners();
     }
   }
+}
+
+enum ObjectState {
+  thrown,
+  stationary,
 }

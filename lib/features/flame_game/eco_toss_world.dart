@@ -1,5 +1,5 @@
 import 'package:eco_toss/features/flame_game/backboard/backboard_component.dart';
-import 'package:eco_toss/features/flame_game/ball/ball.dart';
+import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
@@ -24,7 +24,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     add(binFrontSurface);
     add(BackboardComponent());
     await add(BallComponent(
-      radiusStartMetres: 0.1,
+      radiusStartMetres: 0.2,
       addScore: addScore,
     ));
     showXYZDimensions();
@@ -35,7 +35,7 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
       if (ball == null) {
         binFrontSurface.priority = 1;
         add(BallComponent(
-          radiusStartMetres: 0.1,
+          radiusStartMetres: 0.2,
           addScore: addScore,
         ));
       }
