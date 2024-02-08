@@ -10,7 +10,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
-class BallComponent extends SpriteComponent
+class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     with
         HasGameReference<EcoTossGame>,
         CollisionCallbacks,
@@ -66,9 +66,10 @@ class BallComponent extends SpriteComponent
     }
 
     if (_angles.isNotEmpty) {
-      double averageAngle = _angles.reduce((a, b) => a + b) / _angles.length;
-
       isThrown = true;
+      current = ObjectState.thrown;
+
+      double averageAngle = _angles.reduce((a, b) => a + b) / _angles.length;
       xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
       yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
       zVelocityMps = EcoTossThrow.zVelocityMps;
@@ -82,7 +83,21 @@ class BallComponent extends SpriteComponent
   @override
   Future<void> onLoad() async {
     var image = await Flame.images.load('paper-ball.png');
-    super.sprite = Sprite(image);
+    animations = {
+      ObjectState.thrown: await game.loadSpriteAnimation(
+        'dash/dash_running.png',
+        SpriteAnimationData.sequenced(
+          amount: 4,
+          textureSize: Vector2.all(16),
+          stepTime: 0.15,
+        ),
+      ),
+      ObjectState.stationary: SpriteAnimation.spriteList(
+        [await game.loadSprite('dash/dash_jumping.png')],
+        stepTime: double.infinity,
+      ),
+    };
+    current = ObjectState.stationary;
     add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
@@ -198,4 +213,9 @@ class BallComponent extends SpriteComponent
       notifyListeners();
     }
   }
+}
+
+enum ObjectState {
+  thrown,
+  stationary,
 }
