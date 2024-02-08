@@ -39,6 +39,9 @@ abstract class EcoTossThrow {
   static const powerScale = 0.65;
 
   static const airResistanceVelocityMultiplier = 0.03;
+
+  static const maxVelocityMps = 10.0;
+  static const minVelocityMps = 1.0;
 }
 
 const scaleStart = 3.0;

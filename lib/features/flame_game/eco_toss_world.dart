@@ -1,5 +1,5 @@
 import 'package:eco_toss/features/flame_game/backboard/backboard_component.dart';
-import 'package:eco_toss/features/flame_game/ball/ball.dart';
+import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
