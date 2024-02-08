@@ -43,6 +43,15 @@ class BallComponent extends SpriteComponent
 
   bool isThrown = false;
 
+  final List<double> _angles = [];
+
+  @override
+  void onDragUpdate(DragUpdateEvent event) {
+    double angle = atan2(event.canvasDelta.y, event.canvasDelta.x);
+    _angles.add(angle);
+    super.onDragUpdate(event);
+  }
+
   @override
   void onDragEnd(DragEndEvent event) {
     if (isThrown) {
@@ -55,18 +64,18 @@ class BallComponent extends SpriteComponent
         EcoTossThrow.coneAngleRadians / 2) {
       return;
     }
-    isThrown = true;
-    xVelocityMps = EcoTossThrow.powerScale *
-        event.velocity.x /
-        EcoTossPositioning.xyzPixelsPerMetre;
-    yVelocityMps = EcoTossThrow.powerScale *
-        -event.velocity.y *
-        sin(EcoTossThrow.climbAngleRadians) /
-        EcoTossPositioning.xyzPixelsPerMetre;
-    zVelocityMps = EcoTossThrow.powerScale *
-        -event.velocity.y *
-        cos(EcoTossThrow.climbAngleRadians) /
-        EcoTossPositioning.xyzPixelsPerMetre;
+
+    if (_angles.isNotEmpty) {
+      double averageAngle = _angles.reduce((a, b) => a + b) / _angles.length;
+
+      isThrown = true;
+      xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
+      yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
+      zVelocityMps = EcoTossThrow.zVelocityMps;
+
+      _angles.clear();
+    }
+
     super.onDragEnd(event);
   }
 

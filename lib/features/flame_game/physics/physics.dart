@@ -36,12 +36,10 @@ abstract class EcoTossThrow {
   static const coneAngleDegrees = 120.0;
   static const coneAngleRadians = coneAngleDegrees * pi / 180;
 
-  static const powerScale = 0.65;
-
   static const airResistanceVelocityMultiplier = 0.03;
 
-  static const maxVelocityMps = 10.0;
-  static const minVelocityMps = 1.0;
+  static const velocityMps = 7.0;
+  static const zVelocityMps = 10.0;
 }
 
 const scaleStart = 3.0;
