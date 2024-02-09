@@ -11,8 +11,8 @@ import '../level_selection/levels.dart';
 /// It mostly sets up the overlays (widgets shown on top of the Flame game) and
 /// the gets the [AudioController] from the context and passes it in to the
 /// [EndlessRunner] class so that it can play audio.
-class FlamePlaygroundPage extends StatelessWidget {
-  const FlamePlaygroundPage({required this.level, super.key});
+class GamePage extends StatelessWidget {
+  const GamePage({required this.level, super.key});
 
   final GameLevel level;
 
