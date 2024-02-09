@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rive/rive.dart';
 
 import '../../atomic/palette.dart';
 import '../../atomic/responsive_screen.dart';
@@ -62,6 +63,13 @@ class HomePage extends StatelessWidget {
         rectangularMenuArea: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(
+              height: 200,
+              width: 200,
+              child: RiveAnimation.network(
+                'https://cdn.rive.app/animations/vehicles.riv',
+              ),
+            ),
             WobblyButton(
               onPressed: () {
                 audioController.playSfx(SfxType.buttonTap);
