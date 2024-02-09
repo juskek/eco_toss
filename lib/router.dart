@@ -2,9 +2,9 @@ import 'package:eco_toss/atomic/page_transition.dart';
 import 'package:eco_toss/atomic/palette.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/pages/flame_game/game_screen.dart';
+import 'package:eco_toss/pages/home_page/HomePage.dart';
 import 'package:eco_toss/pages/level_selection/level_selection_screen.dart';
 import 'package:eco_toss/pages/level_selection/levels.dart';
-import 'package:eco_toss/pages/main_menu/main_menu_screen.dart';
 import 'package:eco_toss/pages/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,7 +22,7 @@ final router = GoRouter(
     // ),
     GoRoute(
       path: '/',
-      builder: (context, state) => const MainMenuScreen(key: Key('main menu')),
+      builder: (context, state) => const HomePage(key: Key('main menu')),
       routes: [
         GoRoute(
           path: 'play',

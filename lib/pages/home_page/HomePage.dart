@@ -9,8 +9,8 @@ import '../../features/audio/audio_controller.dart';
 import '../../features/audio/sounds.dart';
 import '../settings/settings.dart';
 
-class MainMenuScreen extends StatelessWidget {
-  const MainMenuScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
