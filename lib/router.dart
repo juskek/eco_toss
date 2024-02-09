@@ -2,8 +2,8 @@ import 'package:eco_toss/atomic/page_transition.dart';
 import 'package:eco_toss/atomic/palette.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/pages/flame_game/game_screen.dart';
+import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:eco_toss/pages/home_page/HomePage.dart';
-import 'package:eco_toss/pages/level_selection/level_selection_screen.dart';
 import 'package:eco_toss/pages/level_selection/levels.dart';
 import 'package:eco_toss/pages/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +14,7 @@ final router = GoRouter(
   routes: [
     // GoRoute(
     //   path: '/',
-    //   builder: (context, state) => const FlamePlaygroundPage(level: (
+    //   builder: (context, state) => const GamePage(level: (
     //     number: 1,
     //     winScore: 3,
     //     canSpawnTall: false,
@@ -29,9 +29,11 @@ final router = GoRouter(
           pageBuilder: (context, state) => buildPageTransition<void>(
             key: const ValueKey('play'),
             color: context.watch<Palette>().backgroundLevelSelection.color,
-            child: const LevelSelectionScreen(
-              key: Key('level selection'),
-            ),
+            child: const GamePage(level: (
+              number: 1,
+              winScore: 3,
+              canSpawnTall: false,
+            )),
           ),
           routes: [
             GoRoute(
