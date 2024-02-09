@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
@@ -30,18 +31,16 @@ class HomePage extends StatelessWidget {
                 filterQuality: FilterQuality.none,
               ),
               _gap,
-              Transform.rotate(
-                angle: -0.1,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 500),
-                  child: const Text(
-                    'A Flutter game template.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Press Start 2P',
-                      fontSize: 32,
-                      height: 1,
-                    ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Text(
+                  'Eco Toss',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.singleDay(
+                    textStyle: Theme.of(context).textTheme.displayLarge,
+                    fontSize: 48,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
               ),
