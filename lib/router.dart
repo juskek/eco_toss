@@ -2,7 +2,7 @@ import 'package:eco_toss/atomic/page_transition.dart';
 import 'package:eco_toss/atomic/palette.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/pages/game_page/game_page.dart';
-import 'package:eco_toss/pages/home_page/HomePage.dart';
+import 'package:eco_toss/pages/home_page/home_page.dart';
 import 'package:eco_toss/pages/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
