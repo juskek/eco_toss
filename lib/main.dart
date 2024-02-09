@@ -1,5 +1,6 @@
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
+import 'package:eco_toss/features/audio/audio_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,17 +39,17 @@ class MyGame extends StatelessWidget {
           Provider(create: (context) => SettingsController()),
 
           // Set up audio.
-          // ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
-          //     AudioController>(
-          //   // Ensures that music starts immediately.
-          //   lazy: false,
-          //   create: (context) => AudioController(),
-          //   update: (context, settings, lifecycleNotifier, audio) {
-          //     audio!.attachDependencies(lifecycleNotifier, settings);
-          //     return audio;
-          //   },
-          //   dispose: (context, audio) => audio.dispose(),
-          // ),
+          ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
+              AudioController>(
+            // Ensures that music starts immediately.
+            lazy: false,
+            create: (context) => AudioController(),
+            update: (context, settings, lifecycleNotifier, audio) {
+              audio!.attachDependencies(lifecycleNotifier, settings);
+              return audio;
+            },
+            dispose: (context, audio) => audio.dispose(),
+          ),
         ],
         child: Builder(builder: (context) {
           final palette = context.watch<Palette>();
