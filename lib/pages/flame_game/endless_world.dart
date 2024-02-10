@@ -7,7 +7,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/player_progress/player_progress.dart';
-import '../level_selection/levels.dart';
+import '../leaderboard_page/levels.dart';
 import 'components/obstacle.dart';
 import 'components/player.dart';
 import 'components/point.dart';

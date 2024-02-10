@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../features/audio/audio_controller.dart';
 import '../../features/player_progress/player_progress.dart';
-import '../level_selection/levels.dart';
+import '../leaderboard_page/levels.dart';
 import 'endless_runner.dart';
 import 'game_win_dialog.dart';
 

@@ -79,6 +79,11 @@ class HomePage extends StatelessWidget {
             ),
             _gap,
             WobblyButton(
+              onPressed: () => GoRouter.of(context).push('/leaderboard'),
+              child: const Text('Leaderboard'),
+            ),
+            _gap,
+            WobblyButton(
               onPressed: () => GoRouter.of(context).push('/settings'),
               child: const Text('Settings'),
             ),
