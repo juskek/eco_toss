@@ -1,4 +1,4 @@
-import 'package:eco_toss/pages/level_selection/instructions_dialog.dart';
+import 'package:eco_toss/pages/leaderboard_page/instructions_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nes_ui/nes_ui.dart';
@@ -11,8 +11,8 @@ import '../../features/audio/sounds.dart';
 import '../../features/player_progress/player_progress.dart';
 import 'levels.dart';
 
-class LevelSelectionScreen extends StatelessWidget {
-  const LevelSelectionScreen({super.key});
+class LeaderboardPage extends StatelessWidget {
+  const LeaderboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
