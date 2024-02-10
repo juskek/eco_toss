@@ -3,6 +3,7 @@ import 'package:eco_toss/atomic/palette.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:eco_toss/pages/home_page/home_page.dart';
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_page.dart';
 import 'package:eco_toss/pages/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,6 +25,12 @@ final router = GoRouter(
           path: 'settings',
           builder: (context, state) => const SettingsScreen(
             key: Key('settings'),
+          ),
+        ),
+        GoRoute(
+          path: 'leaderboard',
+          builder: (context, state) => const LeaderboardPage(
+            key: Key('leaderboard'),
           ),
         ),
       ],
