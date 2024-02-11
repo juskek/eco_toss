@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
 import '../../atomic/wobbly_button.dart';
-import '../../features/player_progress/player_progress.dart';
 
 class LeaderboardPage extends StatelessWidget {
   const LeaderboardPage({super.key});
@@ -12,7 +11,6 @@ class LeaderboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
-    final playerProgress = context.watch<PlayerProgress>();
     final levelTextStyle =
         Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.4);
 
