@@ -2,8 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 class FadeScaleTransitionAtom extends StatefulWidget {
-  const FadeScaleTransitionAtom({required this.child, Key? key})
-      : super(key: key);
+  const FadeScaleTransitionAtom({required this.child, super.key});
   final Widget child;
   @override
   State<FadeScaleTransitionAtom> createState() =>
