@@ -1,3 +1,5 @@
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_list.dart';
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,7 @@ class LeaderboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
+    final leaderboardViewModel = context.watch<LeaderboardViewModel>();
     final levelTextStyle =
         Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.4);
 
@@ -24,14 +27,14 @@ class LeaderboardPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
-              'Rank 4',
+              leaderboardViewModel.userRank,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const CircleAvatar(
               radius: 50,
             ),
-            const Text('Crunchy Granola'),
-            const Text('20 points'),
+            const Text(leaderboardViewModel.userName),
+            const Text(leaderboardViewModel.userScore),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -42,32 +45,9 @@ class LeaderboardPage extends StatelessWidget {
             Expanded(
               child: SizedBox(
                 width: 450,
-                child: ListView(
-                  children: [
-                    for (var i = 0; i < 50; i++)
-                      ListTile(
-                        enabled: false,
-                        leading: Text(
-                          i.toString(),
-                          style: levelTextStyle,
-                        ),
-                        title: Row(
-                          children: [
-                            const CircleAvatar(),
-                            Text(
-                              'Rando',
-                              style: levelTextStyle,
-                            ),
-                            const Expanded(child: SizedBox()),
-                            Text(
-                              '1234 points',
-                              style: levelTextStyle,
-                            ),
-                          ],
-                        ),
-                      )
-                  ],
-                ),
+                child: LeaderboardList(
+                    leaderboardViewModel: leaderboardViewModel,
+                    levelTextStyle: levelTextStyle),
               ),
             ),
             const SizedBox(height: 30),
