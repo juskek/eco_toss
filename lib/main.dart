@@ -1,6 +1,7 @@
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:eco_toss/features/audio/audio_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,7 @@ import 'pages/settings/settings.dart';
 import 'router.dart';
 
 void main() async {
-  /// Required for package_info_plus
+  /// Required for package_info_plus, firebase_auth
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -23,6 +24,19 @@ void main() async {
   configureDependencyInjection(Env.prod);
   await Flame.device.setPortraitUpOnly();
   await Flame.device.fullScreen();
+  try {
+    final userCredential = await FirebaseAuth.instance.signInAnonymously();
+    debugPrint("Signed in with temporary account.");
+  } on FirebaseAuthException catch (e) {
+    switch (e.code) {
+      case "operation-not-allowed":
+        debugPrint("Anonymous auth hasn't been enabled for this project.");
+        break;
+      default:
+        debugPrint("Unknown error.");
+    }
+  }
+
   runApp(const MyGame());
 }
 
