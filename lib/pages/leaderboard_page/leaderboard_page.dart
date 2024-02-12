@@ -27,14 +27,14 @@ class LeaderboardPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
-              leaderboardViewModel.userRank,
+              leaderboardViewModel.userRank.toString(),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const CircleAvatar(
               radius: 50,
             ),
-            const Text(leaderboardViewModel.userName),
-            const Text(leaderboardViewModel.userScore),
+            Text(leaderboardViewModel.userName),
+            Text(leaderboardViewModel.userScore.toString()),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

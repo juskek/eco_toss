@@ -14,9 +14,9 @@ class LeaderboardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final leaderboardListTiles =
-        List.generate(leaderboardViewModel.leaderboardEntries, (index) {
+        List.generate(leaderboardViewModel.leaderboardEntries.length, (index) {
       final rank = index + 1;
-      final leaderboardEntry = leaderboardEntries[index];
+      final leaderboardEntry = leaderboardViewModel.leaderboardEntries[index];
       return ListTile(
         enabled: false,
         leading: Text(
