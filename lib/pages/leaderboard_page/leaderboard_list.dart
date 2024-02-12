@@ -1,4 +1,5 @@
 import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_entry.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 
 class LeaderboardList extends StatelessWidget {
@@ -11,12 +12,11 @@ class LeaderboardList extends StatelessWidget {
   final LeaderboardViewModel leaderboardViewModel;
   final TextStyle? levelTextStyle;
 
-  @override
-  Widget build(BuildContext context) {
-    final leaderboardListTiles =
-        List.generate(leaderboardViewModel.leaderboardEntries.length, (index) {
+  List<Widget> generateLeaderboardListTiles(
+      List<LeaderboardEntry> leaderboardEntries) {
+    return List.generate(leaderboardEntries.length, (index) {
       final rank = index + 1;
-      final leaderboardEntry = leaderboardViewModel.leaderboardEntries[index];
+      final leaderboardEntry = leaderboardEntries[index];
       return ListTile(
         enabled: false,
         leading: Text(
@@ -32,16 +32,30 @@ class LeaderboardList extends StatelessWidget {
             ),
             const Expanded(child: SizedBox()),
             Text(
-              leaderboardEntry.score,
+              leaderboardEntry.score.toString(),
               style: levelTextStyle,
             ),
           ],
         ),
       );
     });
+  }
 
-    return ListView(
-      children: leaderboardListTiles,
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: leaderboardViewModel.leaderboardEntries,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
+          final leaderboardEntries = snapshot.data as List<LeaderboardEntry>;
+
+          return ListView(
+            children: generateLeaderboardListTiles(leaderboardEntries),
+          );
+        }
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

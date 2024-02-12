@@ -8,7 +8,8 @@ class LeaderboardEntry {
   final String name;
   final int score;
 
-  LeaderboardEntry({required this.name, required this.score});
+  LeaderboardEntry(
+      {required this.userId, required this.name, required this.score});
 
   factory LeaderboardEntry.fromJson(Map<String, dynamic> json) =>
       _$LeaderboardEntryFromJson(json);

@@ -1,4 +1,5 @@
 import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/data/user/i_user_repository.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:eco_toss/features/audio/audio_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,8 +26,12 @@ void main() async {
   await Flame.device.setPortraitUpOnly();
   await Flame.device.fullScreen();
   try {
-    final userCredential = await FirebaseAuth.instance.signInAnonymously();
+    await FirebaseAuth.instance.signInAnonymously();
+
     debugPrint("Signed in with temporary account.");
+    final user = FirebaseAuth.instance.currentUser;
+    assert(user != null);
+    getIt<IUserRepository>().storeUserId(user!.uid);
   } on FirebaseAuthException catch (e) {
     switch (e.code) {
       case "operation-not-allowed":
