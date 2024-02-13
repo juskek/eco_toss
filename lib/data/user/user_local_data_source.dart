@@ -6,7 +6,8 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class UserLocalDataSource {
-  final box = Hive.box('UserLocalDataSource');
+  static const String hiveBoxName = 'UserLocalDataSource';
+  final box = Hive.lazyBox(hiveBoxName);
 
   EcoTossUser get ecoTossUser {
     final jsonString = box.get('ecoTossUser') as String;

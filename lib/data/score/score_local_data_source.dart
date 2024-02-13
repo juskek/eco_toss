@@ -3,7 +3,8 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class ScoreLocalDataSource {
-  final box = Hive.box('ScoreLocalDataSource');
+  static const String hiveBoxName = 'ScoreLocalDataSource';
+  final box = Hive.lazyBox(hiveBoxName);
 
   int? get highScore {
     return box.get('highScore') as int?;
