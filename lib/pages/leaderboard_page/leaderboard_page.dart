@@ -36,7 +36,7 @@ class LeaderboardPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   );
                 } else {
-                  return const CircularProgressIndicator();
+                  return const LinearProgressIndicator();
                 }
               },
             ),
@@ -46,7 +46,6 @@ class LeaderboardPage extends StatelessWidget {
             FutureBuilder(
               future: leaderboardViewModel.userName,
               builder: (context, snapshot) {
-                print(snapshot.data.toString());
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (!snapshot.hasData) {
                     return const Text('Anonymous');
@@ -56,11 +55,27 @@ class LeaderboardPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   );
                 } else {
-                  return const CircularProgressIndicator();
+                  return const LinearProgressIndicator();
                 }
               },
             ),
-            Text(leaderboardViewModel.userScore.toString()),
+            FutureBuilder(
+              future: leaderboardViewModel.userScore,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (!snapshot.hasData) {
+                    return const Text('Play a game to set your highscore!');
+                  }
+
+                  return Text(
+                    'Score: ${snapshot.data.toString()}',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                } else {
+                  return const LinearProgressIndicator();
+                }
+              },
+            ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
