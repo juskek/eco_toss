@@ -13,8 +13,8 @@ class UserRepository implements IUserRepository {
   final UserRemoteDataSource _userRemoteDataSource;
 
   @override
-  EcoTossUser get ecoTossUser {
-    return _userLocalDataSource.ecoTossUser;
+  Future<EcoTossUser> get ecoTossUser async {
+    return await _userLocalDataSource.ecoTossUser;
   }
 
   @override

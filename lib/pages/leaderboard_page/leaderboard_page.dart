@@ -26,14 +26,37 @@ class LeaderboardPage extends StatelessWidget {
               'Leaderboard',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            Text(
-              leaderboardViewModel.userRank.toString(),
-              style: Theme.of(context).textTheme.headlineSmall,
+            FutureBuilder(
+              future: leaderboardViewModel.userRank,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  return Text(
+                    'Rank ${snapshot.data.toString()}',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
             ),
             const CircleAvatar(
               radius: 50,
             ),
-            Text(leaderboardViewModel.userName ?? "Name not set"),
+            FutureBuilder(
+              future: leaderboardViewModel.userName,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  return Text(
+                    snapshot.data.toString(),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              },
+            ),
             Text(leaderboardViewModel.userScore.toString()),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
