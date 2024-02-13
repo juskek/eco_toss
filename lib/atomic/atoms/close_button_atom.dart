@@ -6,8 +6,8 @@ class CloseButtonAtom extends StatelessWidget {
     required this.closeCallback,
     this.onClose,
     this.inverted = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final BuildContext mainContext;
   final void Function()? closeCallback;
   final void Function()? onClose;

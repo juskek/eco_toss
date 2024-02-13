@@ -1,10 +1,11 @@
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_list.dart';
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
 import '../../atomic/wobbly_button.dart';
-import '../../features/player_progress/player_progress.dart';
 
 class LeaderboardPage extends StatelessWidget {
   const LeaderboardPage({super.key});
@@ -12,7 +13,7 @@ class LeaderboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.watch<Palette>();
-    final playerProgress = context.watch<PlayerProgress>();
+    final leaderboardViewModel = context.watch<LeaderboardViewModel>();
     final levelTextStyle =
         Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.4);
 
@@ -25,15 +26,56 @@ class LeaderboardPage extends StatelessWidget {
               'Leaderboard',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            Text(
-              'Rank 4',
-              style: Theme.of(context).textTheme.headlineSmall,
+            FutureBuilder(
+              future: leaderboardViewModel.userRank,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  return Text(
+                    'Rank ${snapshot.data.toString()}',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                } else {
+                  return const LinearProgressIndicator();
+                }
+              },
             ),
             const CircleAvatar(
               radius: 50,
             ),
-            const Text('Crunchy Granola'),
-            const Text('20 points'),
+            FutureBuilder(
+              future: leaderboardViewModel.userName,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (!snapshot.hasData) {
+                    return const Text('Anonymous');
+                  }
+                  return Text(
+                    snapshot.data.toString(),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                } else {
+                  return const LinearProgressIndicator();
+                }
+              },
+            ),
+            FutureBuilder(
+              future: leaderboardViewModel.userScore,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (!snapshot.hasData) {
+                    return const Text('Play a game to set your highscore!');
+                  }
+
+                  return Text(
+                    'Score: ${snapshot.data.toString()}',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  );
+                } else {
+                  return const LinearProgressIndicator();
+                }
+              },
+            ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -44,32 +86,9 @@ class LeaderboardPage extends StatelessWidget {
             Expanded(
               child: SizedBox(
                 width: 450,
-                child: ListView(
-                  children: [
-                    for (var i = 0; i < 50; i++)
-                      ListTile(
-                        enabled: false,
-                        leading: Text(
-                          i.toString(),
-                          style: levelTextStyle,
-                        ),
-                        title: Row(
-                          children: [
-                            const CircleAvatar(),
-                            Text(
-                              'Rando',
-                              style: levelTextStyle,
-                            ),
-                            const Expanded(child: SizedBox()),
-                            Text(
-                              '1234 points',
-                              style: levelTextStyle,
-                            ),
-                          ],
-                        ),
-                      )
-                  ],
-                ),
+                child: LeaderboardList(
+                    leaderboardViewModel: leaderboardViewModel,
+                    levelTextStyle: levelTextStyle),
               ),
             ),
             const SizedBox(height: 30),

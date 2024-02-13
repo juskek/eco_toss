@@ -1,9 +1,15 @@
 import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/data/score/score_local_data_source.dart';
+import 'package:eco_toss/data/user/i_user_repository.dart';
+import 'package:eco_toss/data/user/user_local_data_source.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:eco_toss/features/audio/audio_controller.dart';
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nes_ui/nes_ui.dart';
 
 import 'atomic/palette.dart';
@@ -14,15 +20,36 @@ import 'pages/settings/settings.dart';
 import 'router.dart';
 
 void main() async {
-  /// Required for package_info_plus
+  /// Required for package_info_plus, firebase_auth
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Hive.initFlutter();
+  await Hive.openLazyBox(ScoreLocalDataSource.hiveBoxName);
+  await Hive.openLazyBox(UserLocalDataSource.hiveBoxName);
+
   configureDependencyInjection(Env.prod);
   await Flame.device.setPortraitUpOnly();
   await Flame.device.fullScreen();
+  try {
+    await FirebaseAuth.instance.signInAnonymously();
+
+    debugPrint("Signed in with temporary account.");
+    final user = FirebaseAuth.instance.currentUser;
+    assert(user != null);
+    getIt<IUserRepository>().storeUserId(user!.uid);
+  } on FirebaseAuthException catch (e) {
+    switch (e.code) {
+      case "operation-not-allowed":
+        debugPrint("Anonymous auth hasn't been enabled for this project.");
+        break;
+      default:
+        debugPrint("Unknown error.");
+    }
+  }
+
   runApp(const MyGame());
 }
 
@@ -37,6 +64,8 @@ class MyGame extends StatelessWidget {
           Provider(create: (context) => Palette()),
           ChangeNotifierProvider(create: (context) => PlayerProgress()),
           Provider(create: (context) => SettingsController()),
+          ChangeNotifierProvider(
+              create: (context) => getIt<LeaderboardViewModel>()),
 
           // Set up audio.
           ProxyProvider2<SettingsController, AppLifecycleStateNotifier,

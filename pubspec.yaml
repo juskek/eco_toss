@@ -20,6 +20,7 @@ dependencies:
   audioplayers: ^5.2.0
   cloud_firestore: ^4.15.3
   cupertino_icons: ^1.0.6
+  firebase_auth: ^4.17.4
   firebase_core: ^2.25.3
   flame: ^1.14.0
   flame_audio: ^2.1.3
@@ -28,7 +29,11 @@ dependencies:
   get_it: ^7.6.7
   go_router: ^12.1.0
   google_fonts: ^6.1.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   injectable: ^2.3.2
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.1
   logging: ^1.2.0
   nes_ui: ^0.10.0
   package_info_plus: ^5.0.1
@@ -39,6 +44,7 @@ dependencies:
   store_redirect: ^2.0.1
 
 dev_dependencies:
+  hive_generator: ^2.0.1
   build_runner: ^2.4.8
   flame_test: ^1.14.0
   flutter_launcher_icons: ^0.13.1

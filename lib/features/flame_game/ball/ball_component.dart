@@ -7,7 +7,6 @@ import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
 class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
@@ -82,7 +81,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
 
   @override
   Future<void> onLoad() async {
-    var image = await Flame.images.load('paper-ball.png');
     animations = {
       ObjectState.thrown: await game.loadSpriteAnimation(
         'throwables/paper_ball.png',
