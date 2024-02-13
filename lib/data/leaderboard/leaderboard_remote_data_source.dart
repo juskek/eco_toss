@@ -8,7 +8,8 @@ class LeaderboardRemoteDataSource {
       FirebaseFirestore.instance.collection('leaderboard');
 
   Future<List<LeaderboardEntry>> getEntries() async {
-    final querySnapshot = await leaderboard.orderBy({"score"}).limit(10).get();
+    final querySnapshot =
+        await leaderboard.orderBy("score", descending: true).limit(10).get();
     List<LeaderboardEntry> leaderboardEntries = [];
     for (var element in querySnapshot.docs) {
       final json = element.data() as Map<String, dynamic>;
@@ -19,7 +20,8 @@ class LeaderboardRemoteDataSource {
   }
 
   Future<int> getUserRank(String userId) async {
-    final querySnapshot = await leaderboard.orderBy("score").limit(10).get();
+    final querySnapshot =
+        await leaderboard.orderBy("score", descending: true).limit(10).get();
 
     // iterate through the querySnapshot.docs to find the user's rank
     for (var i = 0; i < querySnapshot.docs.length; i++) {
