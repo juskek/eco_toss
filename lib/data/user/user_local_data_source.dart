@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:eco_toss/data/user/eco_toss_user.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -10,16 +8,21 @@ class UserLocalDataSource {
   final box = Hive.lazyBox(hiveBoxName);
 
   EcoTossUser get ecoTossUser {
-    final jsonString = box.get('ecoTossUser') as String;
-    final json = jsonDecode(jsonString) as Map<String, dynamic>;
-    return EcoTossUser.fromJson(json);
+    print('ecoTossUser');
+    print(box.get('ecoTossUser'));
+    // final jsonString = box.get('ecoTossUser') as String;
+
+    // final json = jsonDecode(jsonString) as Map<String, dynamic>;
+    // return EcoTossUser.fromJson(json);
+    return EcoTossUser(userId: '123');
   }
 
-  String get userId {
-    return box.get('userId') as String;
+  Future<String> get userId async {
+    final userId = (await box.get('userId')) as String;
+    return userId;
   }
 
-  set userId(String _) {
-    box.put("userId", _);
+  void setUserId(String userId) {
+    box.put("userId", userId);
   }
 }

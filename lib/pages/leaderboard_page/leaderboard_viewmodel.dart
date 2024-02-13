@@ -20,8 +20,8 @@ class LeaderboardViewModel extends ChangeNotifier {
     return _userRepository.ecoTossUser.name!;
   }
 
-  Future<int?> get userRank =>
-      _leaderboardRepository.getUserRank(_userRepository.userId);
+  Future<int?> get userRank async =>
+      _leaderboardRepository.getUserRank(await _userRepository.userId);
 
   int? get userScore => _scoreRepository.highScore;
 }

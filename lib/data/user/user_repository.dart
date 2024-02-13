@@ -18,10 +18,10 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  String get userId => _userLocalDataSource.userId;
+  Future<String> get userId async => _userLocalDataSource.userId;
 
   @override
   void storeUserId(String userId) {
-    _userLocalDataSource.userId = userId;
+    _userLocalDataSource.setUserId(userId);
   }
 }
