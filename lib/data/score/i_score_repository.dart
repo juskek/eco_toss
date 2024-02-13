@@ -1,3 +1,3 @@
 abstract class IScoreRepository {
-  int? get highScore;
+  Future<int?> get highScore;
 }

@@ -22,5 +22,5 @@ class LeaderboardViewModel extends ChangeNotifier {
   Future<int?> get userRank async =>
       _leaderboardRepository.getUserRank(await _userRepository.userId);
 
-  int? get userScore => _scoreRepository.highScore;
+  Future<int?> get userScore async => await _scoreRepository.highScore;
 }

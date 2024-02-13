@@ -6,7 +6,8 @@ class ScoreLocalDataSource {
   static const String hiveBoxName = 'ScoreLocalDataSource';
   final box = Hive.lazyBox(hiveBoxName);
 
-  int? get highScore {
-    return box.get('highScore') as int?;
+  Future<int?> get highScore async {
+    final highScore = (await box.get('highScore')) as int;
+    return highScore;
   }
 }

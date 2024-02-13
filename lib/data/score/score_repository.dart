@@ -12,7 +12,7 @@ class ScoreRepository implements IScoreRepository {
   final ScoreRemoteDataSource _scoreRemoteDataSource;
 
   @override
-  int? get highScore {
-    return _scoreLocalDataSource.highScore;
+  Future<int?> get highScore async {
+    return await _scoreLocalDataSource.highScore;
   }
 }
