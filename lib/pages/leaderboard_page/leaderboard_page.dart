@@ -46,8 +46,11 @@ class LeaderboardPage extends StatelessWidget {
             FutureBuilder(
               future: leaderboardViewModel.userName,
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
+                print(snapshot.data.toString());
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (!snapshot.hasData) {
+                    return const Text('Anonymous');
+                  }
                   return Text(
                     snapshot.data.toString(),
                     style: Theme.of(context).textTheme.headlineSmall,
