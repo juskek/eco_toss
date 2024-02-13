@@ -4,6 +4,7 @@ import 'package:eco_toss/data/user/i_user_repository.dart';
 import 'package:eco_toss/data/user/user_local_data_source.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:eco_toss/features/audio/audio_controller.dart';
+import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
@@ -63,6 +64,8 @@ class MyGame extends StatelessWidget {
           Provider(create: (context) => Palette()),
           ChangeNotifierProvider(create: (context) => PlayerProgress()),
           Provider(create: (context) => SettingsController()),
+          ChangeNotifierProvider(
+              create: (context) => getIt<LeaderboardViewModel>()),
 
           // Set up audio.
           ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
