@@ -19,16 +19,16 @@ class LeaderboardRemoteDataSource {
   }
 
   Future<int> getUserRank(String userId) async {
-    print('getUserRank: $userId');
-    final querySnapshot = await leaderboard
-        .orderBy({"score"})
-        .where("userId", isEqualTo: userId)
-        .limit(1)
-        .get();
-    print('getUserRank: ${querySnapshot.docs.first.data()} ');
-    final json = querySnapshot.docs.first.data() as Map<String, dynamic>;
-    final entry = LeaderboardEntry.fromJson(json);
-    print('getUserRank: ${entry.score} ');
-    return entry.score;
+    final querySnapshot = await leaderboard.orderBy("score").limit(10).get();
+
+    // iterate through the querySnapshot.docs to find the user's rank
+    for (var i = 0; i < querySnapshot.docs.length; i++) {
+      final json = querySnapshot.docs[i].data() as Map<String, dynamic>;
+      final entry = LeaderboardEntry.fromJson(json);
+      if (entry.userId == userId) {
+        return i + 1;
+      }
+    }
+    return -1;
   }
 }
