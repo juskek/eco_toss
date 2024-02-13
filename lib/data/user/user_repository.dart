@@ -23,5 +23,6 @@ class UserRepository implements IUserRepository {
   @override
   void storeUserId(String userId) {
     _userLocalDataSource.setUserId(userId);
+    _userRemoteDataSource.postUserId(userId);
   }
 }
