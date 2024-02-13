@@ -33,7 +33,7 @@ class LeaderboardPage extends StatelessWidget {
             const CircleAvatar(
               radius: 50,
             ),
-            Text(leaderboardViewModel.userName),
+            Text(leaderboardViewModel.userName ?? "Name not set"),
             Text(leaderboardViewModel.userScore.toString()),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
