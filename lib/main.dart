@@ -1,4 +1,5 @@
 import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/data/new_user/new_user_local_data_source.dart';
 import 'package:eco_toss/data/score/score_local_data_source.dart';
 import 'package:eco_toss/data/user/i_user_repository.dart';
 import 'package:eco_toss/data/user/user_local_data_source.dart';
@@ -29,6 +30,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openLazyBox(ScoreLocalDataSource.hiveBoxName);
   await Hive.openLazyBox(UserLocalDataSource.hiveBoxName);
+  await Hive.openLazyBox(NewUserLocalDataSource.hiveBoxName);
 
   configureDependencyInjection(Env.prod);
   await Flame.device.setPortraitUpOnly();
