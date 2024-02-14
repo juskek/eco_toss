@@ -1,3 +1,5 @@
+import 'package:eco_toss/features/flame_game/eco_toss_game.dart';
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 class TutorialPage extends StatelessWidget {
@@ -5,6 +7,11 @@ class TutorialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: GameWidget<EcoTossGame>(
+        key: const Key('tutorial'),
+        game: EcoTossGame(),
+      ),
+    );
   }
 }

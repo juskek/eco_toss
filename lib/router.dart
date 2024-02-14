@@ -19,9 +19,11 @@ abstract class EcoTossRouter {
   static Future<void> _getInitialRoute() async {
     if (!(await getIt<INewUserRepository>().hasPlayedTutorial)) {
       _initialRoute = '/tutorial';
+      return;
     }
     if (!(await getIt<INewUserRepository>().hasOnboarded)) {
       _initialRoute = '/onboarding';
+      return;
     }
     _initialRoute = '/';
   }
@@ -31,7 +33,6 @@ abstract class EcoTossRouter {
   static GoRouter get instance {
     assert(_initialRoute != null,
         'Initial route is null, did you forget to call EcoTossRouter.init()?');
-
     _instance ??= GoRouter(
       initialLocation: _initialRoute,
       routes: [
