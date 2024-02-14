@@ -49,6 +49,7 @@ void main() async {
         debugPrint("Unknown error.");
     }
   }
+  await EcoTossRouter.init();
 
   runApp(const MyGame());
 }
@@ -99,9 +100,11 @@ class MyGame extends StatelessWidget {
               //   displayColor: palette.text.color,
               // ),
             ),
-            routeInformationProvider: router.routeInformationProvider,
-            routeInformationParser: router.routeInformationParser,
-            routerDelegate: router.routerDelegate,
+            routeInformationProvider:
+                EcoTossRouter.instance.routeInformationProvider,
+            routeInformationParser:
+                EcoTossRouter.instance.routeInformationParser,
+            routerDelegate: EcoTossRouter.instance.routerDelegate,
             builder: (context, child) =>
                 AppVersionControlWrapper(child: child!),
           );
