@@ -20,7 +20,11 @@ class TutorialPage extends StatelessWidget {
         overlayBuilderMap: {
           welcomeOverlayKey: (BuildContext context, BaseEcoTossGame game) {
             return WelcomeDialog(
-              onPressed: () => game.overlays.remove(welcomeOverlayKey),
+              onPressed: () {
+                game.overlays.remove(welcomeOverlayKey);
+                assert(TutorialEcoTossGame.swipeToThrowText != null);
+                game.camera.viewport.add(TutorialEcoTossGame.swipeToThrowText!);
+              },
             );
           },
           readyForOnboardingOverlayKey:
