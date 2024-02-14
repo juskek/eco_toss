@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
-import 'package:eco_toss/features/flame_game/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
