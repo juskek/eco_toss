@@ -5,10 +5,24 @@ import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:eco_toss/pages/home_page/home_page.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_page.dart';
 import 'package:eco_toss/pages/settings/settings_screen.dart';
+import 'package:eco_toss/pages/tutorial_page/tutorial_page.dart';
 import 'package:go_router/go_router.dart';
 
+String getInitialRoute() {
+  if (!getIt<NewUserRepository>().hasPlayedTutorial) {
+    return '/tutorial';
+  }
+  if (!getIt<NewUserRepository>().hasOnboarded) {
+    return '/onboarding';
+  }
+  return '/';
+}
+
 final router = GoRouter(
+  initialLocation: getInitialRoute(),
   routes: [
+    GoRoute(
+        path: '/tutorial', builder: (context, state) => const TutorialPage()),
     GoRoute(
       path: '/',
       builder: (context, state) => const HomePage(key: Key('main menu')),
