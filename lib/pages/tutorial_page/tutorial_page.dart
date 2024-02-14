@@ -22,8 +22,8 @@ class TutorialPage extends StatelessWidget {
             return WelcomeDialog(
               onPressed: () {
                 game.overlays.remove(welcomeOverlayKey);
-                assert(TutorialEcoTossGame.swipeToThrowText != null);
-                game.camera.viewport.add(TutorialEcoTossGame.swipeToThrowText!);
+                assert(TutorialEcoTossGame.instructionsText != null);
+                game.camera.viewport.add(TutorialEcoTossGame.instructionsText!);
               },
             );
           },
