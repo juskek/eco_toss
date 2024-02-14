@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/dialogs/welcome_dialog.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/tutorial_eco_toss_game.dart';
 import 'package:eco_toss/pages/flame_game/game_win_dialog.dart';
@@ -18,13 +19,8 @@ class TutorialPage extends StatelessWidget {
         game: TutorialEcoTossGame(),
         overlayBuilderMap: {
           welcomeOverlayKey: (BuildContext context, BaseEcoTossGame game) {
-            return const GameWinDialog(
-              level: (
-                number: 1,
-                winScore: 3,
-                canSpawnTall: false,
-              ),
-              levelCompletedIn: 123,
+            return WelcomeDialog(
+              onPressed: () => game.overlays.remove(welcomeOverlayKey),
             );
           },
           readyForOnboardingOverlayKey:
