@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     with
-        HasGameReference<EcoTossGame>,
+        HasGameReference<BaseEcoTossGame>,
         CollisionCallbacks,
         Notifier,
         DragCallbacks {

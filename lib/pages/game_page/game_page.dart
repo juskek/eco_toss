@@ -1,4 +1,5 @@
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/eco_toss_game.dart';
 import 'package:eco_toss/pages/flame_game/endless_runner.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final audioController = context.read<AudioController>();
     return Scaffold(
-      body: GameWidget<EcoTossGame>(
+      body: GameWidget<BaseEcoTossGame>(
         key: const Key('play session'),
         game: EcoTossGame(),
       ),
