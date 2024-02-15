@@ -1,6 +1,6 @@
 import 'package:eco_toss/atomic/palette.dart';
 import 'package:eco_toss/atomic/wobbly_button.dart';
-import 'package:eco_toss/features/name/change_name_widget.dart';
+import 'package:eco_toss/features/name/name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -27,16 +27,11 @@ class OnboardingPage extends StatelessWidget {
                   children: const [
                     _gap,
                     Text(
-                      'Settings',
+                      "Let's get you set up!",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Press Start 2P',
-                        fontSize: 30,
-                        height: 1,
-                      ),
                     ),
                     _gap,
-                    ChangeNameWidget(),
+                    NameWidget(),
                   ],
                 ),
               ),

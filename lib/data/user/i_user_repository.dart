@@ -6,4 +6,8 @@ abstract class IUserRepository {
   Future<String> get userId;
 
   void storeUserId(String userId);
+
+  Future<void> setPlayerName(String name);
+
+  Future<String?> get playerName;
 }

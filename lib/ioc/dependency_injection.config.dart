@@ -33,6 +33,7 @@ import '../data/user/user_remote_data_source.dart' as _i14;
 import '../data/user/user_repository.dart' as _i23;
 import '../features/app_version_control/app_version_control_view_model.dart'
     as _i15;
+import '../features/name/name_viewmodel.dart' as _i25;
 import '../pages/leaderboard_page/leaderboard_viewmodel.dart' as _i24;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -86,5 +87,7 @@ _i1.GetIt $initGetIt(
         gh<_i16.ILeaderboardRepository>(),
         gh<_i20.IScoreRepository>(),
       ));
+  gh.factory<_i25.NameViewModel>(
+      () => _i25.NameViewModel(gh<_i22.IUserRepository>()));
   return getIt;
 }

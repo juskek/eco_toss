@@ -23,4 +23,13 @@ class UserLocalDataSource {
   void setUserId(String userId) {
     box.put("userId", userId);
   }
+
+  Future<String?> get playerName async {
+    final playerName = (await box.get('playerName')) as String?;
+    return playerName;
+  }
+
+  Future<void> setPlayerName(String name) async {
+    await box.put('playerName', name);
+  }
 }
