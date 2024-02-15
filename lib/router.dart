@@ -6,7 +6,7 @@ import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:eco_toss/pages/home_page/home_page.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_page.dart';
 import 'package:eco_toss/pages/onboarding/onboarding_page.dart';
-import 'package:eco_toss/pages/settings/settings_screen.dart';
+import 'package:eco_toss/pages/settings/settings_page.dart';
 import 'package:eco_toss/pages/tutorial_page/tutorial_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,7 +57,7 @@ abstract class EcoTossRouter {
             ),
             GoRoute(
               path: 'settings',
-              builder: (context, state) => const SettingsScreen(
+              builder: (context, state) => const SettingsPage(
                 key: Key('settings'),
               ),
             ),

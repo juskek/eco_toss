@@ -8,8 +8,8 @@ import '../../features/name/custom_name_dialog.dart';
 import '../../features/player_progress/player_progress.dart';
 import 'settings.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   static const _gap = SizedBox(height: 60);
 
