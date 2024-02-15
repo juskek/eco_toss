@@ -1,6 +1,8 @@
 import 'package:eco_toss/atomic/palette.dart';
 import 'package:eco_toss/atomic/wobbly_button.dart';
+import 'package:eco_toss/data/new_user/i_new_user_repository.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
+import 'package:eco_toss/ioc/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,7 @@ class OnboardingPage extends StatelessWidget {
             _gap,
             WobblyButton(
               onPressed: () {
+                getIt<INewUserRepository>().setHasOnboarded(true);
                 context.go('/');
               },
               child: const Text('Continue'),

@@ -1,7 +1,9 @@
+import 'package:eco_toss/data/new_user/i_new_user_repository.dart';
 import 'package:eco_toss/features/dialogs/onboarding_dialog.dart';
 import 'package:eco_toss/features/dialogs/welcome_dialog.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/tutorial_eco_toss_game.dart';
+import 'package:eco_toss/ioc/dependency_injection.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +34,7 @@ class TutorialPage extends StatelessWidget {
               (BuildContext context, BaseEcoTossGame game) {
             return OnboardingDialog(
               onPressed: () {
+                getIt<INewUserRepository>().setHasPlayedTutorial(true);
                 context.go('/onboarding');
               },
             );
