@@ -1,9 +1,11 @@
 import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/data/new_user/new_user_local_data_source.dart';
 import 'package:eco_toss/data/score/score_local_data_source.dart';
 import 'package:eco_toss/data/user/i_user_repository.dart';
 import 'package:eco_toss/data/user/user_local_data_source.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:eco_toss/features/audio/audio_controller.dart';
+import 'package:eco_toss/features/name/name_viewmodel.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,6 +31,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openLazyBox(ScoreLocalDataSource.hiveBoxName);
   await Hive.openLazyBox(UserLocalDataSource.hiveBoxName);
+  await Hive.openLazyBox(NewUserLocalDataSource.hiveBoxName);
 
   configureDependencyInjection(Env.prod);
   await Flame.device.setPortraitUpOnly();
@@ -49,6 +52,7 @@ void main() async {
         debugPrint("Unknown error.");
     }
   }
+  await EcoTossRouter.init();
 
   runApp(const MyGame());
 }
@@ -66,6 +70,7 @@ class MyGame extends StatelessWidget {
           Provider(create: (context) => SettingsController()),
           ChangeNotifierProvider(
               create: (context) => getIt<LeaderboardViewModel>()),
+          ChangeNotifierProvider(create: (context) => getIt<NameViewModel>()),
 
           // Set up audio.
           ProxyProvider2<SettingsController, AppLifecycleStateNotifier,
@@ -99,9 +104,11 @@ class MyGame extends StatelessWidget {
               //   displayColor: palette.text.color,
               // ),
             ),
-            routeInformationProvider: router.routeInformationProvider,
-            routeInformationParser: router.routeInformationParser,
-            routerDelegate: router.routerDelegate,
+            routeInformationProvider:
+                EcoTossRouter.instance.routeInformationProvider,
+            routeInformationParser:
+                EcoTossRouter.instance.routeInformationParser,
+            routerDelegate: EcoTossRouter.instance.routerDelegate,
             builder: (context, child) =>
                 AppVersionControlWrapper(child: child!),
           );

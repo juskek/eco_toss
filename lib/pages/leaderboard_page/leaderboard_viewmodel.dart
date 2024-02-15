@@ -16,7 +16,7 @@ class LeaderboardViewModel extends ChangeNotifier {
       _leaderboardRepository.entries;
 
   Future<String?> get userName async {
-    return (await _userRepository.ecoTossUser).name;
+    return await _userRepository.playerName;
   }
 
   Future<int?> get userRank async =>

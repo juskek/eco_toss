@@ -25,4 +25,14 @@ class UserRepository implements IUserRepository {
     _userLocalDataSource.setUserId(userId);
     _userRemoteDataSource.postUserId(userId);
   }
+
+  @override
+  Future<String?> get playerName async {
+    return await _userLocalDataSource.playerName;
+  }
+
+  @override
+  Future<void> setPlayerName(String name) async {
+    await _userLocalDataSource.setPlayerName(name);
+  }
 }

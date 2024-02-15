@@ -48,7 +48,7 @@ class LeaderboardPage extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (!snapshot.hasData) {
-                    return const Text('Anonymous');
+                    return Text(snapshot.data.toString());
                   }
                   return Text(
                     snapshot.data.toString(),

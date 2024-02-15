@@ -1,15 +1,14 @@
+import 'package:eco_toss/features/name/name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
 import '../../atomic/wobbly_button.dart';
-import '../../features/player_progress/player_progress.dart';
-import 'custom_name_dialog.dart';
 import 'settings.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   static const _gap = SizedBox(height: 60);
 
@@ -41,9 +40,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     _gap,
-                    const _NameChangeLine(
-                      'Name',
-                    ),
+                    const NameWidget(),
                     ValueListenableBuilder<bool>(
                       valueListenable: settings.soundsOn,
                       builder: (context, soundsOn, child) => _SettingsLine(
@@ -60,19 +57,6 @@ class SettingsScreen extends StatelessWidget {
                         onSelected: () => settings.toggleMusicOn(),
                       ),
                     ),
-                    _SettingsLine(
-                      'Reset progress',
-                      const Icon(Icons.delete),
-                      onSelected: () {
-                        context.read<PlayerProgress>().reset();
-
-                        final messenger = ScaffoldMessenger.of(context);
-                        messenger.showSnackBar(
-                          const SnackBar(
-                              content: Text('Player progress has been reset.')),
-                        );
-                      },
-                    ),
                   ],
                 ),
               ),
@@ -85,46 +69,6 @@ class SettingsScreen extends StatelessWidget {
               child: const Text('Back'),
             ),
             _gap,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _NameChangeLine extends StatelessWidget {
-  final String title;
-
-  const _NameChangeLine(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    final settings = context.watch<SettingsController>();
-
-    return InkResponse(
-      highlightShape: BoxShape.rectangle,
-      onTap: () => showCustomNameDialog(context),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(title,
-                style: const TextStyle(
-                  fontFamily: 'Press Start 2P',
-                  fontSize: 20,
-                )),
-            const Spacer(),
-            ValueListenableBuilder(
-              valueListenable: settings.playerName,
-              builder: (context, name, child) => Text(
-                '‘$name’',
-                style: const TextStyle(
-                  fontFamily: 'Press Start 2P',
-                  fontSize: 20,
-                ),
-              ),
-            ),
           ],
         ),
       ),

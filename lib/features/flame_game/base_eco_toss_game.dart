@@ -4,8 +4,8 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-class EcoTossGame extends FlameGame<EcoTossWorld> {
-  EcoTossGame()
+abstract class BaseEcoTossGame extends FlameGame<EcoTossWorld> {
+  BaseEcoTossGame()
       : super(
           world: EcoTossWorld(),
           camera: EcoTossCameraComponent(),
