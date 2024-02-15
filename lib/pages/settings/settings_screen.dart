@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
 import '../../atomic/wobbly_button.dart';
+import '../../features/name/custom_name_dialog.dart';
 import '../../features/player_progress/player_progress.dart';
-import 'custom_name_dialog.dart';
 import 'settings.dart';
 
 class SettingsScreen extends StatelessWidget {

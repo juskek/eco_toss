@@ -1,19 +1,22 @@
+import 'package:eco_toss/features/name/name_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'settings.dart';
 
-void showCustomNameDialog(BuildContext context) {
+void showCustomNameDialog(BuildContext context) async {
+  final playerName = await context.read<NameViewModel>().playerName;
   showGeneralDialog(
       context: context,
       pageBuilder: (context, animation, secondaryAnimation) =>
-          CustomNameDialog(animation: animation));
+          CustomNameDialog(animation: animation, playerName: playerName));
 }
 
 class CustomNameDialog extends StatefulWidget {
   final Animation<double> animation;
+  final String playerName;
 
-  const CustomNameDialog({required this.animation, super.key});
+  const CustomNameDialog(
+      {required this.animation, required this.playerName, super.key});
 
   @override
   State<CustomNameDialog> createState() => _CustomNameDialogState();
@@ -24,6 +27,8 @@ class _CustomNameDialogState extends State<CustomNameDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final nameViewModel = context.watch<NameViewModel>();
+    _controller.text = widget.playerName;
     return ScaleTransition(
       scale: CurvedAnimation(
         parent: widget.animation,
@@ -46,30 +51,20 @@ class _CustomNameDialogState extends State<CustomNameDialog> {
             textAlign: TextAlign.center,
             textCapitalization: TextCapitalization.words,
             textInputAction: TextInputAction.done,
-            onChanged: (value) {
-              context.read<SettingsController>().setPlayerName(value);
-            },
-            onSubmitted: (value) {
-              // Player tapped 'Submit'/'Done' on their keyboard.
-              Navigator.pop(context);
-            },
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              nameViewModel.setPlayerName(_controller.value.text);
+              Navigator.pop(context);
+            },
             child: Text(
-              'Close',
+              'Save',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    _controller.text = context.read<SettingsController>().playerName.value;
-    super.didChangeDependencies();
   }
 
   @override

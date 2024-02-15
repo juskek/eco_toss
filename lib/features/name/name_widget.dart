@@ -1,5 +1,5 @@
+import 'package:eco_toss/features/name/custom_name_dialog.dart';
 import 'package:eco_toss/features/name/name_viewmodel.dart';
-import 'package:eco_toss/pages/settings/custom_name_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
