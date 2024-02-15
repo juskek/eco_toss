@@ -24,13 +24,13 @@ class OnboardingDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Welcome to Eco Toss!',
+              "Great job!",
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             const Text(
-              "Let's learn how to recycle! First, let's start with the basics.",
+              "Now that you've learned the basics, recyle away!",
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),

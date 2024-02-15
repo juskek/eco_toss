@@ -37,7 +37,7 @@ class WelcomeDialog extends StatelessWidget {
             NesButton(
               onPressed: onPressed,
               type: NesButtonType.primary,
-              child: const Text("Let's go!"),
+              child: const Text("Show me the basics!"),
             ),
           ],
         ),
