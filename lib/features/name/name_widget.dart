@@ -22,16 +22,24 @@ class NameWidget extends StatelessWidget {
               'Your Name',
             ),
             const Spacer(),
-            FutureBuilder(
-              future: nameViewModel.playerName,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
-                  return Text(
-                    '${snapshot.data}',
-                  );
-                }
-                return const CircularProgressIndicator();
+            Selector<NameViewModel, Future<String>>(
+              selector: (context, viewModel) async =>
+                  await viewModel.playerName,
+              builder: (context, value, child) {
+                return FutureBuilder(
+                  future: nameViewModel.playerName,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
+                      return Text(
+                        '${snapshot.data}',
+                        style: const TextStyle(
+                            decoration: TextDecoration.underline),
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                );
               },
             )
           ],

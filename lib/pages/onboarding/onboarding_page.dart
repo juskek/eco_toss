@@ -41,7 +41,7 @@ class OnboardingPage extends StatelessWidget {
               onPressed: () {
                 context.go('/');
               },
-              child: const Text('Back'),
+              child: const Text('Continue'),
             ),
             _gap,
           ],

@@ -8,6 +8,7 @@ class NameViewModel extends ChangeNotifier {
 
   void setPlayerName(String name) {
     _userRepository.setPlayerName(name);
+    notifyListeners();
   }
 
   Future<String> get playerName async {
