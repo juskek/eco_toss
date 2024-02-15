@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../atomic/palette.dart';
 import '../../atomic/wobbly_button.dart';
 import '../../features/name/custom_name_dialog.dart';
-import '../../features/player_progress/player_progress.dart';
 import 'settings.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -59,19 +58,6 @@ class SettingsPage extends StatelessWidget {
                         Icon(musicOn ? Icons.music_note : Icons.music_off),
                         onSelected: () => settings.toggleMusicOn(),
                       ),
-                    ),
-                    _SettingsLine(
-                      'Reset progress',
-                      const Icon(Icons.delete),
-                      onSelected: () {
-                        context.read<PlayerProgress>().reset();
-
-                        final messenger = ScaffoldMessenger.of(context);
-                        messenger.showSnackBar(
-                          const SnackBar(
-                              content: Text('Player progress has been reset.')),
-                        );
-                      },
                     ),
                   ],
                 ),
