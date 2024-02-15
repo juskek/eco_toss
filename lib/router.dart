@@ -34,7 +34,8 @@ abstract class EcoTossRouter {
     assert(_initialRoute != null,
         'Initial route is null, did you forget to call EcoTossRouter.init()?');
     _instance ??= GoRouter(
-      initialLocation: _initialRoute,
+      initialLocation: "/onboarding",
+      // initialLocation: _initialRoute,
       routes: [
         GoRoute(
             path: '/tutorial',
