@@ -10,4 +10,8 @@ class ScoreLocalDataSource {
     final highScore = (await box.get('highScore')) as int?;
     return highScore;
   }
+
+  Future<void> setHighScore(int _) async {
+    await box.put('highScore', _);
+  }
 }

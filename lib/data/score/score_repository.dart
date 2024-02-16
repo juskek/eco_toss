@@ -15,4 +15,9 @@ class ScoreRepository implements IScoreRepository {
   Future<int?> get highScore async {
     return await _scoreLocalDataSource.highScore;
   }
+
+  @override
+  Future<void> setHighScore(int _) async {
+    await _scoreLocalDataSource.setHighScore(_);
+  }
 }

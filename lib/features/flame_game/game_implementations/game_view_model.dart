@@ -18,4 +18,8 @@ class GameViewModel extends ChangeNotifier {
     assert(_previousHighScore != null);
     return _previousHighScore!;
   }
+
+  Future<void> setHighScore(int _) async {
+    await _scoreRepository.setHighScore(_);
+  }
 }
