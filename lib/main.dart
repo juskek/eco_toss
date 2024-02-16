@@ -5,7 +5,7 @@ import 'package:eco_toss/data/user/i_user_repository.dart';
 import 'package:eco_toss/data/user/user_local_data_source.dart';
 import 'package:eco_toss/features/app_version_control/app_version_control_wrapper.dart';
 import 'package:eco_toss/features/audio/audio_controller.dart';
-import 'package:eco_toss/features/flame_game/game_implementations/game_view_model.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/name/name_viewmodel.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';

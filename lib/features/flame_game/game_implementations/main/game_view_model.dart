@@ -14,6 +14,10 @@ class GameViewModel extends ChangeNotifier {
     _previousHighScore ??= 0;
   }
 
+  void setPreviousHighScore(int _) {
+    _previousHighScore = _;
+  }
+
   int get previousHighScore {
     assert(_previousHighScore != null);
     return _previousHighScore!;

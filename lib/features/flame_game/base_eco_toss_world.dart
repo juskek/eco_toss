@@ -1,5 +1,6 @@
 import 'package:eco_toss/features/flame_game/backboard/backboard_component.dart';
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
+import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
@@ -8,15 +9,11 @@ import 'package:eco_toss/features/flame_game/room/floor_far_edge.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
-  final scoreNotifier = ValueNotifier(0);
-
-  void addScore({int amount = 1}) {
-    scoreNotifier.value += amount;
-  }
-
+abstract class BaseEcoTossWorld extends World
+    with HasCollisionDetection, HasGameRef {
   @override
   Future<void> onLoad() async {
+    final game = findGame()! as BaseEcoTossGame;
     final canvasSize = findGame()!.canvasSize;
     EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
     add(FloorFarEdge());
@@ -25,7 +22,8 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
     add(BackboardComponent());
     await add(BallComponent(
       radiusStartMetres: 0.2,
-      addScore: addScore,
+      addScore: game.addScore,
+      onMiss: game.onMiss,
     ));
     showXYZDimensions();
 
@@ -36,7 +34,8 @@ class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
         binFrontSurface.priority = 1;
         add(BallComponent(
           radiusStartMetres: 0.2,
-          addScore: addScore,
+          addScore: game.addScore,
+          onMiss: game.onMiss,
         ));
       }
       if (ball != null &&

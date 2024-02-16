@@ -1,15 +1,22 @@
+import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
-import 'package:eco_toss/features/flame_game/eco_toss_world.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseEcoTossGame extends FlameGame<EcoTossWorld> {
-  BaseEcoTossGame()
+abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
+  BaseEcoTossGame({super.world})
       : super(
-          world: EcoTossWorld(),
           camera: EcoTossCameraComponent(),
         );
+
+  final scoreNotifier = ValueNotifier(0);
+
+  void addScore({int amount = 1}) {
+    scoreNotifier.value += amount;
+  }
+
+  void onMiss();
 
   @override
   Future<void> onLoad() async {
@@ -33,9 +40,9 @@ abstract class BaseEcoTossGame extends FlameGame<EcoTossWorld> {
 
     camera.viewport.add(scoreComponent);
 
-    world.scoreNotifier.addListener(() {
+    scoreNotifier.addListener(() {
       scoreComponent.text =
-          scoreText.replaceFirst('0', '${world.scoreNotifier.value}');
+          scoreText.replaceFirst('0', '${scoreNotifier.value}');
     });
   }
 }

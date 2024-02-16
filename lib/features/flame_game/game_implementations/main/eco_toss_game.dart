@@ -1,15 +1,26 @@
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
-import 'package:eco_toss/features/flame_game/game_implementations/game_view_model.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
+import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:flame/components.dart';
 
 class EcoTossGame extends BaseEcoTossGame {
-  EcoTossGame(this.gameViewModel);
+  EcoTossGame(this.gameViewModel) : super(world: EcoTossWorld());
   final GameViewModel gameViewModel;
 
   late TextComponent highScoreTextComponent;
   late Vector2 textSize;
   late Vector2 textPosition;
+
+  @override
+  void onMiss() {
+    if (scoreNotifier.value > gameViewModel.previousHighScore) {
+      overlays.add(GamePage.submitHighScoreOverlayKey);
+      gameViewModel.setPreviousHighScore(scoreNotifier.value);
+    }
+    scoreNotifier.value = 0;
+  }
 
   @override
   Future<void> onLoad() async {
@@ -23,15 +34,15 @@ class EcoTossGame extends BaseEcoTossGame {
       size: textSize,
       position: textPosition,
     );
-    world.scoreNotifier.addListener(() async {
-      if (world.scoreNotifier.value == gameViewModel.previousHighScore + 1) {
+    scoreNotifier.addListener(() async {
+      if (scoreNotifier.value == gameViewModel.previousHighScore + 1) {
         camera.viewport.add(highScoreTextComponent);
         Future.delayed(const Duration(seconds: 3), () {
           camera.viewport.remove(highScoreTextComponent);
         });
       }
-      if (world.scoreNotifier.value > gameViewModel.previousHighScore) {
-        await gameViewModel.setHighScore(world.scoreNotifier.value);
+      if (scoreNotifier.value > gameViewModel.previousHighScore) {
+        await gameViewModel.setHighScore(scoreNotifier.value);
       }
     });
 
