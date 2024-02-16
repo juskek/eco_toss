@@ -1,5 +1,6 @@
 import 'package:eco_toss/features/flame_game/backboard/backboard_component.dart';
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
+import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
@@ -16,8 +17,11 @@ abstract class BaseEcoTossWorld extends World
     scoreNotifier.value += amount;
   }
 
+  void resetScore();
+
   @override
   Future<void> onLoad() async {
+    final game = findGame()! as BaseEcoTossGame;
     final canvasSize = findGame()!.canvasSize;
     EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
     add(FloorFarEdge());
@@ -27,6 +31,7 @@ abstract class BaseEcoTossWorld extends World
     await add(BallComponent(
       radiusStartMetres: 0.2,
       addScore: addScore,
+      resetScore: resetScore,
     ));
     showXYZDimensions();
 
@@ -38,6 +43,7 @@ abstract class BaseEcoTossWorld extends World
         add(BallComponent(
           radiusStartMetres: 0.2,
           addScore: addScore,
+          resetScore: resetScore,
         ));
       }
       if (ball != null &&
