@@ -11,14 +11,6 @@ import 'package:flutter/material.dart';
 
 abstract class BaseEcoTossWorld extends World
     with HasCollisionDetection, HasGameRef {
-  final scoreNotifier = ValueNotifier(0);
-
-  void addScore({int amount = 1}) {
-    scoreNotifier.value += amount;
-  }
-
-  void onMiss();
-
   @override
   Future<void> onLoad() async {
     final game = findGame()! as BaseEcoTossGame;
@@ -30,8 +22,8 @@ abstract class BaseEcoTossWorld extends World
     add(BackboardComponent());
     await add(BallComponent(
       radiusStartMetres: 0.2,
-      addScore: addScore,
-      onMiss: onMiss,
+      addScore: game.addScore,
+      onMiss: game.onMiss,
     ));
     showXYZDimensions();
 
@@ -42,8 +34,8 @@ abstract class BaseEcoTossWorld extends World
         binFrontSurface.priority = 1;
         add(BallComponent(
           radiusStartMetres: 0.2,
-          addScore: addScore,
-          onMiss: onMiss,
+          addScore: game.addScore,
+          onMiss: game.onMiss,
         ));
       }
       if (ball != null &&

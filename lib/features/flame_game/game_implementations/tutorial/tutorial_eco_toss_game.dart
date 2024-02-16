@@ -12,6 +12,10 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
   static TextComponent? instructionsText;
   late Vector2 tutorialTextSize;
   late Vector2 tutorialTextPosition;
+
+  @override
+  void onMiss() {}
+
   @override
   Future<void> onLoad() {
     overlays.add(TutorialPage.welcomeOverlayKey);
@@ -41,7 +45,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
         assert(instructionsText != null);
         camera.viewport.remove(instructionsText!);
         Future.delayed(const Duration(seconds: 2), () {
-          if (world.scoreNotifier.value == 0) {
+          if (scoreNotifier.value == 0) {
             instructionsText = TypingTextComponent(
                 text:
                     "Good throw! To score points, throw the paper ball into the bin. Let's aim for 3 points!",
@@ -59,8 +63,8 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
       }
     });
 
-    world.scoreNotifier.addListener(() {
-      if (world.scoreNotifier.value == 3) {
+    scoreNotifier.addListener(() {
+      if (scoreNotifier.value == 3) {
         camera.viewport.remove(instructionsText!);
         overlays.add(TutorialPage.readyForOnboardingOverlayKey);
       }

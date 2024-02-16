@@ -13,6 +13,11 @@ class EcoTossGame extends BaseEcoTossGame {
   late Vector2 textPosition;
 
   @override
+  void onMiss() {
+    scoreNotifier.value = 0;
+  }
+
+  @override
   Future<void> onLoad() async {
     await gameViewModel.getPreviousHighScore();
 
@@ -24,15 +29,15 @@ class EcoTossGame extends BaseEcoTossGame {
       size: textSize,
       position: textPosition,
     );
-    world.scoreNotifier.addListener(() async {
-      if (world.scoreNotifier.value == gameViewModel.previousHighScore + 1) {
+    scoreNotifier.addListener(() async {
+      if (scoreNotifier.value == gameViewModel.previousHighScore + 1) {
         camera.viewport.add(highScoreTextComponent);
         Future.delayed(const Duration(seconds: 3), () {
           camera.viewport.remove(highScoreTextComponent);
         });
       }
-      if (world.scoreNotifier.value > gameViewModel.previousHighScore) {
-        await gameViewModel.setHighScore(world.scoreNotifier.value);
+      if (scoreNotifier.value > gameViewModel.previousHighScore) {
+        await gameViewModel.setHighScore(scoreNotifier.value);
       }
     });
 

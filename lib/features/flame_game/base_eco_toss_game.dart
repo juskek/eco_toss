@@ -10,6 +10,14 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
           camera: EcoTossCameraComponent(),
         );
 
+  final scoreNotifier = ValueNotifier(0);
+
+  void addScore({int amount = 1}) {
+    scoreNotifier.value += amount;
+  }
+
+  void onMiss();
+
   @override
   Future<void> onLoad() async {
     camera.viewfinder.anchor = Anchor.center;
@@ -32,9 +40,9 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
     camera.viewport.add(scoreComponent);
 
-    world.scoreNotifier.addListener(() {
+    scoreNotifier.addListener(() {
       scoreComponent.text =
-          scoreText.replaceFirst('0', '${world.scoreNotifier.value}');
+          scoreText.replaceFirst('0', '${scoreNotifier.value}');
     });
   }
 }
