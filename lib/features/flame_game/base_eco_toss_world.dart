@@ -8,7 +8,8 @@ import 'package:eco_toss/features/flame_game/room/floor_far_edge.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-class EcoTossWorld extends World with HasCollisionDetection, HasGameRef {
+abstract class BaseEcoTossWorld extends World
+    with HasCollisionDetection, HasGameRef {
   final scoreNotifier = ValueNotifier(0);
 
   void addScore({int amount = 1}) {

@@ -1,10 +1,11 @@
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
-import 'package:eco_toss/features/flame_game/game_implementations/game_view_model.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:flame/components.dart';
 
 class EcoTossGame extends BaseEcoTossGame {
-  EcoTossGame(this.gameViewModel);
+  EcoTossGame(this.gameViewModel) : super(world: EcoTossWorld());
   final GameViewModel gameViewModel;
 
   late TextComponent highScoreTextComponent;
