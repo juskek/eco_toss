@@ -42,12 +42,12 @@ class SubmitHighScoreDialog extends StatelessWidget {
             NesButton(
               onPressed: onSubmit,
               type: NesButtonType.primary,
-              child: const Text("Yes"),
+              child: const Text("Submit to Leaderboard"),
             ),
             NesButton(
               onPressed: onCancel,
               type: NesButtonType.normal,
-              child: const Text("No"),
+              child: const Text("No thanks"),
             ),
           ],
         ),
