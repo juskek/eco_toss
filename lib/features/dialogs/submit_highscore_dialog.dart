@@ -1,7 +1,7 @@
+import 'package:eco_toss/common_imports.dart';
+import 'package:eco_toss/data/score/i_score_repository.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
-import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
 
@@ -18,6 +18,7 @@ class SubmitHighScoreDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.read<Palette>();
+
     return Center(
       child: NesContainer(
         width: 420,
@@ -38,6 +39,19 @@ class SubmitHighScoreDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const NameWidget(),
+            const SizedBox(height: 16),
+            FutureBuilder(
+              future: getIt<IScoreRepository>().highScore,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  return Text(
+                    "Highscore: ${snapshot.data}",
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
             const SizedBox(height: 16),
             NesButton(
               onPressed: onSubmit,
