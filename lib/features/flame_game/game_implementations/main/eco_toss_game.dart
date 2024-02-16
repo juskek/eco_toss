@@ -2,6 +2,7 @@ import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
+import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:flame/components.dart';
 
 class EcoTossGame extends BaseEcoTossGame {
@@ -14,6 +15,10 @@ class EcoTossGame extends BaseEcoTossGame {
 
   @override
   void onMiss() {
+    if (scoreNotifier.value > gameViewModel.previousHighScore) {
+      overlays.add(GamePage.submitHighScoreOverlayKey);
+      gameViewModel.setPreviousHighScore(scoreNotifier.value);
+    }
     scoreNotifier.value = 0;
   }
 
