@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/dialogs/submit_highscore_dialog.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/game_view_model.dart';
@@ -18,6 +19,7 @@ class GamePage extends StatelessWidget {
 
   static const String winDialogKey = 'win_dialog';
   static const String backButtonKey = 'back_buttton';
+  static const String submitHighScoreOverlayKey = 'submit_high_score';
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,15 @@ class GamePage extends StatelessWidget {
       body: GameWidget<BaseEcoTossGame>(
         key: const Key('play session'),
         game: EcoTossGame(gameViewModel),
+        overlayBuilderMap: {
+          submitHighScoreOverlayKey:
+              (BuildContext context, BaseEcoTossGame game) {
+            return SubmitHighScoreDialog(
+              onSubmit: () {},
+              onCancel: () {},
+            );
+          },
+        },
       ),
     );
   }
