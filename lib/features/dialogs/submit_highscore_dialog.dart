@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/name/name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class SubmitHighScoreDialog extends StatelessWidget {
     return Center(
       child: NesContainer(
         width: 420,
-        height: 280,
+        height: 400,
         backgroundColor: palette.backgroundPlaySession.color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -35,6 +36,8 @@ class SubmitHighScoreDialog extends StatelessWidget {
               "Would you like to submit your highscore to the leaderboard?",
               textAlign: TextAlign.center,
             ),
+            const SizedBox(height: 16),
+            const NameWidget(),
             const SizedBox(height: 16),
             NesButton(
               onPressed: onSubmit,
