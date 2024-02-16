@@ -74,7 +74,7 @@ class EndlessWorld extends World with TapCallbacks, HasGameReference {
     player = Player(
       position: Vector2(-size.x / 3, groundLevel - 900),
       addScore: addScore,
-      resetScore: resetScore,
+      onMiss: onMiss,
     );
     add(player);
 
@@ -144,7 +144,7 @@ class EndlessWorld extends World with TapCallbacks, HasGameReference {
   }
 
   /// Sets the player's score to 0 again.
-  void resetScore() {
+  void onMiss() {
     scoreNotifier.value = 0;
   }
 

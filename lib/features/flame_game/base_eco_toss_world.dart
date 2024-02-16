@@ -17,7 +17,7 @@ abstract class BaseEcoTossWorld extends World
     scoreNotifier.value += amount;
   }
 
-  void resetScore();
+  void onMiss();
 
   @override
   Future<void> onLoad() async {
@@ -31,7 +31,7 @@ abstract class BaseEcoTossWorld extends World
     await add(BallComponent(
       radiusStartMetres: 0.2,
       addScore: addScore,
-      resetScore: resetScore,
+      onMiss: onMiss,
     ));
     showXYZDimensions();
 
@@ -43,7 +43,7 @@ abstract class BaseEcoTossWorld extends World
         add(BallComponent(
           radiusStartMetres: 0.2,
           addScore: addScore,
-          resetScore: resetScore,
+          onMiss: onMiss,
         ));
       }
       if (ball != null &&

@@ -19,12 +19,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         HasGameReference<EndlessRunner> {
   Player({
     required this.addScore,
-    required this.resetScore,
+    required this.onMiss,
     super.position,
   }) : super(size: Vector2.all(150), anchor: Anchor.center, priority: 1);
 
   final void Function({int amount}) addScore;
-  final VoidCallback resetScore;
+  final VoidCallback onMiss;
 
   // The current velocity that the player has that comes from being affected by
   // the gravity. Defined in virtual pixels/s².
@@ -111,7 +111,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     // When the player collides with an obstacle it should lose all its points.
     if (other is Obstacle) {
       game.audioController.playSfx(SfxType.damage);
-      resetScore();
+      onMiss();
       add(HurtEffect());
     } else if (other is Point) {
       // When the player collides with a point it should gain a point and remove

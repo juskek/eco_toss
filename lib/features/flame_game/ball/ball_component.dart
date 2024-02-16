@@ -18,7 +18,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   BallComponent({
     required this.radiusStartMetres,
     required this.addScore,
-    required this.resetScore,
+    required this.onMiss,
   }) : super(
             anchor: Anchor.center,
             priority: 2,
@@ -27,7 +27,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   double radiusStartMetres;
 
   final void Function({int amount}) addScore;
-  final void Function() resetScore;
+  final void Function() onMiss;
 
   double timeSinceMissSeconds = 0;
 
@@ -171,7 +171,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       super.setColor(Colors.red);
       if (timeSinceMissSeconds >= 1) {
         removeFromParent();
-        resetScore();
+        onMiss();
       }
     }
   }
@@ -184,7 +184,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     if (hasHitBackboard) {
       addScore();
     } else {
-      resetScore();
+      onMiss();
     }
     removeFromParent();
   }
