@@ -4,4 +4,6 @@ abstract class ILeaderboardRepository {
   Future<List<LeaderboardEntry>> get entries;
 
   Future<int?> getUserRank(String userId);
+
+  Future<void> postEntry(String userId, String userName, int score);
 }

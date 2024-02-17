@@ -24,6 +24,7 @@ class EcoTossGame extends BaseEcoTossGame {
 
   @override
   Future<void> onLoad() async {
+    overlays.add(GamePage.backButtonKey);
     await gameViewModel.getPreviousHighScore();
 
     textSize = Vector2(size.x, size.y * 0.5);

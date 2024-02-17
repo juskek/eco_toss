@@ -40,4 +40,9 @@ class LeaderboardRepository implements ILeaderboardRepository {
       return _leaderboardLocalDataSource.userRank!;
     }
   }
+
+  @override
+  Future<void> postEntry(String userId, String userName, int score) async {
+    await _leaderboardRemoteDataSource.postEntry(userId, userName, score);
+  }
 }

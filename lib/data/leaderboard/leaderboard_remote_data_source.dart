@@ -23,7 +23,6 @@ class LeaderboardRemoteDataSource {
     final querySnapshot =
         await leaderboard.orderBy("score", descending: true).limit(10).get();
 
-    // iterate through the querySnapshot.docs to find the user's rank
     for (var i = 0; i < querySnapshot.docs.length; i++) {
       final json = querySnapshot.docs[i].data() as Map<String, dynamic>;
       final entry = LeaderboardEntry.fromJson(json);
@@ -32,5 +31,19 @@ class LeaderboardRemoteDataSource {
       }
     }
     return -1;
+  }
+
+  Future<void> postEntry(String userId, String userName, int score) async {
+    final querySnapshot =
+        await leaderboard.where("userId", isEqualTo: userId).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs.first.id;
+      await leaderboard.doc(docId).delete();
+    }
+
+    final entry =
+        LeaderboardEntry(userId: userId, name: userName, score: score).toJson();
+    await leaderboard.add(entry);
   }
 }

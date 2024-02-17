@@ -5,6 +5,8 @@ import 'package:eco_toss/features/flame_game/game_implementations/main/game_view
 import 'package:eco_toss/pages/flame_game/endless_runner.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../../features/audio/audio_controller.dart';
@@ -30,12 +32,25 @@ class GamePage extends StatelessWidget {
         key: const Key('play session'),
         game: EcoTossGame(gameViewModel),
         overlayBuilderMap: {
+          backButtonKey: (BuildContext context, BaseEcoTossGame game) {
+            return Positioned(
+              top: 20,
+              left: 10,
+              child: NesButton(
+                type: NesButtonType.normal,
+                onPressed: GoRouter.of(context).pop,
+                child: NesIcon(iconData: NesIcons.leftArrowIndicator),
+              ),
+            );
+          },
           submitHighScoreOverlayKey:
               (BuildContext context, BaseEcoTossGame game) {
-            return SubmitHighScoreDialog(
-              onSubmit: () {},
-              onCancel: () {},
-            );
+            return SubmitHighScoreDialog(onSubmit: () {
+              gameViewModel.submitHighScore();
+              game.overlays.remove(GamePage.submitHighScoreOverlayKey);
+            }, onCancel: () {
+              game.overlays.remove(GamePage.submitHighScoreOverlayKey);
+            });
           },
         },
       ),
