@@ -73,7 +73,14 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       isThrown = true;
       current = ObjectState.thrown;
 
-      double averageAngle = _angles.reduce((a, b) => a + b) / _angles.length;
+      int start = (_angles.length * 0.25).round();
+      int end = (_angles.length * 0.75).round();
+
+      double sum = 0;
+      for (int i = start; i < end; i++) {
+        sum += _angles[i];
+      }
+      double averageAngle = sum / (end - start);
       xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
       yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
       zVelocityMps = EcoTossThrow.zVelocityMps;
