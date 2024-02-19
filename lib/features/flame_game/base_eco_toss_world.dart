@@ -18,6 +18,7 @@ abstract class BaseEcoTossWorld extends World
 
     add(FloorFarEdge());
     add(binComponents.backSurfaceComponent);
+    add(binComponents.frontSurfaceComponent);
     // final binFrontSurface = BinFrontSurfaceComponent();
     // add(binFrontSurface);
     await add(BallComponent(

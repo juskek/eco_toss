@@ -6,17 +6,15 @@ import 'package:flutter/material.dart';
 
 import 'bin_dimensions.dart';
 
-class BinFrontSurfaceComponent extends SpriteComponent {
+class BinFrontSurfaceComponent extends RectangleComponent {
   BinFrontSurfaceComponent({super.size}) {
     final pixelCoordinates = EcoTossPositioning.xyzMetresToXyPixels(Vector3(
-        EcoToss3DSpace.xMidMetres,
-        0,
-        EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres));
+        EcoToss3DSpace.xMidMetres, 0, BinDimensions.frontSurfaceZMetres));
     final height =
         EcoTossPositioning.ySizeMetresToPixels(BinDimensions.heightMetres);
     final width =
         EcoTossPositioning.xSizeMetresToPixels(BinDimensions.widthMetres);
-    final sizeScale = getScaleFactor(EcoToss3DSpace.zMaxMetres);
+    final sizeScale = getScaleFactor(BinDimensions.frontSurfaceZMetres);
 
     super.position = Vector2(pixelCoordinates.x, pixelCoordinates.y);
     super.size = Vector2(width * sizeScale, height * sizeScale);
@@ -28,8 +26,8 @@ class BinFrontSurfaceComponent extends SpriteComponent {
   @override
   void onLoad() async {
     add(RectangleHitbox(isSolid: true));
-    sprite = await Sprite.load('bins/blue_bin.png');
+    // sprite = await Sprite.load('bins/blue_bin.png');
 
-    super.paint = (Paint()..color = Colors.grey);
+    super.paint = (Paint()..color = Colors.blueGrey);
   }
 }

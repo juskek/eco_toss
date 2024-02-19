@@ -5,7 +5,7 @@ abstract class BinDimensions {
   static const heightMetres = 0.7;
   static const widthMetres = 0.3;
   static const backSurfaceZMetres = 4.0;
-  static const frontSurfaceZMetres = 3.8;
+  static const frontSurfaceZMetres = 3.6;
   static const depthMetres = backSurfaceZMetres - frontSurfaceZMetres;
 }
 
