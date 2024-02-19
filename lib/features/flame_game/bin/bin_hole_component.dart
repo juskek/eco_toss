@@ -26,20 +26,30 @@ class BinHoleComponent extends PolygonComponent {
     //     EcoTossPositioning.ySizeMetresToPixels(BinDimensions.heightMetres);
     // final width =
     //     EcoTossPositioning.xSizeMetresToPixels(BinDimensions.widthMetres);
+
     final sizeScale = getScaleFactor(BinDimensions.frontSurfaceZMetres);
+
     final frontLengthPixels =
-        frontRightCornerPixels.x - frontLeftCornerPixels.x;
+        EcoTossPositioning.xSizeMetresToPixels(BinDimensions.widthMetres);
     final frontScaledLengthPixels = frontLengthPixels * sizeScale;
+
+    final frontHeightPixels =
+        EcoTossPositioning.ySizeMetresToPixels(BinDimensions.heightMetres);
+    final frontScaledHeightPixels = frontHeightPixels * sizeScale;
+    final frontScaledHeightDifferencePixels =
+        frontScaledHeightPixels - frontHeightPixels;
+
     final midpointPixels = EcoTossPositioning.xyzMetresToXyPixels(Vector3(
         midpointXMetres,
         BinDimensions.heightMetres,
         BinDimensions.frontSurfaceZMetres));
+
     final frontLeftCornerScaledPixels = Vector2(
         midpointPixels.x - frontScaledLengthPixels / 2,
-        frontLeftCornerPixels.y);
+        frontLeftCornerPixels.y - frontScaledHeightDifferencePixels);
     final frontRightCornerScaledPixels = Vector2(
         midpointPixels.x + frontScaledLengthPixels / 2,
-        frontRightCornerPixels.y);
+        frontLeftCornerPixels.y - frontScaledHeightDifferencePixels);
 
     // super.position = Vector2(pixelCoordinates.x, pixelCoordinates.y);
     // super.size = Vector2(width * sizeScale, height * sizeScale);
