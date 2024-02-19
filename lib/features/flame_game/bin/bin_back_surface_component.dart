@@ -31,6 +31,6 @@ class BinBackSurfaceComponent extends RectangleComponent {
     add(RectangleHitbox(isSolid: true));
     // sprite = await Sprite.load('bins/blue_bin.png');
 
-    super.paint = (Paint()..color = Colors.grey);
+    super.paint = (Paint()..color = Colors.red);
   }
 }
