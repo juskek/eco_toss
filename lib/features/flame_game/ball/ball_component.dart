@@ -115,7 +115,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       updatePositionAndRadius();
       return;
     }
-    bounceIfHitWalls();
 
     removeIfMissed(dt);
 
@@ -176,15 +175,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       onMiss();
     }
     removeFromParent();
-  }
-
-  void bounceIfHitWalls() {
-    if (xPositionMetres > EcoToss3DSpace.xMaxMetres) {
-      xVelocityMps = -xVelocityMps * 0.9;
-    }
-    if (xPositionMetres < EcoToss3DSpace.xMinMetres) {
-      xVelocityMps = -xVelocityMps * 0.9;
-    }
   }
 
   void applyAirResistance() {
