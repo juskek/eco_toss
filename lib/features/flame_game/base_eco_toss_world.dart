@@ -1,4 +1,3 @@
-import 'package:eco_toss/features/flame_game/backboard/backboard_component.dart';
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
@@ -19,7 +18,6 @@ abstract class BaseEcoTossWorld extends World
     add(FloorFarEdge());
     final binFrontSurface = BinFrontSurfaceComponent();
     add(binFrontSurface);
-    add(BackboardComponent());
     await add(BallComponent(
       radiusStartMetres: 0.2,
       addScore: game.addScore,
