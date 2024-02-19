@@ -26,7 +26,14 @@ class BinFrontSurfaceComponent extends RectangleComponent {
   @override
   void onLoad() async {
     add(RectangleHitbox(isSolid: true));
-    // sprite = await Sprite.load('bins/blue_bin.png');
+    final sprite = await Sprite.load('bins/blue_bin.png');
+    const imageScale = 0.4;
+    add(SpriteComponent(
+      sprite: sprite,
+      anchor: Anchor.center,
+      position: Vector2(size.x / 2, size.y / 2),
+      scale: Vector2(imageScale, imageScale),
+    ));
 
     super.paint = (Paint()..color = Colors.blue);
   }

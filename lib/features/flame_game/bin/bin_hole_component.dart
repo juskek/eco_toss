@@ -49,7 +49,7 @@ class BinHoleComponent extends PolygonComponent {
         frontLeftCornerPixels.y - frontScaledHeightDifferencePixels);
     final frontRightCornerScaledPixels = Vector2(
         midpointPixels.x + frontScaledLengthPixels / 2,
-        frontLeftCornerPixels.y - frontScaledHeightDifferencePixels);
+        frontRightCornerPixels.y - frontScaledHeightDifferencePixels);
 
     // super.position = Vector2(pixelCoordinates.x, pixelCoordinates.y);
     // super.size = Vector2(width * sizeScale, height * sizeScale);
