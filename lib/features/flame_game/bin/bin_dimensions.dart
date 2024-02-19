@@ -5,7 +5,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 
 abstract class BinDimensions {
   static const heightMetres = 0.7;
-  static const widthMetres = 0.5;
+  static const widthMetres = 0.4;
   static const backSurfaceZMetres = 4.0;
   static const frontSurfaceZMetres = 3.6;
   static const depthMetres = backSurfaceZMetres - frontSurfaceZMetres;

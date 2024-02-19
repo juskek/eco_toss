@@ -41,7 +41,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   double yVelocityMps = 0;
   double zVelocityMps = 0;
 
-  bool hasHitBackboard = false;
   bool hasPassedBinStart = false;
 
   bool isThrown = false;
@@ -175,7 +174,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   }
 
   void removeIfMissed(double dt) {
-    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres && !hasHitBackboard) {
+    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
       if (timeSinceMissSeconds >= 1) {
@@ -190,11 +189,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       return;
     }
     yVelocityMps = 0;
-    if (hasHitBackboard) {
-      addScore();
-    } else {
-      onMiss();
-    }
+
+    onMiss();
     removeFromParent();
   }
 
