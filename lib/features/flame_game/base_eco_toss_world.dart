@@ -1,7 +1,6 @@
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
-import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:eco_toss/features/flame_game/room/floor_far_edge.dart';
@@ -16,8 +15,8 @@ abstract class BaseEcoTossWorld extends World
     final canvasSize = findGame()!.canvasSize;
     EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
     add(FloorFarEdge());
-    final binFrontSurface = BinFrontSurfaceComponent();
-    add(binFrontSurface);
+    // final binFrontSurface = BinFrontSurfaceComponent();
+    // add(binFrontSurface);
     await add(BallComponent(
       radiusStartMetres: 0.2,
       addScore: game.addScore,
@@ -29,7 +28,7 @@ abstract class BaseEcoTossWorld extends World
     ballNotifier.addListener(() {
       final ball = ballNotifier.single;
       if (ball == null) {
-        binFrontSurface.priority = 1;
+        // binFrontSurface.priority = 1;
         add(BallComponent(
           radiusStartMetres: 0.2,
           addScore: game.addScore,
@@ -39,7 +38,7 @@ abstract class BaseEcoTossWorld extends World
       if (ball != null &&
           ball.zPositionMetres >=
               EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres) {
-        binFrontSurface.priority = 2;
+        // binFrontSurface.priority = 2;
         ball.priority = 1;
       }
     });
