@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/flame_game/background/background_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
 import 'package:flame/components.dart';
@@ -20,6 +21,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
   @override
   Future<void> onLoad() async {
+    camera.backdrop.add(BackgroundComponent());
     camera.viewfinder.anchor = Anchor.center;
     camera.viewfinder.position = Vector2(0, 0);
     const scoreText = 'Recycled: 0';

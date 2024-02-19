@@ -61,6 +61,7 @@ flutter:
     - assets/images/
     - assets/images/dash/
     - assets/images/throwables/
+    - assets/images/bins/
     - assets/images/enemies/
     - assets/images/scenery/
     - assets/music/
