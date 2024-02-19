@@ -14,18 +14,20 @@ abstract class BaseEcoTossWorld extends World
     final game = findGame()! as BaseEcoTossGame;
     final canvasSize = findGame()!.canvasSize;
     EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
-    final binComponents = createBinComponents(midpointXMetres: 1);
+
     add(FloorFarEdge());
+
+    final binComponents = createBinComponents(midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
     add(binComponents.holeComponent);
-    // final binFrontSurface = BinFrontSurfaceComponent();
-    // add(binFrontSurface);
+
     await add(BallComponent(
       radiusStartMetres: 0.2,
       addScore: game.addScore,
       onMiss: game.onMiss,
     ));
+
     showXYZDimensions();
 
     final ballNotifier = gameRef.componentsNotifier<BallComponent>();

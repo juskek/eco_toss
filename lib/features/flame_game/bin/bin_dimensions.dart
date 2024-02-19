@@ -15,6 +15,7 @@ abstract class BinDimensions {
   BinFrontSurfaceComponent frontSurfaceComponent,
   BinBackSurfaceComponent backSurfaceComponent,
   BinHoleComponent holeComponent,
+  BinHoleCoordinatesMetres binHoleCoordinatesMetres,
 }) createBinComponents({required double midpointXMetres}) {
   final binHoleCoordinatesMetres =
       BinHoleCoordinatesMetres(midpointXMetres: midpointXMetres);
@@ -24,5 +25,6 @@ abstract class BinDimensions {
     holeComponent: BinHoleComponent(
         midpointXMetres: midpointXMetres,
         binHoleCoordinatesMetres: binHoleCoordinatesMetres),
+    binHoleCoordinatesMetres: binHoleCoordinatesMetres,
   );
 }
