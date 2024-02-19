@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
@@ -19,6 +20,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     required this.radiusStartMetres,
     required this.addScore,
     required this.onMiss,
+    required this.binHoleCoordinatesMetres,
   }) : super(
             anchor: Anchor.center,
             priority: 2,
@@ -39,10 +41,11 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   double yVelocityMps = 0;
   double zVelocityMps = 0;
 
-  bool hasHitBackboard = false;
   bool hasPassedBinStart = false;
 
   bool isThrown = false;
+
+  BinHoleCoordinatesMetres binHoleCoordinatesMetres;
 
   final List<double> _angles = [];
 
@@ -110,23 +113,17 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   }
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
-      hasHitBackboard = true;
-      super.setColor(Colors.green);
-      zVelocityMps = 0;
-    }
-
-    super.onCollision(intersectionPoints, other);
-  }
-
-  @override
   void update(double dt) {
     if (!isThrown) {
       updatePositionAndRadius();
       return;
     }
-    bounceIfHitWalls();
+    print(
+        'binHoleCoordinatesMetres.frontLeftCornerMetres.z: ${binHoleCoordinatesMetres.frontLeftCornerMetres.z}');
+
+    print('x: $xPositionMetres, y: $yPositionMetres, z: $zPositionMetres');
+
+    checkIfScored(dt);
 
     removeIfMissed(dt);
 
@@ -165,8 +162,19 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
             getScaleFactor(zPositionMetres));
   }
 
+  void checkIfScored(double dt) {
+    if (zPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.z &&
+        zPositionMetres <= binHoleCoordinatesMetres.backLeftCornerMetres.z &&
+        xPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.x &&
+        xPositionMetres <= binHoleCoordinatesMetres.frontRightCornerMetres.x &&
+        yPositionMetres <= binHoleCoordinatesMetres.frontLeftCornerMetres.y) {
+      addScore();
+      removeFromParent();
+    }
+  }
+
   void removeIfMissed(double dt) {
-    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres && !hasHitBackboard) {
+    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
       timeSinceMissSeconds += dt;
       super.setColor(Colors.red);
       if (timeSinceMissSeconds >= 1) {
@@ -181,21 +189,9 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       return;
     }
     yVelocityMps = 0;
-    if (hasHitBackboard) {
-      addScore();
-    } else {
-      onMiss();
-    }
-    removeFromParent();
-  }
 
-  void bounceIfHitWalls() {
-    if (xPositionMetres > EcoToss3DSpace.xMaxMetres) {
-      xVelocityMps = -xVelocityMps * 0.9;
-    }
-    if (xPositionMetres < EcoToss3DSpace.xMinMetres) {
-      xVelocityMps = -xVelocityMps * 0.9;
-    }
+    onMiss();
+    removeFromParent();
   }
 
   void applyAirResistance() {

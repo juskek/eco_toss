@@ -1,32 +1,36 @@
-import 'package:eco_toss/features/flame_game/backboard/backboard_dimensions.dart';
-import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-class BackboardComponent extends RectangleComponent with CollisionCallbacks {
-  BackboardComponent({super.size}) {
-    final pixelCoordinates = EcoTossPositioning.xyzMetresToXyPixels(Vector3(
-        EcoToss3DSpace.xMidMetres,
-        BinDimensions.heightMetres,
-        EcoToss3DSpace.zMaxMetres));
+import 'bin_dimensions.dart';
 
-    final height = EcoTossPositioning.ySizeMetresToPixels(
-        BackboardDimensions.heightMetres);
+class BinBackSurfaceComponent extends RectangleComponent {
+  BinBackSurfaceComponent({super.size}) {
+    final pixelCoordinates = EcoTossPositioning.xyzMetresToXyPixels(Vector3(
+      EcoToss3DSpace.xMidMetres,
+      0,
+      BinDimensions.backSurfaceZMetres,
+    ));
+    final height =
+        EcoTossPositioning.ySizeMetresToPixels(BinDimensions.heightMetres);
     final width =
-        EcoTossPositioning.xSizeMetresToPixels(BackboardDimensions.widthMetres);
+        EcoTossPositioning.xSizeMetresToPixels(BinDimensions.widthMetres);
     final sizeScale = getScaleFactor(EcoToss3DSpace.zMaxMetres);
+
     super.position = Vector2(pixelCoordinates.x, pixelCoordinates.y);
     super.size = Vector2(width * sizeScale, height * sizeScale);
+
     super.anchor = Anchor.bottomCenter;
     super.priority = 1;
-    super.paint = (Paint()..color = Colors.blue);
   }
 
   @override
-  void onLoad() {
+  void onLoad() async {
     add(RectangleHitbox(isSolid: true));
+    // sprite = await Sprite.load('bins/blue_bin.png');
+
+    super.paint = (Paint()..color = Colors.red);
   }
 }

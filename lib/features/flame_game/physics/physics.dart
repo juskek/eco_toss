@@ -39,7 +39,7 @@ abstract class EcoTossThrow {
   static const airResistanceVelocityMultiplier = 0.03;
 
   static const velocityMps = 7.0;
-  static const zVelocityMps = 10.0;
+  static const zVelocityMps = 8.5;
 }
 
 const scaleStart = 3.0;
