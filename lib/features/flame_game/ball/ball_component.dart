@@ -110,17 +110,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   }
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (zPositionMetres >= EcoToss3DSpace.zMaxMetres) {
-      hasHitBackboard = true;
-      super.setColor(Colors.green);
-      zVelocityMps = 0;
-    }
-
-    super.onCollision(intersectionPoints, other);
-  }
-
-  @override
   void update(double dt) {
     if (!isThrown) {
       updatePositionAndRadius();
