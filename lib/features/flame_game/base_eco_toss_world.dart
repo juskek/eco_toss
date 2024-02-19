@@ -26,6 +26,7 @@ abstract class BaseEcoTossWorld extends World
       radiusStartMetres: 0.2,
       addScore: game.addScore,
       onMiss: game.onMiss,
+      binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
     ));
 
     showXYZDimensions();
@@ -39,6 +40,7 @@ abstract class BaseEcoTossWorld extends World
           radiusStartMetres: 0.2,
           addScore: game.addScore,
           onMiss: game.onMiss,
+          binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
         ));
       }
       if (ball != null &&

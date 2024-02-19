@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/collisions.dart';
@@ -19,6 +20,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     required this.radiusStartMetres,
     required this.addScore,
     required this.onMiss,
+    required this.binHoleCoordinatesMetres,
   }) : super(
             anchor: Anchor.center,
             priority: 2,
@@ -43,6 +45,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   bool hasPassedBinStart = false;
 
   bool isThrown = false;
+
+  BinHoleCoordinatesMetres binHoleCoordinatesMetres;
 
   final List<double> _angles = [];
 
@@ -115,6 +119,12 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       updatePositionAndRadius();
       return;
     }
+    print(
+        'binHoleCoordinatesMetres.frontLeftCornerMetres.z: ${binHoleCoordinatesMetres.frontLeftCornerMetres.z}');
+
+    print('x: $xPositionMetres, y: $yPositionMetres, z: $zPositionMetres');
+
+    checkIfScored(dt);
 
     removeIfMissed(dt);
 
@@ -151,6 +161,17 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
         radiusStartMetres *
             EcoTossPositioning.xyzPixelsPerMetre *
             getScaleFactor(zPositionMetres));
+  }
+
+  void checkIfScored(double dt) {
+    if (zPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.z &&
+        zPositionMetres <= binHoleCoordinatesMetres.backLeftCornerMetres.z &&
+        xPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.x &&
+        xPositionMetres <= binHoleCoordinatesMetres.frontRightCornerMetres.x &&
+        yPositionMetres <= binHoleCoordinatesMetres.frontLeftCornerMetres.y) {
+      addScore();
+      removeFromParent();
+    }
   }
 
   void removeIfMissed(double dt) {
