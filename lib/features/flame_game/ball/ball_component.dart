@@ -118,10 +118,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       updatePositionAndRadius();
       return;
     }
-    print(
-        'binHoleCoordinatesMetres.frontLeftCornerMetres.z: ${binHoleCoordinatesMetres.frontLeftCornerMetres.z}');
-
-    print('x: $xPositionMetres, y: $yPositionMetres, z: $zPositionMetres');
 
     checkIfScored(dt);
 
