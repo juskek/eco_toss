@@ -33,7 +33,7 @@ abstract class EcoTossThrow {
 
   static const airResistanceVelocityMultiplier = 0.03;
 
-  static const windCoefficientVelocityMultiplier = 0.5;
+  static const windCoefficientVelocityMultiplier = 1;
 
   static const bounceEnergyXVelocityMultiplier = 0.5;
   static const bounceEnergyYVelocityMultiplier = 0.5;
@@ -65,6 +65,6 @@ double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
 }
 
 double generateRandomWindSpeed() {
-  return Random().nextDouble() * 20 -
-      10; // Scale to [0, 20) then shift to [-10, 10)
+  return Random().nextDouble() * 10 -
+      5; // Scale to [0, 10) then shift to [-5, 5)
 }
