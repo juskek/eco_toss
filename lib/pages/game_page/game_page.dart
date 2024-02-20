@@ -33,10 +33,11 @@ class GamePage extends StatelessWidget {
         overlayBuilderMap: {
           backButtonKey: (BuildContext context, BaseEcoTossGame game) {
             return Positioned(
-              top: 20,
-              left: 10,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
+              top: 50,
+              left: 30,
+              child: FilledButton.tonalIcon(
+                label: const Text('Quit'),
+                icon: const Icon(Icons.cancel_rounded),
                 onPressed: GoRouter.of(context).pop,
               ),
             );
