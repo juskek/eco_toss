@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
@@ -57,6 +58,7 @@ class BinHoleComponent extends PolygonComponent {
 
   @override
   void onLoad() async {
-    super.paint = (Paint()..color = Colors.white.withOpacity(0.5));
+    super.paint = (Paint()
+      ..color = Colors.white.withOpacity(showGameTuningUtils ? 0.5 : 0));
   }
 }

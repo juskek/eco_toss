@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/components.dart';
@@ -34,6 +35,7 @@ class BinFrontSurfaceComponent extends RectangleComponent {
           BinDimensions.binFrontSurfaceImageScale),
     ));
 
-    super.paint = (Paint()..color = Colors.blue.withOpacity(0.2));
+    super.paint = (Paint()
+      ..color = Colors.blue.withOpacity(showGameTuningUtils ? 0.2 : 0));
   }
 }

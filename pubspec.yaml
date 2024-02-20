@@ -13,7 +13,11 @@ publish_to: "none"
 version: 0.1.0+1
 
 environment:
-  sdk: ^3.0.0
+  sdk: "3.2.3"
+  flutter: "3.16.6"
+  # Also,
+  # use XCode 15.1
+  # use CoacoaPods 1.15.0
 
 dependencies:
   animations: ^2.0.11
