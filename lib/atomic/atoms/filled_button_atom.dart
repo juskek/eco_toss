@@ -14,7 +14,7 @@ class FilledButtonAtom extends StatelessWidget {
       : _type = _Type.tonal;
 
   final _Type _type;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final Widget child;
 
   @override
