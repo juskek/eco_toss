@@ -1,4 +1,3 @@
-import 'package:eco_toss/atomic/atoms/filled_button_atom.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/home_page/background_only_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
@@ -64,7 +63,7 @@ class HomePage extends StatelessWidget {
             rectangularMenuArea: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FilledButtonAtom(
+                FilledButton(
                   child: const Text('Play'),
                   onPressed: () {
                     audioController.playSfx(SfxType.buttonTap);
@@ -72,12 +71,12 @@ class HomePage extends StatelessWidget {
                   },
                 ),
                 _gap,
-                FilledButtonAtom.tonal(
+                FilledButton.tonal(
                   onPressed: () => GoRouter.of(context).push('/leaderboard'),
                   child: const Text('Leaderboard'),
                 ),
                 _gap,
-                FilledButtonAtom.tonal(
+                FilledButton.tonal(
                   onPressed: () => GoRouter.of(context).push('/settings'),
                   child: const Text('Settings'),
                 ),

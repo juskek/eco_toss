@@ -1,5 +1,4 @@
 import 'package:eco_toss/atomic/atoms/color_atom.dart';
-import 'package:eco_toss/atomic/atoms/filled_button_atom.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeDialog extends StatelessWidget {
@@ -45,7 +44,7 @@ class WelcomeDialog extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
-                FilledButtonAtom(
+                FilledButton(
                   onPressed: onPressed,
                   child: const Text("Show me the basics"),
                 ),
