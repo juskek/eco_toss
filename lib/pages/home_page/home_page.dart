@@ -1,10 +1,9 @@
+import 'package:eco_toss/atomic/atoms/eco_toss_logo_atom.dart';
+import 'package:eco_toss/atomic/atoms/eco_toss_title_atom.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/home_page/background_only_game.dart';
-import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/responsive_screen.dart';
@@ -25,38 +24,13 @@ class HomePage extends StatelessWidget {
         children: [
           GameWidget(game: BackgroundOnlyGame()),
           ResponsiveScreen(
-            squarishMainArea: Center(
+            squarishMainArea: const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: SpriteAnimationWidget.asset(
-                      path: 'throwables/paper_ball.png',
-                      playing: true,
-                      data: SpriteAnimationData.sequenced(
-                        amount: 20,
-                        textureSize: Vector2.all(128),
-                        texturePosition: Vector2(512, 0),
-                        stepTime: 0.1,
-                      ),
-                    ),
-                  ),
+                  EcoTossLogoAtom(),
                   _gap,
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    child: Text(
-                      'Eco Toss',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.happyMonkey(
-                        textStyle: Theme.of(context).textTheme.bodySmall,
-                        fontSize: 48,
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                  ),
+                  EcoTossTitleAtom(),
                 ],
               ),
             ),
