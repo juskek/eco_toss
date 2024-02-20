@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/color_atom.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/new_user/new_user_local_data_source.dart';
 import 'package:eco_toss/data/score/score_local_data_source.dart';
@@ -87,11 +88,10 @@ class MyGame extends StatelessWidget {
           ),
         ],
         child: Builder(builder: (context) {
-          final palette = context.watch<Palette>();
-
           return MaterialApp.router(
             title: 'Endless Runner',
             theme: ThemeData(
+              colorSchemeSeed: ColorAtom.timberwolf,
               textTheme: GoogleFonts.happyMonkeyTextTheme(),
             ),
             routeInformationProvider:

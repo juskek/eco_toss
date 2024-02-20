@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/filled_button_atom.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/home_page/background_only_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:rive/rive.dart';
 
 import '../../atomic/responsive_screen.dart';
 import '../../features/audio/audio_controller.dart';
@@ -64,46 +64,23 @@ class HomePage extends StatelessWidget {
             rectangularMenuArea: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: RiveAnimation.network(
-                    'https://cdn.rive.app/animations/vehicles.riv',
-                  ),
-                ),
-                TextButton(
+                FilledButtonAtom(
+                  child: const Text('Play'),
                   onPressed: () {
                     audioController.playSfx(SfxType.buttonTap);
                     GoRouter.of(context).go('/play');
                   },
-                  child: const Text('Play'),
                 ),
                 _gap,
-                TextButton(
+                FilledButtonAtom.tonal(
                   onPressed: () => GoRouter.of(context).push('/leaderboard'),
                   child: const Text('Leaderboard'),
                 ),
                 _gap,
-                TextButton(
+                FilledButtonAtom.tonal(
                   onPressed: () => GoRouter.of(context).push('/settings'),
                   child: const Text('Settings'),
                 ),
-                _gap,
-                Padding(
-                  padding: const EdgeInsets.only(top: 32),
-                  child: ValueListenableBuilder<bool>(
-                    valueListenable: settingsController.audioOn,
-                    builder: (context, audioOn, child) {
-                      return IconButton(
-                        onPressed: () => settingsController.toggleAudioOn(),
-                        icon:
-                            Icon(audioOn ? Icons.volume_up : Icons.volume_off),
-                      );
-                    },
-                  ),
-                ),
-                _gap,
-                const Text('Built with Flame'),
               ],
             ),
           ),
