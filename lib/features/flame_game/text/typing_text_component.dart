@@ -11,6 +11,7 @@ class TypingTextComponent extends TextBoxComponent {
           align: Anchor.topCenter,
           textRenderer: TextPaint(
             style: const TextStyle(
+              fontFamily: 'Happy Monkey',
               fontSize: 30,
               color: Colors.white,
             ),
