@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
@@ -10,8 +12,9 @@ class EcoTossGame extends BaseEcoTossGame {
   final GameViewModel gameViewModel;
 
   late TextComponent highScoreTextComponent;
-  late Vector2 textSize;
-  late Vector2 textPosition;
+  late TextComponent windTextComponent;
+
+  double windSpeedMps = 0;
 
   @override
   void onMiss() {
@@ -27,15 +30,25 @@ class EcoTossGame extends BaseEcoTossGame {
     overlays.add(GamePage.backButtonKey);
     await gameViewModel.getPreviousHighScore();
 
-    textSize = Vector2(size.x, size.y * 0.5);
-    textPosition = Vector2(0, size.y * 0.8);
-
     highScoreTextComponent = TypingTextComponent(
       text: 'New high score!',
-      size: textSize,
-      position: textPosition,
+      size: Vector2(size.x, size.y * 0.5),
+      position: Vector2(0, size.y * 0.8),
     );
+    const windText = 'Wind Speed: 0 m/s';
+
+    windTextComponent = TypingTextComponent(
+      text: windText,
+      size: Vector2(size.x, size.y * 0.5),
+      position: Vector2(0, size.y * 0.6),
+    );
+
+    camera.viewport.add(windTextComponent);
+
     scoreNotifier.addListener(() async {
+      windSpeedMps = Random().nextDouble();
+      windTextComponent.text =
+          windText.replaceFirst('0', windSpeedMps.toStringAsFixed(2));
       if (scoreNotifier.value == gameViewModel.previousHighScore + 1) {
         camera.viewport.add(highScoreTextComponent);
         Future.delayed(const Duration(seconds: 3), () {
