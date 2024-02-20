@@ -49,11 +49,11 @@ class HomePage extends StatelessWidget {
                 child: Text(
                   'Eco Toss',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.singleDay(
-                    textStyle: Theme.of(context).textTheme.displayLarge,
+                  style: GoogleFonts.happyMonkey(
+                    textStyle: Theme.of(context).textTheme.bodySmall,
                     fontSize: 48,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
                   ),
                 ),
               ),
