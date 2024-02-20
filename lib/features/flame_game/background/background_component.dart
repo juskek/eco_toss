@@ -10,8 +10,6 @@ class BackgroundComponent extends ParallaxComponent {
       ParallaxImageData('scenery/eco_toss_background.png'),
     ];
 
-    y = -50;
-
     parallax = await game.loadParallax(
       layers,
     );
