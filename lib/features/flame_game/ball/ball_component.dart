@@ -71,7 +71,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       return;
     }
 
-    if (_angles.isNotEmpty) {
+    if (_angles.isNotEmpty && _angles.length > 7) {
       isThrown = true;
       current = ObjectState.thrown;
 
