@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -39,12 +40,12 @@ class GameWinDialog extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            const SpacerAtom.medium(),
             Text(
               'You completed level ${level.number} in $levelCompletedIn seconds.',
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            const SpacerAtom.medium(),
             if (level.number < gameLevels.length) ...[
               TextButton(
                 onPressed: () {
@@ -52,7 +53,7 @@ class GameWinDialog extends StatelessWidget {
                 },
                 child: const Text('Next level'),
               ),
-              const SizedBox(height: 16),
+              const SpacerAtom.medium(),
             ],
             TextButton(
               onPressed: () {

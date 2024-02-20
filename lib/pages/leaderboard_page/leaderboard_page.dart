@@ -2,6 +2,7 @@ import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_list.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
@@ -114,6 +115,13 @@ class LeaderboardPage extends StatelessWidget {
                     levelTextStyle: levelTextStyle),
               ),
             ),
+            TextButton(
+              onPressed: () {
+                GoRouter.of(context).pop();
+              },
+              child: const Text('Back'),
+            ),
+            const SpacerAtom.large(),
           ],
         ),
       ),

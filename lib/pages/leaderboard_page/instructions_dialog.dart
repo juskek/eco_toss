@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:flame/components.dart';
 import 'package:flame/widgets.dart';
@@ -25,7 +26,7 @@ class _InstructionsDialogState extends State<InstructionsDialog> {
             fontSize: 25,
           ),
         ),
-        const SizedBox(height: 30),
+        const SpacerAtom.large(),
         Row(
           children: [
             SizedBox(
@@ -71,7 +72,7 @@ class _InstructionsDialogState extends State<InstructionsDialog> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      const SpacerAtom.medium(),
                       const Flexible(
                         flex: 7,
                         child: Text(
@@ -89,7 +90,7 @@ class _InstructionsDialogState extends State<InstructionsDialog> {
                           'You have to save as many Embers as possible to clear the level.',
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      const SpacerAtom.medium(),
                       Flexible(
                         flex: 3,
                         child: SizedBox(
@@ -119,7 +120,7 @@ class _InstructionsDialogState extends State<InstructionsDialog> {
                               SpriteWidget.asset(path: 'enemies/obstacles.png'),
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      const SpacerAtom.medium(),
                       const Flexible(
                         flex: 6,
                         child: Text(
