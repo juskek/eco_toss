@@ -31,7 +31,8 @@ class BinBackSurfaceComponent extends RectangleComponent {
     add(SpriteComponent(
       sprite: sprite,
       anchor: Anchor.center,
-      position: Vector2(size.x / 2, size.y / 2),
+      position: Vector2(size.x / 2,
+          size.y / 2 + BinDimensions.binBackSurfaceImageYCorrectionPixels),
       scale: Vector2(BinDimensions.binBackSurfaceImageScale,
           BinDimensions.binBackSurfaceImageScale),
     ));
