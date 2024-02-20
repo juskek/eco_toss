@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:eco_toss/features/flame_game/background/background_component.dart';
 import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
+import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:flame/components.dart';
@@ -53,7 +52,7 @@ class EcoTossGame extends BaseEcoTossGame {
       windSpeedMps2 = 0;
 
       if (scoreNotifier.value != 0) {
-        windSpeedMps2 = Random().nextDouble() * 10;
+        windSpeedMps2 = generateRandomWindSpeed();
       }
       windTextComponent.text = windText.replaceFirst(
           '0', windSpeedMps2 == 0 ? '0' : windSpeedMps2.toStringAsFixed(1));

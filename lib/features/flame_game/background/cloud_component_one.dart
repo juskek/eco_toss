@@ -15,7 +15,7 @@ class CloudComponentOne extends ParallaxComponent {
 
     parallax = await game.loadParallax(
       layers,
-      baseVelocity: Vector2(speed, 0),
+      baseVelocity: Vector2(-speed, 0),
       repeat: ImageRepeat.repeatX,
     );
   }

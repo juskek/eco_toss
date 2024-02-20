@@ -61,3 +61,8 @@ double getDistanceTravelled(double timeSeconds, double velocityMps) {
 double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
   return yVelocityMps - (gravityMps2 * timeSeconds);
 }
+
+double generateRandomWindSpeed() {
+  return Random().nextDouble() * 20 -
+      10; // Scale to [0, 20) then shift to [-10, 10)
+}
