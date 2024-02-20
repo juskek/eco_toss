@@ -1,5 +1,3 @@
-import 'package:eco_toss/features/flame_game/background/background_component.dart';
-import 'package:eco_toss/features/flame_game/background/cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
@@ -15,6 +13,9 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
           camera: EcoTossCameraComponent(),
         );
 
+  double windSpeedMps = 0;
+  Component? cloudComponent;
+
   final scoreNotifier = ValueNotifier(0);
 
   void addScore({int amount = 1}) {
@@ -29,8 +30,6 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
     camera.viewfinder.position = Vector2(0, 0);
 
     EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
-    camera.backdrop.add(BackgroundComponent());
-    camera.backdrop.add(cloudComponent(speed: 20, size: size));
 
     const scoreText = 'Recycled: 0';
 

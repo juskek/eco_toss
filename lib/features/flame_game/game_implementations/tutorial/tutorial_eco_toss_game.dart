@@ -1,3 +1,5 @@
+import 'package:eco_toss/features/flame_game/background/background_component.dart';
+import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/tutorial/tutorial_eco_toss_world.dart';
@@ -18,6 +20,8 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
 
   @override
   Future<void> onLoad() {
+    camera.backdrop.add(BackgroundComponent());
+    camera.backdrop.add(generateCloudComponent(speedMps: 0.2, size: size));
     overlays.add(TutorialPage.welcomeOverlayKey);
 
     tutorialTextSize = Vector2(size.x, size.y * 0.5);

@@ -3,7 +3,11 @@ import 'package:eco_toss/features/flame_game/background/cloud_component_three.da
 import 'package:eco_toss/features/flame_game/background/cloud_component_two.dart';
 import 'package:flame/components.dart';
 
-Component cloudComponent({required double speed, required Vector2 size}) {
+Component generateCloudComponent(
+    {required double speedMps, required Vector2 size}) {
+  double speedOne = speedMps == 0 ? 0 : speedMps * 150;
+  double speedTwo = speedMps == 0 ? 0 : speedMps * 100;
+  double speedThree = speedMps == 0 ? 0 : speedMps * 50;
   return PositionComponent(
     position: Vector2(0, 0),
     size: Vector2(size.x, size.y * 0.3),
@@ -11,17 +15,17 @@ Component cloudComponent({required double speed, required Vector2 size}) {
       PositionComponent(
         position: Vector2(0, -20),
         size: Vector2(size.x, size.y * 0.3),
-        children: [CloudComponentOne(speed: 20)],
+        children: [CloudComponentOne(speed: speedOne)],
       ),
       PositionComponent(
-        position: Vector2(0, 0),
+        position: Vector2(0, 50),
         size: Vector2(size.x, size.y * 0.1),
-        children: [CloudComponentTwo(speed: 40)],
+        children: [CloudComponentTwo(speed: speedTwo)],
       ),
       PositionComponent(
         position: Vector2(0, 20),
         size: Vector2(size.x, size.y * 0.2),
-        children: [CloudComponentThree(speed: 60)],
+        children: [CloudComponentThree(speed: speedThree)],
       ),
     ],
   );

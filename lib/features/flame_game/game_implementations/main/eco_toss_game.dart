@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:eco_toss/features/flame_game/background/background_component.dart';
+import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
@@ -14,8 +16,6 @@ class EcoTossGame extends BaseEcoTossGame {
   late TextComponent highScoreTextComponent;
   late TextComponent windTextComponent;
 
-  double windSpeedMps = 0;
-
   @override
   void onMiss() {
     if (scoreNotifier.value > gameViewModel.previousHighScore) {
@@ -28,6 +28,10 @@ class EcoTossGame extends BaseEcoTossGame {
   @override
   Future<void> onLoad() async {
     overlays.add(GamePage.backButtonKey);
+    camera.backdrop.add(BackgroundComponent());
+    cloudComponent = generateCloudComponent(speedMps: 0, size: size);
+    camera.backdrop.add(cloudComponent!);
+
     await gameViewModel.getPreviousHighScore();
 
     highScoreTextComponent = TypingTextComponent(
@@ -49,6 +53,10 @@ class EcoTossGame extends BaseEcoTossGame {
       windSpeedMps = Random().nextDouble();
       windTextComponent.text =
           windText.replaceFirst('0', windSpeedMps.toStringAsFixed(2));
+      camera.backdrop.remove(cloudComponent!);
+      cloudComponent =
+          generateCloudComponent(speedMps: windSpeedMps, size: size);
+      camera.backdrop.add(cloudComponent!);
       if (scoreNotifier.value == gameViewModel.previousHighScore + 1) {
         camera.viewport.add(highScoreTextComponent);
         Future.delayed(const Duration(seconds: 3), () {
