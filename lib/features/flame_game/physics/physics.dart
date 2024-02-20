@@ -33,6 +33,8 @@ abstract class EcoTossThrow {
 
   static const airResistanceVelocityMultiplier = 0.03;
 
+  static const windCoefficientVelocityMultiplier = 0.5;
+
   static const bounceEnergyXVelocityMultiplier = 0.5;
   static const bounceEnergyYVelocityMultiplier = 0.5;
   static const bounceEnergyZVelocityMultiplier = 0.3;

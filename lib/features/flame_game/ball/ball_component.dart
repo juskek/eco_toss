@@ -153,7 +153,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   }
 
   void applyWind(double dt) {
-    xVelocityMps += windSpeedMps2 * dt;
+    xVelocityMps +=
+        windSpeedMps2 * dt * EcoTossThrow.windCoefficientVelocityMultiplier;
   }
 
   void calculatePosition(double dt) {
