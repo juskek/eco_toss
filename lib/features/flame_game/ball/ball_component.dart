@@ -45,6 +45,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
 
   bool isThrown = false;
 
+  bool hasBouncedOffRim = false;
+
   BinHoleCoordinatesMetres binHoleCoordinatesMetres;
 
   final List<double> _angles = [];
@@ -125,6 +127,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       return;
     }
 
+    bounceIfSlightlyAboveHoleRim();
+
     checkIfScored(dt);
 
     removeIfMissed(dt);
@@ -164,7 +168,103 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
             getScaleFactor(zPositionMetres));
   }
 
-  bool ballIsSlightlyBelowHole() {
+  bool isBallSlightlyAboveHoleRim() {
+    // checks if the ball is within a certain +- threshold of each edge of the hole,
+    // and if it is within a certain threshold of the top of the hole
+
+    const yThresholdMetres = 0.15;
+    // ignore if ball y position is not near the top of the bin
+    if (yPositionMetres < binHoleCoordinatesMetres.frontLeftCornerMetres.y ||
+        yPositionMetres >
+            binHoleCoordinatesMetres.frontLeftCornerMetres.y +
+                yThresholdMetres) {
+      return false;
+    }
+    const thresholdMetres = 0.05;
+    // front edge
+    if (zPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.z - thresholdMetres &&
+        zPositionMetres <=
+            binHoleCoordinatesMetres.frontLeftCornerMetres.z +
+                thresholdMetres &&
+        xPositionMetres >=
+            binHoleCoordinatesMetres.frontLeftCornerMetres.x -
+                thresholdMetres &&
+        xPositionMetres <=
+            binHoleCoordinatesMetres.frontRightCornerMetres.x +
+                thresholdMetres) {
+      return true;
+    }
+    // left edge
+    if (xPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.x - thresholdMetres &&
+        xPositionMetres <=
+            binHoleCoordinatesMetres.frontLeftCornerMetres.x +
+                thresholdMetres &&
+        zPositionMetres >=
+            binHoleCoordinatesMetres.frontLeftCornerMetres.z -
+                thresholdMetres &&
+        zPositionMetres <=
+            binHoleCoordinatesMetres.backLeftCornerMetres.z + thresholdMetres) {
+      return true;
+    }
+
+    // right edge
+    if (xPositionMetres >= binHoleCoordinatesMetres.frontRightCornerMetres.x - thresholdMetres &&
+        xPositionMetres <=
+            binHoleCoordinatesMetres.frontRightCornerMetres.x +
+                thresholdMetres &&
+        zPositionMetres >=
+            binHoleCoordinatesMetres.frontRightCornerMetres.z -
+                thresholdMetres &&
+        zPositionMetres <=
+            binHoleCoordinatesMetres.backRightCornerMetres.z +
+                thresholdMetres) {
+      return true;
+    }
+
+    // back edge
+    if (zPositionMetres >=
+            binHoleCoordinatesMetres.backLeftCornerMetres.z - thresholdMetres &&
+        zPositionMetres <=
+            binHoleCoordinatesMetres.backLeftCornerMetres.z + thresholdMetres &&
+        xPositionMetres >=
+            binHoleCoordinatesMetres.backLeftCornerMetres.x - thresholdMetres &&
+        xPositionMetres <=
+            binHoleCoordinatesMetres.backRightCornerMetres.x +
+                thresholdMetres) {
+      return true;
+    }
+
+    return false;
+  }
+
+  void bounceIfSlightlyAboveHoleRim() {
+    if (hasBouncedOffRim) {
+      // prevent multiple bounces due to threshold
+      return;
+    }
+    if (!isBallSlightlyAboveHoleRim()) {
+      return;
+    }
+    yVelocityMps = -yVelocityMps * EcoTossThrow.bounceEnergyYVelocityMultiplier;
+    zVelocityMps = zVelocityMps * EcoTossThrow.bounceEnergyZVelocityMultiplier;
+    // if on bin side, reverse x velocity
+    if (xPositionMetres > binHoleCoordinatesMetres.frontLeftCornerMetres.x &&
+        xPositionMetres < binHoleCoordinatesMetres.frontRightCornerMetres.x) {
+      xVelocityMps =
+          -xVelocityMps * EcoTossThrow.bounceEnergyXVelocityMultiplier;
+    }
+
+    // if on outerside, increase x velocity
+    if (xPositionMetres < binHoleCoordinatesMetres.frontLeftCornerMetres.x ||
+        xPositionMetres > binHoleCoordinatesMetres.frontRightCornerMetres.x) {
+      xVelocityMps =
+          xVelocityMps / EcoTossThrow.bounceEnergyXVelocityMultiplier;
+    }
+
+    hasBouncedOffRim = true;
+  }
+
+  bool isBallSlightlyBelowHole() {
     return zPositionMetres >=
             binHoleCoordinatesMetres.frontLeftCornerMetres.z &&
         zPositionMetres <= binHoleCoordinatesMetres.backLeftCornerMetres.z &&
@@ -174,7 +274,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   }
 
   void checkIfScored(double dt) {
-    if (ballIsSlightlyBelowHole()) {
+    if (isBallSlightlyBelowHole()) {
       addScore();
       removeFromParent();
     }
