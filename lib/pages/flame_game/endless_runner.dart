@@ -51,7 +51,6 @@ class EndlessRunner extends FlameGame<EndlessWorld> with HasCollisionDetection {
       style: const TextStyle(
         fontSize: 30,
         color: Colors.white,
-        fontFamily: 'Press Start 2P',
       ),
     );
 

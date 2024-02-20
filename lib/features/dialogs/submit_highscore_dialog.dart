@@ -4,8 +4,6 @@ import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/score/i_score_repository.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
 
-import '../../atomic/palette.dart';
-
 class SubmitHighScoreDialog extends StatelessWidget {
   const SubmitHighScoreDialog({
     required this.onSubmit,
@@ -18,8 +16,6 @@ class SubmitHighScoreDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.read<Palette>();
-
     return DialogAtom(
       child: Column(
         mainAxisSize: MainAxisSize.min,

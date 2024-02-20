@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+/// Generate more colours here https://coolors.co/546a76-7ac584-69ad87-dbd3c9-fffeff
 abstract class ColorAtom {
   static const payneGreyHex = 0xFF546A76;
   static const mintHex = 0xFF69AD87;

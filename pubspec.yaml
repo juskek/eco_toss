@@ -65,11 +65,15 @@ flutter:
     - assets/images/scenery/
     - assets/music/
     - assets/sfx/
+    - assets/fonts/Happy_Monkey/ # allow google_fonts to detect this font for build
 
   fonts:
     - family: Press Start 2P
       fonts:
         - asset: assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf
+    - family: Happy Monkey # allow Flame to use this font
+      fonts:
+        - asset: assets/fonts/Happy_Monkey/HappyMonkey-Regular.ttf
 
 flutter_launcher_icons:
   android: true

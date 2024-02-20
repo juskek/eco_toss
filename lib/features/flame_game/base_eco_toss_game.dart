@@ -28,18 +28,16 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
     camera.viewfinder.position = Vector2(0, 0);
     const scoreText = 'Recycled: 0';
 
-    final textRenderer = TextPaint(
-      style: const TextStyle(
-        fontSize: 30,
-        color: Colors.white,
-        fontFamily: 'Press Start 2P',
-      ),
-    );
-
     final scoreComponent = TextComponent(
       text: scoreText,
       position: Vector2.all(30),
-      textRenderer: textRenderer,
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          fontFamily: 'Happy Monkey',
+          fontSize: 30,
+          color: Colors.white,
+        ),
+      ),
     );
 
     camera.viewport.add(scoreComponent);
