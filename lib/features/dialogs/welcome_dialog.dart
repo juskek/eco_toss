@@ -1,8 +1,6 @@
+import 'package:eco_toss/atomic/atoms/dialog_atom.dart';
+import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:nes_ui/nes_ui.dart';
-import 'package:provider/provider.dart';
-
-import '../../atomic/palette.dart';
 
 class WelcomeDialog extends StatelessWidget {
   const WelcomeDialog({
@@ -14,33 +12,27 @@ class WelcomeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.read<Palette>();
-    return Center(
-      child: NesContainer(
-        width: 420,
-        height: 280,
-        backgroundColor: palette.backgroundPlaySession.color,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to Eco Toss!',
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              "Let's learn how to recycle! First, let's start with the basics.",
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            NesButton(
-              onPressed: onPressed,
-              type: NesButtonType.primary,
-              child: const Text("Show me the basics!"),
-            ),
-          ],
-        ),
+    return DialogAtom(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Welcome to Eco Toss!',
+            style: Theme.of(context).textTheme.headlineMedium,
+            textAlign: TextAlign.center,
+          ),
+          const SpacerAtom.medium(),
+          const Text(
+            "Let's learn how to recycle! First, let's start with the basics.",
+            textAlign: TextAlign.center,
+          ),
+          const SpacerAtom.medium(),
+          FilledButton(
+            onPressed: onPressed,
+            child: const Text("Show me the basics"),
+          ),
+        ],
       ),
     );
   }

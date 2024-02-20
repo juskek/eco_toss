@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/color_atom.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/new_user/new_user_local_data_source.dart';
 import 'package:eco_toss/data/score/score_local_data_source.dart';
@@ -13,7 +14,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:nes_ui/nes_ui.dart';
 
 import 'atomic/palette.dart';
 import 'features/app_lifecycle/app_lifecycle.dart';
@@ -88,24 +88,14 @@ class MyGame extends StatelessWidget {
           ),
         ],
         child: Builder(builder: (context) {
-          final palette = context.watch<Palette>();
-
           return MaterialApp.router(
             title: 'Endless Runner',
-            theme: flutterNesTheme().copyWith(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: palette.seed.color,
-                background: palette.backgroundMain.color,
-              ),
-              textTheme: GoogleFonts.aBeeZeeTextTheme().apply(
-                bodyColor: palette.text.color,
-                displayColor: palette.text.color,
-              ),
-              // textTheme: GoogleFonts.pressStart2pTextTheme().apply(
-              //   bodyColor: palette.text.color,
-              //   displayColor: palette.text.color,
-              // ),
-            ),
+            theme: ThemeData(
+                colorSchemeSeed: ColorAtom.timberwolf,
+                textTheme: GoogleFonts.happyMonkeyTextTheme(),
+                appBarTheme: const AppBarTheme(
+                  color: Colors.transparent,
+                )),
             routeInformationProvider:
                 EcoTossRouter.instance.routeInformationProvider,
             routeInformationParser:

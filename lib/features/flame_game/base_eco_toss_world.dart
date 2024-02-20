@@ -12,8 +12,6 @@ abstract class BaseEcoTossWorld extends World
   @override
   Future<void> onLoad() async {
     final game = findGame()! as BaseEcoTossGame;
-    final canvasSize = findGame()!.canvasSize;
-    EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
 
     add(FloorFarEdge());
 

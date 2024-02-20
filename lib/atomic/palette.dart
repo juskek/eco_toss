@@ -1,5 +1,7 @@
 import 'package:flame/palette.dart';
 
+@Deprecated('use ColorAtom instead')
+
 /// A palette of colors to be used in the game.
 ///
 /// The reason we're not going with something like Material Design's

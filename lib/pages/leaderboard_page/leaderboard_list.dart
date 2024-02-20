@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_entry.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
@@ -25,17 +26,20 @@ class LeaderboardList extends StatelessWidget {
         ),
         title: Row(
           children: [
-            const CircleAvatar(),
+            CircleAvatar(
+              child: Text(leaderboardEntry.name.substring(0, 1).toUpperCase()),
+            ),
+            const SpacerAtom.small(),
             Text(
               leaderboardEntry.name,
               style: levelTextStyle,
             ),
             const Expanded(child: SizedBox()),
-            Text(
-              leaderboardEntry.score.toString(),
-              style: levelTextStyle,
-            ),
           ],
+        ),
+        trailing: Text(
+          "Score: ${leaderboardEntry.score}",
+          style: levelTextStyle,
         ),
       );
     });

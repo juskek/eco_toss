@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_list.dart';
 import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
-import '../../atomic/wobbly_button.dart';
 
 class LeaderboardPage extends StatelessWidget {
   const LeaderboardPage({super.key});
@@ -18,14 +18,15 @@ class LeaderboardPage extends StatelessWidget {
         Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.4);
 
     return Scaffold(
-      backgroundColor: palette.backgroundLevelSelection.color,
+      appBar: AppBar(
+        title: const Text(
+          'Leaderboard',
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              'Leaderboard',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            const SpacerAtom.small(),
             FutureBuilder(
               future: leaderboardViewModel.userRank,
               builder: (context, snapshot) {
@@ -40,9 +41,30 @@ class LeaderboardPage extends StatelessWidget {
                 }
               },
             ),
-            const CircleAvatar(
-              radius: 50,
+            const SpacerAtom.small(),
+            FutureBuilder(
+              future: leaderboardViewModel.userName,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData) {
+                  return CircleAvatar(
+                      radius: 50,
+                      child: Text(
+                          snapshot.data
+                              .toString()
+                              .substring(0, 1)
+                              .toUpperCase(),
+                          style: const TextStyle(
+                            fontSize: 40,
+                          )));
+                } else {
+                  return const CircleAvatar(
+                    radius: 50,
+                  );
+                }
+              },
             ),
+            const SpacerAtom.small(),
             FutureBuilder(
               future: leaderboardViewModel.userName,
               builder: (context, snapshot) {
@@ -59,6 +81,7 @@ class LeaderboardPage extends StatelessWidget {
                 }
               },
             ),
+            const SpacerAtom.small(),
             FutureBuilder(
               future: leaderboardViewModel.userScore,
               builder: (context, snapshot) {
@@ -76,13 +99,14 @@ class LeaderboardPage extends StatelessWidget {
                 }
               },
             ),
+            const SpacerAtom.small(),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(width: 16),
               ],
             ),
-            const SizedBox(height: 50),
+            const Divider(),
             Expanded(
               child: SizedBox(
                 width: 450,
@@ -91,14 +115,13 @@ class LeaderboardPage extends StatelessWidget {
                     levelTextStyle: levelTextStyle),
               ),
             ),
-            const SizedBox(height: 30),
-            WobblyButton(
+            TextButton(
               onPressed: () {
-                GoRouter.of(context).go('/');
+                GoRouter.of(context).pop();
               },
               child: const Text('Back'),
             ),
-            const SizedBox(height: 30),
+            const SpacerAtom.large(),
           ],
         ),
       ),

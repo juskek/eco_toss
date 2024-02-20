@@ -35,7 +35,6 @@ dependencies:
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
   logging: ^1.2.0
-  nes_ui: ^0.10.0
   package_info_plus: ^5.0.1
   provider: ^6.0.5
   rive: ^0.12.4
@@ -66,11 +65,15 @@ flutter:
     - assets/images/scenery/
     - assets/music/
     - assets/sfx/
+    - assets/fonts/Happy_Monkey/ # allow google_fonts to detect this font for build
 
   fonts:
     - family: Press Start 2P
       fonts:
         - asset: assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf
+    - family: Happy Monkey # allow Flame to use this font
+      fonts:
+        - asset: assets/fonts/Happy_Monkey/HappyMonkey-Regular.ttf
 
 flutter_launcher_icons:
   android: true
