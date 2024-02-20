@@ -4,11 +4,17 @@ import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 
 abstract class BinDimensions {
-  static const heightMetres = 0.7;
+  static const heightMetres = 0.75;
   static const widthMetres = 0.4;
   static const backSurfaceZMetres = 4.0;
-  static const frontSurfaceZMetres = 3.6;
+  static const frontSurfaceZMetres = 3.5;
   static const depthMetres = backSurfaceZMetres - frontSurfaceZMetres;
+
+  /// The scale factor for the bin's back surface image.
+  /// This is used to scale the image to match the bin's logical size (in metres).
+  static const binBackSurfaceImageScale = 0.18;
+  static const binFrontSurfaceImageScale = 0.185;
+  static const binFrontSurfaceImageYCorrectionPixels = -25.0;
 }
 
 ({
