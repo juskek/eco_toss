@@ -11,6 +11,7 @@ import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'atomic/palette.dart';
@@ -90,6 +91,9 @@ class MyGame extends StatelessWidget {
 
           return MaterialApp.router(
             title: 'Endless Runner',
+            theme: ThemeData(
+              textTheme: GoogleFonts.happyMonkeyTextTheme(),
+            ),
             routeInformationProvider:
                 EcoTossRouter.instance.routeInformationProvider,
             routeInformationParser:
