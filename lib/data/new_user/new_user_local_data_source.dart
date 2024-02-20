@@ -7,10 +7,12 @@ class NewUserLocalDataSource {
   final box = Hive.lazyBox(hiveBoxName);
 
   Future<bool> get hasPlayedTutorial async {
+    // await box.put('hasPlayedTutorial', false);
     return await box.get('hasPlayedTutorial', defaultValue: false) as bool;
   }
 
   Future<bool> get hasOnboarded async {
+    // await box.put('hasOnboarded', false);
     return await box.get('hasOnboarded', defaultValue: false) as bool;
   }
 

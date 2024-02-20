@@ -1,6 +1,5 @@
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +27,15 @@ class BinBackSurfaceComponent extends RectangleComponent {
 
   @override
   void onLoad() async {
-    add(RectangleHitbox(isSolid: true));
-    // sprite = await Sprite.load('bins/blue_bin.png');
+    final sprite = await Sprite.load('bins/BlueBin_Back.png');
+    add(SpriteComponent(
+      sprite: sprite,
+      anchor: Anchor.center,
+      position: Vector2(size.x / 2,
+          size.y / 2 + BinDimensions.binBackSurfaceImageYCorrectionPixels),
+      scale: Vector2(BinDimensions.binBackSurfaceImageScale,
+          BinDimensions.binBackSurfaceImageScale),
+    ));
 
     super.paint = (Paint()..color = Colors.red);
   }

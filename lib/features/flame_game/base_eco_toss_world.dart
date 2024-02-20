@@ -25,6 +25,7 @@ abstract class BaseEcoTossWorld extends World
       addScore: game.addScore,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+      windSpeedMps2: game.windSpeedMps2,
     ));
 
     showXYZDimensions();
@@ -33,18 +34,19 @@ abstract class BaseEcoTossWorld extends World
     ballNotifier.addListener(() {
       final ball = ballNotifier.single;
       if (ball == null) {
-        // binFrontSurface.priority = 1;
+        binComponents.frontSurfaceComponent.priority = 1;
         add(BallComponent(
           radiusStartMetres: 0.2,
           addScore: game.addScore,
           onMiss: game.onMiss,
           binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+          windSpeedMps2: game.windSpeedMps2,
         ));
       }
       if (ball != null &&
           ball.zPositionMetres >=
               EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres) {
-        // binFrontSurface.priority = 2;
+        binComponents.frontSurfaceComponent.priority = 2;
         ball.priority = 1;
       }
     });
