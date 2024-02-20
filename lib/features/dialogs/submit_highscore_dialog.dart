@@ -36,26 +36,31 @@ class SubmitHighScoreDialog extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SpacerAtom.medium(),
-          const NameWidget(),
-          const SpacerAtom.medium(),
-          FutureBuilder(
-            future: getIt<IScoreRepository>().highScore,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done &&
-                  snapshot.hasData) {
-                return Text(
-                  "Highscore: ${snapshot.data}",
-                );
-              }
-              return const CircularProgressIndicator();
-            },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const NameWidget(),
+              FutureBuilder(
+                future: getIt<IScoreRepository>().highScore,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasData) {
+                    return Text(
+                      "Score: ${snapshot.data}",
+                    );
+                  }
+                  return const CircularProgressIndicator();
+                },
+              ),
+            ],
           ),
           const SpacerAtom.medium(),
-          TextButton(
+          const SpacerAtom.medium(),
+          FilledButton(
             onPressed: onSubmit,
             child: const Text("Submit to Leaderboard"),
           ),
-          TextButton(
+          FilledButton.tonal(
             onPressed: onCancel,
             child: const Text("No thanks"),
           ),
