@@ -13,7 +13,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
           camera: EcoTossCameraComponent(),
         );
 
-  double windSpeedMps = 0;
+  double windSpeedMps2 = 0;
   Component? cloudComponent;
 
   final scoreNotifier = ValueNotifier(0);

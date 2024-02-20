@@ -5,9 +5,9 @@ import 'package:flame/components.dart';
 
 Component generateCloudComponent(
     {required double speedMps, required Vector2 size}) {
-  double speedOne = speedMps == 0 ? 0 : speedMps * 150;
-  double speedTwo = speedMps == 0 ? 0 : speedMps * 100;
-  double speedThree = speedMps == 0 ? 0 : speedMps * 50;
+  double speedOne = speedMps == 0 ? 0 : speedMps * 15;
+  double speedTwo = speedMps == 0 ? 0 : speedMps * 10;
+  double speedThree = speedMps == 0 ? 0 : speedMps * 5;
   return PositionComponent(
     position: Vector2(0, 0),
     size: Vector2(size.x, size.y * 0.3),

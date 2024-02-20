@@ -21,12 +21,14 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     required this.addScore,
     required this.onMiss,
     required this.binHoleCoordinatesMetres,
+    required this.windSpeedMps2,
   }) : super(
             anchor: Anchor.center,
             priority: 2,
             size: Vector2(radiusStartMetres, radiusStartMetres));
 
   double radiusStartMetres;
+  final double windSpeedMps2;
 
   final void Function({int amount}) addScore;
   final void Function() onMiss;
@@ -137,6 +139,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
 
     removeIfHitFloor();
 
+    applyWind(dt);
+
     applyAirResistance();
 
     applyGravity(dt);
@@ -146,6 +150,10 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     updatePositionAndRadius();
 
     super.update(dt);
+  }
+
+  void applyWind(double dt) {
+    xVelocityMps += windSpeedMps2 * dt;
   }
 
   void calculatePosition(double dt) {

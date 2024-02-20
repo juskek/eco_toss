@@ -50,19 +50,25 @@ class EcoTossGame extends BaseEcoTossGame {
     camera.viewport.add(windTextComponent);
 
     scoreNotifier.addListener(() async {
-      windSpeedMps = Random().nextDouble();
-      windTextComponent.text =
-          windText.replaceFirst('0', windSpeedMps.toStringAsFixed(2));
+      windSpeedMps2 = 0;
+
+      if (scoreNotifier.value != 0) {
+        windSpeedMps2 = Random().nextDouble() * 10;
+      }
+      windTextComponent.text = windText.replaceFirst(
+          '0', windSpeedMps2 == 0 ? '0' : windSpeedMps2.toStringAsFixed(1));
       camera.backdrop.remove(cloudComponent!);
       cloudComponent =
-          generateCloudComponent(speedMps: windSpeedMps, size: size);
+          generateCloudComponent(speedMps: windSpeedMps2, size: size);
       camera.backdrop.add(cloudComponent!);
+
       if (scoreNotifier.value == gameViewModel.previousHighScore + 1) {
         camera.viewport.add(highScoreTextComponent);
         Future.delayed(const Duration(seconds: 3), () {
           camera.viewport.remove(highScoreTextComponent);
         });
       }
+
       if (scoreNotifier.value > gameViewModel.previousHighScore) {
         await gameViewModel.setHighScore(scoreNotifier.value);
       }
