@@ -1,10 +1,9 @@
-import 'package:eco_toss/atomic/palette.dart';
+import 'package:eco_toss/atomic/atoms/padding_atom.dart';
 import 'package:eco_toss/data/new_user/i_new_user_repository.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
 import 'package:eco_toss/ioc/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -12,41 +11,39 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.watch<Palette>();
-
     return Scaffold(
-      backgroundColor: palette.backgroundSettings.color,
+      appBar: AppBar(
+        title: const Text("Let's get you set up!"),
+      ),
       body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 600,
-                ),
+        child: PaddingAtom(
+          child: Column(
+            children: [
+              Expanded(
                 child: ListView(
                   children: const [
                     _gap,
-                    Text(
-                      "Let's get you set up!",
-                      textAlign: TextAlign.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Enter your name:'),
+                        NameWidget(),
+                      ],
                     ),
-                    _gap,
-                    NameWidget(),
                   ],
                 ),
               ),
-            ),
-            _gap,
-            TextButton(
-              onPressed: () {
-                getIt<INewUserRepository>().setHasOnboarded(true);
-                context.go('/');
-              },
-              child: const Text('Continue'),
-            ),
-            _gap,
-          ],
+              _gap,
+              FilledButton(
+                onPressed: () {
+                  getIt<INewUserRepository>().setHasOnboarded(true);
+                  context.go('/');
+                },
+                child: const Text('Continue'),
+              ),
+              _gap,
+            ],
+          ),
         ),
       ),
     );

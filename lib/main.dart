@@ -91,9 +91,11 @@ class MyGame extends StatelessWidget {
           return MaterialApp.router(
             title: 'Endless Runner',
             theme: ThemeData(
-              colorSchemeSeed: ColorAtom.timberwolf,
-              textTheme: GoogleFonts.happyMonkeyTextTheme(),
-            ),
+                colorSchemeSeed: ColorAtom.timberwolf,
+                textTheme: GoogleFonts.happyMonkeyTextTheme(),
+                appBarTheme: const AppBarTheme(
+                  color: Colors.transparent,
+                )),
             routeInformationProvider:
                 EcoTossRouter.instance.routeInformationProvider,
             routeInformationParser:
