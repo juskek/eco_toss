@@ -164,12 +164,17 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
             getScaleFactor(zPositionMetres));
   }
 
-  void checkIfScored(double dt) {
-    if (zPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.z &&
+  bool ballIsSlightlyBelowHole() {
+    return zPositionMetres >=
+            binHoleCoordinatesMetres.frontLeftCornerMetres.z &&
         zPositionMetres <= binHoleCoordinatesMetres.backLeftCornerMetres.z &&
         xPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.x &&
         xPositionMetres <= binHoleCoordinatesMetres.frontRightCornerMetres.x &&
-        yPositionMetres <= binHoleCoordinatesMetres.frontLeftCornerMetres.y) {
+        yPositionMetres <= binHoleCoordinatesMetres.frontLeftCornerMetres.y;
+  }
+
+  void checkIfScored(double dt) {
+    if (ballIsSlightlyBelowHole()) {
       addScore();
       removeFromParent();
     }
