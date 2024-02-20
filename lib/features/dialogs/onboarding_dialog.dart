@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
@@ -16,10 +15,10 @@ class OnboardingDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.read<Palette>();
     return Center(
-      child: NesContainer(
+      child: Container(
         width: 420,
         height: 280,
-        backgroundColor: palette.backgroundPlaySession.color,
+        color: palette.backgroundPlaySession.color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -34,9 +33,8 @@ class OnboardingDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            NesButton(
+            TextButton(
               onPressed: onPressed,
-              type: NesButtonType.primary,
               child: const Text("Let's go!"),
             ),
           ],

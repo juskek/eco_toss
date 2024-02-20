@@ -1,8 +1,7 @@
+import 'package:eco_toss/common_imports.dart';
 import 'package:flame/components.dart';
 import 'package:flame/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nes_ui/nes_ui.dart';
 
 class InstructionsDialog extends StatefulWidget {
   const InstructionsDialog({super.key});
@@ -32,9 +31,9 @@ class _InstructionsDialogState extends State<InstructionsDialog> {
             SizedBox(
               width: 30,
               child: _currentPage != 0
-                  ? NesIconButton(
-                      icon: NesIcons.leftArrowIndicator,
-                      onPress: () {
+                  ? IconButton(
+                      icon: const Icon(Icons.arrow_left),
+                      onPressed: () {
                         _pageController.previousPage(
                           duration: const Duration(milliseconds: 200),
                           curve: Curves.easeInOut,
@@ -135,9 +134,9 @@ class _InstructionsDialogState extends State<InstructionsDialog> {
             SizedBox(
               width: 30,
               child: _currentPage != 2
-                  ? NesIconButton(
-                      icon: NesIcons.rightArrowIndicator,
-                      onPress: () {
+                  ? IconButton(
+                      icon: const Icon(Icons.arrow_right),
+                      onPressed: () {
                         _pageController.nextPage(
                           duration: const Duration(milliseconds: 200),
                           curve: Curves.easeInOut,

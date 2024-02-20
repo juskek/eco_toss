@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
-import '../../atomic/wobbly_button.dart';
 import 'settings.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -70,7 +69,7 @@ https://creativecommons.org/licenses/by/4.0/
               ),
             ),
             _gap,
-            WobblyButton(
+            TextButton(
               onPressed: () {
                 GoRouter.of(context).pop();
               },

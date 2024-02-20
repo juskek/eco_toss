@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 
 import '../../atomic/responsive_screen.dart';
-import '../../atomic/wobbly_button.dart';
 import '../../features/audio/audio_controller.dart';
 import '../../features/audio/sounds.dart';
 import '../settings/settings.dart';
@@ -72,7 +71,7 @@ class HomePage extends StatelessWidget {
                     'https://cdn.rive.app/animations/vehicles.riv',
                   ),
                 ),
-                WobblyButton(
+                TextButton(
                   onPressed: () {
                     audioController.playSfx(SfxType.buttonTap);
                     GoRouter.of(context).go('/play');
@@ -80,12 +79,12 @@ class HomePage extends StatelessWidget {
                   child: const Text('Play'),
                 ),
                 _gap,
-                WobblyButton(
+                TextButton(
                   onPressed: () => GoRouter.of(context).push('/leaderboard'),
                   child: const Text('Leaderboard'),
                 ),
                 _gap,
-                WobblyButton(
+                TextButton(
                   onPressed: () => GoRouter.of(context).push('/settings'),
                   child: const Text('Settings'),
                 ),

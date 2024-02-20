@@ -1,7 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nes_ui/nes_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../../features/audio/audio_controller.dart';
@@ -39,10 +38,9 @@ class GameScreen extends StatelessWidget {
             return Positioned(
               top: 20,
               right: 10,
-              child: NesButton(
-                type: NesButtonType.normal,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
                 onPressed: GoRouter.of(context).pop,
-                child: NesIcon(iconData: NesIcons.leftArrowIndicator),
               ),
             );
           },

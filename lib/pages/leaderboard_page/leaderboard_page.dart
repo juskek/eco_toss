@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../atomic/palette.dart';
-import '../../atomic/wobbly_button.dart';
 
 class LeaderboardPage extends StatelessWidget {
   const LeaderboardPage({super.key});
@@ -92,7 +91,7 @@ class LeaderboardPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            WobblyButton(
+            TextButton(
               onPressed: () {
                 GoRouter.of(context).go('/');
               },

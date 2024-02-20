@@ -1,7 +1,6 @@
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/score/i_score_repository.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
-import 'package:nes_ui/nes_ui.dart';
 
 import '../../atomic/palette.dart';
 
@@ -20,10 +19,10 @@ class SubmitHighScoreDialog extends StatelessWidget {
     final palette = context.read<Palette>();
 
     return Center(
-      child: NesContainer(
+      child: Container(
         width: 420,
         height: 400,
-        backgroundColor: palette.backgroundPlaySession.color,
+        color: palette.backgroundPlaySession.color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -53,14 +52,12 @@ class SubmitHighScoreDialog extends StatelessWidget {
               },
             ),
             const SizedBox(height: 16),
-            NesButton(
+            TextButton(
               onPressed: onSubmit,
-              type: NesButtonType.primary,
               child: const Text("Submit to Leaderboard"),
             ),
-            NesButton(
+            TextButton(
               onPressed: onCancel,
-              type: NesButtonType.normal,
               child: const Text("No thanks"),
             ),
           ],

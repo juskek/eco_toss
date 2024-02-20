@@ -11,9 +11,7 @@ import 'package:eco_toss/pages/leaderboard_page/leaderboard_viewmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flame/flame.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:nes_ui/nes_ui.dart';
 
 import 'atomic/palette.dart';
 import 'features/app_lifecycle/app_lifecycle.dart';
@@ -92,20 +90,6 @@ class MyGame extends StatelessWidget {
 
           return MaterialApp.router(
             title: 'Endless Runner',
-            theme: flutterNesTheme().copyWith(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: palette.seed.color,
-                background: palette.backgroundMain.color,
-              ),
-              textTheme: GoogleFonts.aBeeZeeTextTheme().apply(
-                bodyColor: palette.text.color,
-                displayColor: palette.text.color,
-              ),
-              // textTheme: GoogleFonts.pressStart2pTextTheme().apply(
-              //   bodyColor: palette.text.color,
-              //   displayColor: palette.text.color,
-              // ),
-            ),
             routeInformationProvider:
                 EcoTossRouter.instance.routeInformationProvider,
             routeInformationParser:
