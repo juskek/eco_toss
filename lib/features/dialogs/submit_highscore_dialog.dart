@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/dialog_atom.dart';
 import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/score/i_score_repository.dart';
@@ -19,50 +20,46 @@ class SubmitHighScoreDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.read<Palette>();
 
-    return Center(
-      child: Container(
-        width: 420,
-        height: 400,
-        color: palette.backgroundPlaySession.color,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "New Highscore!",
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
-            const SpacerAtom.medium(),
-            const Text(
-              "Would you like to submit your highscore to the leaderboard?",
-              textAlign: TextAlign.center,
-            ),
-            const SpacerAtom.medium(),
-            const NameWidget(),
-            const SpacerAtom.medium(),
-            FutureBuilder(
-              future: getIt<IScoreRepository>().highScore,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
-                  return Text(
-                    "Highscore: ${snapshot.data}",
-                  );
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
-            const SpacerAtom.medium(),
-            TextButton(
-              onPressed: onSubmit,
-              child: const Text("Submit to Leaderboard"),
-            ),
-            TextButton(
-              onPressed: onCancel,
-              child: const Text("No thanks"),
-            ),
-          ],
-        ),
+    return DialogAtom(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "New Highscore!",
+            style: Theme.of(context).textTheme.headlineMedium,
+            textAlign: TextAlign.center,
+          ),
+          const SpacerAtom.medium(),
+          const Text(
+            "Would you like to submit your highscore to the leaderboard?",
+            textAlign: TextAlign.center,
+          ),
+          const SpacerAtom.medium(),
+          const NameWidget(),
+          const SpacerAtom.medium(),
+          FutureBuilder(
+            future: getIt<IScoreRepository>().highScore,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData) {
+                return Text(
+                  "Highscore: ${snapshot.data}",
+                );
+              }
+              return const CircularProgressIndicator();
+            },
+          ),
+          const SpacerAtom.medium(),
+          TextButton(
+            onPressed: onSubmit,
+            child: const Text("Submit to Leaderboard"),
+          ),
+          TextButton(
+            onPressed: onCancel,
+            child: const Text("No thanks"),
+          ),
+        ],
       ),
     );
   }

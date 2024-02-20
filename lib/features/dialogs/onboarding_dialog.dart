@@ -15,6 +15,7 @@ class OnboardingDialog extends StatelessWidget {
     return DialogAtom(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Great job!",

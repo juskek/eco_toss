@@ -11,7 +11,6 @@ class DialogAtom extends StatelessWidget {
     return Center(
       child: FractionallySizedBox(
         widthFactor: 0.8,
-        heightFactor: 0.3,
         child: Container(
           decoration: BoxDecoration(
             color: ColorAtom.timberwolf,
