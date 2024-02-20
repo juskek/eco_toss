@@ -1,9 +1,6 @@
 import 'package:eco_toss/atomic/atoms/color_atom.dart';
 import 'package:eco_toss/atomic/atoms/filled_button_atom.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../atomic/palette.dart';
 
 class WelcomeDialog extends StatelessWidget {
   const WelcomeDialog({
@@ -15,7 +12,6 @@ class WelcomeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.read<Palette>();
     return Center(
       child: FractionallySizedBox(
         widthFactor: 0.8,
