@@ -1,3 +1,4 @@
+import 'package:eco_toss/atomic/atoms/padding_atom.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,104 +18,87 @@ class SettingsPage extends StatelessWidget {
     final palette = context.watch<Palette>();
 
     return Scaffold(
-      backgroundColor: palette.backgroundSettings.color,
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
       body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 600,
-                ),
+        child: PaddingAtom(
+          child: Column(
+            children: [
+              Expanded(
                 child: ListView(
                   children: [
                     _gap,
-                    const Text(
-                      'Settings',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Press Start 2P',
-                        fontSize: 30,
-                        height: 1,
-                      ),
+                    Text('General',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    const Divider(),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Name:'),
+                        NameWidget(),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Sound Effects:'),
+                        ValueListenableBuilder<bool>(
+                            valueListenable: settings.soundsOn,
+                            builder: (context, soundsOn, child) =>
+                                FilledButton.tonalIcon(
+                                  onPressed: () => settings.toggleSoundsOn(),
+                                  label: soundsOn
+                                      ? const Text('On')
+                                      : const Text('Muted'),
+                                  icon: Icon(soundsOn
+                                      ? Icons.graphic_eq
+                                      : Icons.volume_off),
+                                )),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Music:'),
+                        ValueListenableBuilder<bool>(
+                            valueListenable: settings.musicOn,
+                            builder: (context, musicOn, child) =>
+                                FilledButton.tonalIcon(
+                                  onPressed: () => settings.toggleMusicOn(),
+                                  label: musicOn
+                                      ? const Text('On')
+                                      : const Text('Muted'),
+                                  icon: Icon(musicOn
+                                      ? Icons.graphic_eq
+                                      : Icons.volume_off),
+                                )),
+                      ],
                     ),
                     _gap,
-                    const NameWidget(),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: settings.soundsOn,
-                      builder: (context, soundsOn, child) => _SettingsLine(
-                        'Sound FX',
-                        Icon(soundsOn ? Icons.graphic_eq : Icons.volume_off),
-                        onSelected: () => settings.toggleSoundsOn(),
-                      ),
-                    ),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: settings.musicOn,
-                      builder: (context, musicOn, child) => _SettingsLine(
-                        'Music',
-                        Icon(musicOn ? Icons.music_note : Icons.music_off),
-                        onSelected: () => settings.toggleMusicOn(),
-                      ),
-                    ),
-                    _gap,
-                    const Text('Credits'),
+                    Text('Credits',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    const Divider(),
                     const Text(
-                        '''Meadow Waltz by Keys of Moon | https://soundcloud.com/keysofmoon
-Music promoted by https://www.free-stock-music.com
-Creative Commons / Attribution 4.0 International (CC BY 4.0)
-https://creativecommons.org/licenses/by/4.0/
-''')
+                        'Meadow Waltz by Keys of Moon | https://soundcloud.com/keysofmoon'),
+                    const Text(
+                        'Music promoted by https://www.free-stock-music.com'),
+                    const Text(
+                        'Creative Commons / Attribution 4.0 International (CC BY 4.0)'),
+                    const Text('https://creativecommons.org/licenses/by/4.0/'),
                   ],
                 ),
               ),
-            ),
-            _gap,
-            TextButton(
-              onPressed: () {
-                GoRouter.of(context).pop();
-              },
-              child: const Text('Back'),
-            ),
-            _gap,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SettingsLine extends StatelessWidget {
-  final String title;
-
-  final Widget icon;
-
-  final VoidCallback? onSelected;
-
-  const _SettingsLine(this.title, this.icon, {this.onSelected});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkResponse(
-      highlightShape: BoxShape.rectangle,
-      onTap: onSelected,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontFamily: 'Press Start 2P',
-                  fontSize: 20,
-                ),
+              _gap,
+              TextButton(
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+                child: const Text('Back'),
               ),
-            ),
-            icon,
-          ],
+              _gap,
+            ],
+          ),
         ),
       ),
     );
