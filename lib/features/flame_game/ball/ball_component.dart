@@ -115,7 +115,6 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       ),
     };
     current = ObjectState.stationary;
-    add(CircleHitbox(isSolid: true));
     return super.onLoad();
   }
 

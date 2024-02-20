@@ -2,7 +2,6 @@ import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
@@ -58,8 +57,6 @@ class BinHoleComponent extends PolygonComponent {
 
   @override
   void onLoad() async {
-    add(RectangleHitbox(isSolid: true));
-
     super.paint = (Paint()..color = Colors.white.withOpacity(0.5));
   }
 }
