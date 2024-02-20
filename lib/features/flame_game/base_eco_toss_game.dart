@@ -1,7 +1,5 @@
 import 'package:eco_toss/features/flame_game/background/background_component.dart';
-import 'package:eco_toss/features/flame_game/background/cloud_component_one.dart';
-import 'package:eco_toss/features/flame_game/background/cloud_component_three.dart';
-import 'package:eco_toss/features/flame_game/background/cloud_component_two.dart';
+import 'package:eco_toss/features/flame_game/background/cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
 import 'package:flame/components.dart';
@@ -24,28 +22,8 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
   @override
   Future<void> onLoad() async {
-    await camera.backdrop.add(BackgroundComponent());
-    camera.backdrop.add(PositionComponent(
-      position: Vector2(0, 0),
-      size: Vector2(size.x, size.y * 0.3),
-      children: [
-        PositionComponent(
-          position: Vector2(0, -20),
-          size: Vector2(size.x, size.y * 0.3),
-          children: [CloudComponentOne(speed: 20)],
-        ),
-        PositionComponent(
-          position: Vector2(0, 0),
-          size: Vector2(size.x, size.y * 0.1),
-          children: [CloudComponentTwo(speed: 40)],
-        ),
-        PositionComponent(
-          position: Vector2(0, 20),
-          size: Vector2(size.x, size.y * 0.2),
-          children: [CloudComponentThree(speed: 60)],
-        ),
-      ],
-    ));
+    camera.backdrop.add(BackgroundComponent());
+    camera.backdrop.add(cloudComponent(speed: 20, size: size));
     camera.viewfinder.anchor = Anchor.center;
     camera.viewfinder.position = Vector2(0, 0);
     const scoreText = 'Recycled: 0';
