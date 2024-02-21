@@ -2,8 +2,7 @@ List<String> soundTypeToFilename(SfxType type) {
   switch (type) {
     case SfxType.score:
       return const [
-        'score1.mp3',
-        'score2.mp3',
+        'complete_task.mp3',
       ];
     case SfxType.toss:
       return const [
@@ -41,7 +40,9 @@ List<String> soundTypeToFilename(SfxType type) {
 double soundTypeToVolume(SfxType type) {
   switch (type) {
     case SfxType.score:
+      return 2.7;
     case SfxType.toss:
+      return 2;
     case SfxType.jump:
     case SfxType.doubleJump:
     case SfxType.damage:
