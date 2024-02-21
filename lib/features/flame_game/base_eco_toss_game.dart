@@ -1,3 +1,5 @@
+import 'package:eco_toss/features/audio/audio_controller.dart';
+import 'package:eco_toss/features/audio/sounds.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
@@ -8,7 +10,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
-  BaseEcoTossGame({super.world})
+  BaseEcoTossGame({required this.audioController, super.world})
       : super(
           camera: EcoTossCameraComponent(),
         );
@@ -18,8 +20,11 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
   final scoreNotifier = ValueNotifier(0);
 
+  final AudioController audioController;
+
   void addScore({int amount = 1}) {
     scoreNotifier.value += amount;
+    audioController.playSfx(SfxType.score);
   }
 
   void onMiss();

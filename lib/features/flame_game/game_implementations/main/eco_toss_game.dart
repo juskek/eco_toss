@@ -9,7 +9,8 @@ import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:flame/components.dart';
 
 class EcoTossGame extends BaseEcoTossGame {
-  EcoTossGame(this.gameViewModel) : super(world: EcoTossWorld());
+  EcoTossGame(this.gameViewModel, {required super.audioController})
+      : super(world: EcoTossWorld());
   final GameViewModel gameViewModel;
 
   late TextComponent highScoreTextComponent;

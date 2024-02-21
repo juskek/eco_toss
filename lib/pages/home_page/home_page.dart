@@ -46,12 +46,18 @@ class HomePage extends StatelessWidget {
                 ),
                 _gap,
                 FilledButton.tonal(
-                  onPressed: () => GoRouter.of(context).push('/leaderboard'),
+                  onPressed: () {
+                    audioController.playSfx(SfxType.buttonTap);
+                    GoRouter.of(context).push('/leaderboard');
+                  },
                   child: const Text('Leaderboard'),
                 ),
                 _gap,
                 FilledButton.tonal(
-                  onPressed: () => GoRouter.of(context).push('/settings'),
+                  onPressed: () {
+                    audioController.playSfx(SfxType.buttonTap);
+                    GoRouter.of(context).push('/settings');
+                  },
                   child: const Text('Settings'),
                 ),
               ],

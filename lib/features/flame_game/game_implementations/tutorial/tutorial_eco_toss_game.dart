@@ -9,7 +9,8 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
-  TutorialEcoTossGame() : super(world: TutorialEcoTossWorld());
+  TutorialEcoTossGame({required super.audioController})
+      : super(world: TutorialEcoTossWorld());
   final thrownNotifier = ValueNotifier<bool>(false);
   static TextComponent? instructionsText;
   late Vector2 tutorialTextSize;

@@ -2,7 +2,6 @@ import 'package:eco_toss/features/dialogs/submit_highscore_dialog.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
-import 'package:eco_toss/pages/flame_game/endless_runner.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +28,8 @@ class GamePage extends StatelessWidget {
     return Scaffold(
       body: GameWidget<BaseEcoTossGame>(
         key: const Key('play session'),
-        game: EcoTossGame(gameViewModel),
+        game: EcoTossGame(gameViewModel,
+            audioController: context.read<AudioController>()),
         overlayBuilderMap: {
           backButtonKey: (BuildContext context, BaseEcoTossGame game) {
             return Positioned(
