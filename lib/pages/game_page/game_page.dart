@@ -29,7 +29,8 @@ class GamePage extends StatelessWidget {
     return Scaffold(
       body: GameWidget<BaseEcoTossGame>(
         key: const Key('play session'),
-        game: EcoTossGame(gameViewModel),
+        game: EcoTossGame(gameViewModel,
+            audioController: context.read<AudioController>()),
         overlayBuilderMap: {
           backButtonKey: (BuildContext context, BaseEcoTossGame game) {
             return Positioned(

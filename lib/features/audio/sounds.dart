@@ -7,8 +7,9 @@ List<String> soundTypeToFilename(SfxType type) {
       ];
     case SfxType.toss:
       return const [
-        'score1.mp3',
-        'score2.mp3',
+        'swing.mp3',
+        'swing2.mp3',
+        'swing3.mp3',
       ];
     case SfxType.jump:
       return const [

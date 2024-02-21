@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:eco_toss/features/audio/sounds.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
@@ -75,6 +76,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
 
     if (_angles.isNotEmpty && _angles.length > 7) {
       isThrown = true;
+      game.audioController.playSfx(SfxType.toss);
+
       current = ObjectState.thrown;
 
       int start = (_angles.length * 0.25).round();
