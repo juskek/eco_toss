@@ -74,7 +74,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
       return;
     }
 
-    if (_angles.isNotEmpty && _angles.length > 7) {
+    if (_angles.isNotEmpty && _angles.length > 4) {
+      print('no of angles: ${_angles.length}');
       int start = (_angles.length * 0.25).round();
       int end = (_angles.length * 0.75).round();
 
