@@ -10,24 +10,6 @@ List<String> soundTypeToFilename(SfxType type) {
         'swing2.mp3',
         'swing3.mp3',
       ];
-    case SfxType.jump:
-      return const [
-        'jump1.mp3',
-      ];
-    case SfxType.doubleJump:
-      return const [
-        'double_jump1.mp3',
-      ];
-    case SfxType.hit:
-      return const [
-        'hit1.mp3',
-        'hit2.mp3',
-      ];
-    case SfxType.damage:
-      return const [
-        'damage1.mp3',
-        'damage2.mp3',
-      ];
 
     case SfxType.buttonTap:
       return const [
@@ -43,11 +25,6 @@ double soundTypeToVolume(SfxType type) {
       return 2.7;
     case SfxType.toss:
       return 2;
-    case SfxType.jump:
-    case SfxType.doubleJump:
-    case SfxType.damage:
-    case SfxType.hit:
-      return 0.4;
     case SfxType.buttonTap:
       return 1.0;
   }
@@ -56,14 +33,5 @@ double soundTypeToVolume(SfxType type) {
 enum SfxType {
   score,
   toss,
-
-  @Deprecated('legacy from endless runner')
-  jump,
-  @Deprecated('legacy from endless runner')
-  doubleJump,
-  @Deprecated('legacy from endless runner')
-  hit,
-  @Deprecated('legacy from endless runner')
-  damage,
   buttonTap,
 }
