@@ -69,17 +69,8 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
     if (event.velocity.y > 0) {
       return;
     }
-    if (atan(event.velocity.x.abs() / event.velocity.y.abs()) >
-        EcoTossThrow.coneAngleRadians / 2) {
-      return;
-    }
 
     if (_angles.isNotEmpty && _angles.length > 7) {
-      isThrown = true;
-      game.audioController.playSfx(SfxType.toss);
-
-      current = ObjectState.thrown;
-
       int start = (_angles.length * 0.25).round();
       int end = (_angles.length * 0.75).round();
 
@@ -88,6 +79,22 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
         sum += _angles[i];
       }
       double averageAngle = sum / (end - start);
+
+      if ((averageAngle / 2).abs() > EcoTossThrow.noThrowAngleRadians) {
+        return;
+      }
+
+      if (averageAngle < EcoTossThrow.maxAngleRadians) {
+        averageAngle = EcoTossThrow.maxAngleRadians;
+      }
+      if (averageAngle > EcoTossThrow.minAngleRadians) {
+        averageAngle = EcoTossThrow.minAngleRadians;
+      }
+
+      isThrown = true;
+      game.audioController.playSfx(SfxType.toss);
+
+      current = ObjectState.thrown;
       xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
       yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
       zVelocityMps = EcoTossThrow.zVelocityMps;

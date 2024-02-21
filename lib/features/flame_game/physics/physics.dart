@@ -28,12 +28,17 @@ abstract class EcoTossThrow {
   static const climbAngleDegrees = 30.0;
   static const climbAngleRadians = climbAngleDegrees * pi / 180;
 
-  static const coneAngleDegrees = 120.0;
-  static const coneAngleRadians = coneAngleDegrees * pi / 180;
+  static const maxAngleDegrees = -117.5;
+  static const minAngleDegrees = -62.5;
+  static const maxAngleRadians = maxAngleDegrees * pi / 180;
+  static const minAngleRadians = minAngleDegrees * pi / 180;
+
+  static const noThrowAngleDegrees = 180;
+  static const noThrowAngleRadians = noThrowAngleDegrees * pi / 180;
 
   static const airResistanceVelocityMultiplier = 0.03;
 
-  static const windCoefficientVelocityMultiplier = 1;
+  static const windCoefficientVelocityMultiplier = 2;
 
   static const bounceEnergyXVelocityMultiplier = 0.5;
   static const bounceEnergyYVelocityMultiplier = 0.5;
@@ -65,6 +70,8 @@ double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
 }
 
 double generateRandomWindSpeed() {
-  return Random().nextDouble() * 10 -
-      5; // Scale to [0, 10) then shift to [-5, 5)
+  /// Scales to [0, maxWindSpeed) then shift to [-maxWindSpeed, maxWindSpeed)
+  double maxWindSpeed = 5;
+  // return Random().nextDouble() * maxWindSpeed * 2 - maxWindSpeed;
+  return maxWindSpeed;
 }
