@@ -22,6 +22,14 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    throw new GradleException("key.properties not found, please ensure you have a key.properties file in the android/ directory - see https://docs.flutter.dev/deployment/android#reference-the-keystore-from-the-app")
+}
+
 android {
     namespace "com.justinkek.eco_toss"
     compileSdkVersion flutter.compileSdkVersion
