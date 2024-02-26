@@ -109,7 +109,7 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   @override
   Future<void> onLoad() async {
     animations = {
-      ObjectState.thrown: await loadSpriteAnimationFromFiles(
+      ObjectState.thrown: await loadSpriteAnimationFromFilesToGame(
           game, "throwables/paper_ball/", 48),
       ObjectState.stationary: SpriteAnimation.spriteList(
         [
