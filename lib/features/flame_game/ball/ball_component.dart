@@ -6,6 +6,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
+import 'package:eco_toss/features/flame_game/utils/load_sprite_animation_from_files.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -108,20 +109,13 @@ class BallComponent extends SpriteAnimationGroupComponent<ObjectState>
   @override
   Future<void> onLoad() async {
     animations = {
-      ObjectState.thrown: await game.loadSpriteAnimation(
-        'throwables/paper_ball.png',
-        SpriteAnimationData.sequenced(
-          amount: 24,
-          textureSize: Vector2.all(128),
-          texturePosition: Vector2(0, 0),
-          stepTime: 0.01,
-        ),
-      ),
+      ObjectState.thrown: await loadSpriteAnimationFromFiles(
+          game, "throwables/paper_ball/", 48),
       ObjectState.stationary: SpriteAnimation.spriteList(
         [
           await game.loadSprite(
-            'throwables/paper_ball.png',
-            srcSize: Vector2.all(128),
+            'throwables/paper_ball/0001.png',
+            srcSize: Vector2.all(1080),
             srcPosition: Vector2(0, 0),
           )
         ],
