@@ -1,6 +1,7 @@
 import 'package:eco_toss/features/flame_game/background/background_component.dart';
 import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
+import 'package:eco_toss/features/flame_game/buttons/cycle_bins_button_component.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
@@ -73,6 +74,9 @@ class EcoTossGame extends BaseEcoTossGame {
         await gameViewModel.setHighScore(scoreNotifier.value);
       }
     });
+
+    camera.viewport.add(CycleBinsButtonComponent(gameViewModel,
+        audioController: audioController));
 
     return super.onLoad();
   }
