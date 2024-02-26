@@ -63,6 +63,11 @@ flutter:
   assets:
     - assets/images/
     - assets/images/throwables/
+    - assets/images/throwables/banana/
+    - assets/images/throwables/can/
+    - assets/images/throwables/glass_bottle/
+    - assets/images/throwables/paper_ball/
+    - assets/images/throwables/plastic_bottle/
     - assets/images/bins/
     - assets/images/labels/
     - assets/images/enemies/
