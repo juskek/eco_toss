@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/leaderboard/i_leaderboard_repository.dart';
 import 'package:eco_toss/data/score/i_score_repository.dart';
@@ -56,9 +58,9 @@ class GameViewModel extends ChangeNotifier {
 
   ThrowableType get currentThrowableType => _currentThrowableType.value;
 
-  void cycleThrowables() {
-    _currentThrowableType.value = ThrowableType.values[
-        (_currentThrowableType.value.index + 1) % ThrowableType.values.length];
+  void cycleThrowablesRandomly() {
+    int randomIndex = Random().nextInt(ThrowableType.values.length);
+    _currentThrowableType.value = ThrowableType.values[randomIndex];
     notifyListeners();
   }
 }

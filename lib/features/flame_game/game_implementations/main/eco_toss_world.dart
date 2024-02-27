@@ -58,7 +58,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       final throwable = throwableNotifier.single;
       if (throwable == null) {
         binComponents.frontSurfaceComponent.priority = 1;
-        game.gameViewModel.cycleThrowables();
+        game.gameViewModel.cycleThrowablesRandomly();
         switch (game.gameViewModel.currentThrowableType) {
           case ThrowableType.banana:
             add(BananaComponent(
