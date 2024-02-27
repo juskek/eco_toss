@@ -7,6 +7,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dar
 import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 
 class EcoTossWorld extends BaseEcoTossWorld {
@@ -53,13 +54,33 @@ class EcoTossWorld extends BaseEcoTossWorld {
       final throwable = throwableNotifier.single;
       if (throwable == null) {
         binComponents.frontSurfaceComponent.priority = 1;
-        add(BallComponent(
-          radiusStartMetres: 0.2,
-          addScore: game.addScore,
-          onMiss: game.onMiss,
-          binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
-          windSpeedMps2: game.windSpeedMps2,
-        ));
+        game.gameViewModel.cycleThrowables();
+        switch (game.gameViewModel.currentThrowableType) {
+          case ThrowableType.banana:
+            print('banana');
+            break;
+          case ThrowableType.can:
+            print('can');
+            break;
+          case ThrowableType.glassBottle:
+            print('glassBottle');
+            break;
+          case ThrowableType.paperBall:
+            add(BallComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
+            break;
+          case ThrowableType.plasticBottle:
+            print('plasticBottle');
+            break;
+
+          default:
+            throw UnimplementedError();
+        }
       }
       if (throwable != null &&
           throwable.zPositionMetres >=

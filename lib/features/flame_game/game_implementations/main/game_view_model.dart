@@ -54,8 +54,7 @@ class GameViewModel extends ChangeNotifier {
   final ValueNotifier<ThrowableType> _currentThrowableType =
       ValueNotifier(ThrowableType.paperBall);
 
-  ValueNotifier<ThrowableType> get currentThrowableType =>
-      _currentThrowableType;
+  ThrowableType get currentThrowableType => _currentThrowableType.value;
 
   void cycleThrowables() {
     _currentThrowableType.value = ThrowableType.values[
