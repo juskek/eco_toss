@@ -46,7 +46,6 @@ class GameViewModel extends ChangeNotifier {
   void cycleBins() {
     _currentBinType =
         BinType.values[(_currentBinType.index + 1) % BinType.values.length];
-    print('Current bin type: $_currentBinType');
     notifyListeners();
   }
 }
