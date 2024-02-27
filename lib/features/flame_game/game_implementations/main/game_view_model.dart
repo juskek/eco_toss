@@ -41,11 +41,13 @@ class GameViewModel extends ChangeNotifier {
     _leaderboardRepository.postEntry(userId, userName!, currentHighScore!);
   }
 
-  BinType _currentBinType = BinType.general;
+  final ValueNotifier<BinType> _currentBinType = ValueNotifier(BinType.general);
+
+  ValueNotifier<BinType> get currentBinType => _currentBinType;
 
   void cycleBins() {
-    _currentBinType =
-        BinType.values[(_currentBinType.index + 1) % BinType.values.length];
+    _currentBinType.value = BinType
+        .values[(_currentBinType.value.index + 1) % BinType.values.length];
     notifyListeners();
   }
 }

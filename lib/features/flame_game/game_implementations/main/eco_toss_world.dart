@@ -1,18 +1,37 @@
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
-import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_back_surface_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 
 class EcoTossWorld extends BaseEcoTossWorld {
+  late ({
+    BinFrontSurfaceComponent frontSurfaceComponent,
+    BinBackSurfaceComponent backSurfaceComponent,
+    BinHoleComponent holeComponent,
+    BinHoleCoordinatesMetres binHoleCoordinatesMetres,
+  }) binComponents;
   @override
   Future<void> onLoad() async {
-    final game = findGame()! as BaseEcoTossGame;
+    final game = findGame()! as EcoTossGame;
+    binComponents = createBinComponents(midpointXMetres: 1);
 
-    final binComponents = createBinComponents(midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
     add(binComponents.holeComponent);
+
+    game.gameViewModel.currentBinType.addListener(
+      () {
+        print('currentBinType changed');
+        remove(binComponents.backSurfaceComponent);
+        remove(binComponents.frontSurfaceComponent);
+        remove(binComponents.holeComponent);
+      },
+    );
 
     await add(BallComponent(
       radiusStartMetres: 0.2,
