@@ -12,7 +12,8 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
-class ThrowableComponent extends SpriteAnimationGroupComponent<ObjectState>
+abstract class ThrowableComponent
+    extends SpriteAnimationGroupComponent<ObjectState>
     with
         HasGameReference<BaseEcoTossGame>,
         CollisionCallbacks,
