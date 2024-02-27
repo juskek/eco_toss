@@ -1,3 +1,4 @@
+import 'package:eco_toss/features/audio/sounds.dart';
 import 'package:eco_toss/features/flame_game/background/background_component.dart';
 import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
@@ -16,6 +17,12 @@ class EcoTossGame extends BaseEcoTossGame {
 
   late TextComponent highScoreTextComponent;
   late TextComponent windTextComponent;
+
+  @override
+  void addScore({int amount = 1}) {
+    scoreNotifier.value += amount;
+    audioController.playSfx(SfxType.score);
+  }
 
   @override
   void onMiss() {
