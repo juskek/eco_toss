@@ -2,6 +2,7 @@ import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 
 class TutorialEcoTossWorld extends BaseEcoTossWorld {
@@ -9,7 +10,8 @@ class TutorialEcoTossWorld extends BaseEcoTossWorld {
   Future<void> onLoad() async {
     final game = findGame()! as BaseEcoTossGame;
 
-    final binComponents = createBinComponents(midpointXMetres: 1);
+    final binComponents =
+        createBinComponents(binType: BinType.paper, midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
     add(binComponents.holeComponent);

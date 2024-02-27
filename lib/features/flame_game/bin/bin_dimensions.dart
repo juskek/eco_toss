@@ -2,6 +2,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_back_surface_component.dart
 import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 
 abstract class BinDimensions {
   static const heightMetres = 0.55;
@@ -23,12 +24,13 @@ abstract class BinDimensions {
   BinBackSurfaceComponent backSurfaceComponent,
   BinHoleComponent holeComponent,
   BinHoleCoordinatesMetres binHoleCoordinatesMetres,
-}) createBinComponents({required double midpointXMetres}) {
+}) createBinComponents(
+    {required BinType binType, required double midpointXMetres}) {
   final binHoleCoordinatesMetres =
       BinHoleCoordinatesMetres(midpointXMetres: midpointXMetres);
   return (
-    frontSurfaceComponent: BinFrontSurfaceComponent(),
-    backSurfaceComponent: BinBackSurfaceComponent(),
+    frontSurfaceComponent: BinFrontSurfaceComponent(binType: binType),
+    backSurfaceComponent: BinBackSurfaceComponent(binType: binType),
     holeComponent: BinHoleComponent(
         midpointXMetres: midpointXMetres,
         binHoleCoordinatesMetres: binHoleCoordinatesMetres),

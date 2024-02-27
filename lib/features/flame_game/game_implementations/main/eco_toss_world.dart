@@ -18,7 +18,8 @@ class EcoTossWorld extends BaseEcoTossWorld {
   @override
   Future<void> onLoad() async {
     final game = findGame()! as EcoTossGame;
-    binComponents = createBinComponents(midpointXMetres: 1);
+    binComponents = createBinComponents(
+        binType: game.gameViewModel.currentBinType.value, midpointXMetres: 1);
 
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
@@ -26,10 +27,15 @@ class EcoTossWorld extends BaseEcoTossWorld {
 
     game.gameViewModel.currentBinType.addListener(
       () {
-        print('currentBinType changed');
         remove(binComponents.backSurfaceComponent);
         remove(binComponents.frontSurfaceComponent);
         remove(binComponents.holeComponent);
+        binComponents = createBinComponents(
+            binType: game.gameViewModel.currentBinType.value,
+            midpointXMetres: 1);
+        add(binComponents.backSurfaceComponent);
+        add(binComponents.frontSurfaceComponent);
+        add(binComponents.holeComponent);
       },
     );
 
