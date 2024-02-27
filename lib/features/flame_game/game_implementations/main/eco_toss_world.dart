@@ -7,7 +7,11 @@ import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
-import 'package:eco_toss/features/flame_game/throwables/ball_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/banana_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/can_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/glass_bottle_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/paper_ball_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/plastic_bottle_component.dart';
 import 'package:eco_toss/features/flame_game/throwables/throwable_component.dart';
 
 class EcoTossWorld extends BaseEcoTossWorld {
@@ -41,7 +45,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
-    await add(BallComponent(
+    await add(PaperBallComponent(
       radiusStartMetres: 0.2,
       addScore: game.addScore,
       onMiss: game.onMiss,
@@ -57,16 +61,34 @@ class EcoTossWorld extends BaseEcoTossWorld {
         game.gameViewModel.cycleThrowables();
         switch (game.gameViewModel.currentThrowableType) {
           case ThrowableType.banana:
-            print('banana');
+            add(BananaComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
             break;
           case ThrowableType.can:
-            print('can');
+            add(CanComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
             break;
           case ThrowableType.glassBottle:
-            print('glassBottle');
+            add(GlassBottleComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
             break;
           case ThrowableType.paperBall:
-            add(BallComponent(
+            add(PaperBallComponent(
               radiusStartMetres: 0.2,
               addScore: game.addScore,
               onMiss: game.onMiss,
@@ -75,7 +97,13 @@ class EcoTossWorld extends BaseEcoTossWorld {
             ));
             break;
           case ThrowableType.plasticBottle:
-            print('plasticBottle');
+            add(PlasticBottleComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
             break;
 
           default:

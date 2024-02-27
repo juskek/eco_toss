@@ -1,8 +1,8 @@
 import 'package:eco_toss/features/flame_game/throwables/throwable_component.dart';
 
-class BallComponent extends ThrowableComponent {
-  BallComponent({
-    super.imageFolderPath = "throwables/paper_ball/",
+class BananaComponent extends ThrowableComponent {
+  BananaComponent({
+    super.imageFolderPath = "throwables/banana/",
     required super.radiusStartMetres,
     required super.onMiss,
     required super.addScore,
