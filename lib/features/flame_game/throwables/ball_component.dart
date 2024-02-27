@@ -1,4 +1,4 @@
-import 'package:eco_toss/features/flame_game/ball/throwable_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/throwable_component.dart';
 
 class BallComponent extends ThrowableComponent {
   BallComponent({
