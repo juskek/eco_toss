@@ -1,4 +1,5 @@
 import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
+import 'package:eco_toss/features/flame_game/ball/throwable_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_back_surface_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
@@ -47,10 +48,10 @@ class EcoTossWorld extends BaseEcoTossWorld {
       windSpeedMps2: game.windSpeedMps2,
     ));
 
-    final ballNotifier = gameRef.componentsNotifier<BallComponent>();
-    ballNotifier.addListener(() {
-      final ball = ballNotifier.single;
-      if (ball == null) {
+    final throwableNotifier = gameRef.componentsNotifier<ThrowableComponent>();
+    throwableNotifier.addListener(() {
+      final throwable = throwableNotifier.single;
+      if (throwable == null) {
         binComponents.frontSurfaceComponent.priority = 1;
         add(BallComponent(
           radiusStartMetres: 0.2,
@@ -60,11 +61,11 @@ class EcoTossWorld extends BaseEcoTossWorld {
           windSpeedMps2: game.windSpeedMps2,
         ));
       }
-      if (ball != null &&
-          ball.zPositionMetres >=
+      if (throwable != null &&
+          throwable.zPositionMetres >=
               EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres) {
         binComponents.frontSurfaceComponent.priority = 2;
-        ball.priority = 1;
+        throwable.priority = 1;
       }
     });
   }
