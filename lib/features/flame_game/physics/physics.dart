@@ -72,6 +72,5 @@ double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
 double generateRandomWindSpeed() {
   /// Scales to [0, maxWindSpeed) then shift to [-maxWindSpeed, maxWindSpeed)
   double maxWindSpeed = 5;
-  // return Random().nextDouble() * maxWindSpeed * 2 - maxWindSpeed;
-  return maxWindSpeed;
+  return Random().nextDouble() * maxWindSpeed * 2 - maxWindSpeed;
 }

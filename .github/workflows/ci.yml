@@ -1,0 +1,24 @@
+name: ci
+run-name: ${{ github.actor }} is executing ${{ github.workflow }} on ${{ github.event_name }} at ${{ github.sha }}
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  app-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.16.6"
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Test
+        run: flutter test

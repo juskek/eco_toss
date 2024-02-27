@@ -1,4 +1,5 @@
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/components.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'bin_dimensions.dart';
 
 class BinBackSurfaceComponent extends RectangleComponent {
-  BinBackSurfaceComponent({super.size}) {
+  final BinType binType;
+  BinBackSurfaceComponent({required this.binType, super.size}) {
     final pixelCoordinates = EcoTossPositioning.xyzMetresToXyPixels(Vector3(
       EcoToss3DSpace.xMidMetres,
       0,
@@ -28,7 +30,28 @@ class BinBackSurfaceComponent extends RectangleComponent {
 
   @override
   void onLoad() async {
-    final sprite = await Sprite.load('bins/BlueBin_Back.png');
+    late String imagePath;
+    switch (binType) {
+      case BinType.general:
+        imagePath = 'bins/BlackBin_Back.png';
+        break;
+      case BinType.plastic:
+        imagePath = 'bins/RedBin_Back.png';
+        break;
+      case BinType.glass:
+        imagePath = 'bins/GreenBin_Back.png';
+        break;
+      case BinType.paper:
+        imagePath = 'bins/BlueBin_Back.png';
+        break;
+      case BinType.metal:
+        imagePath = 'bins/GreyBin_Back.png';
+        break;
+      default:
+        throw Exception('Invalid bin type');
+    }
+
+    final sprite = await Sprite.load(imagePath);
     add(SpriteComponent(
       sprite: sprite,
       anchor: Anchor.center,
