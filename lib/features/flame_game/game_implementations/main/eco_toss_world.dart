@@ -1,4 +1,3 @@
-import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_back_surface_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
@@ -6,7 +5,14 @@ import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dar
 import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
+import 'package:eco_toss/features/flame_game/throwables/banana_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/can_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/glass_bottle_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/paper_ball_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/plastic_bottle_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/throwable_component.dart';
 
 class EcoTossWorld extends BaseEcoTossWorld {
   late ({
@@ -39,7 +45,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
-    await add(BallComponent(
+    await add(PaperBallComponent(
       radiusStartMetres: 0.2,
       addScore: game.addScore,
       onMiss: game.onMiss,
@@ -47,24 +53,68 @@ class EcoTossWorld extends BaseEcoTossWorld {
       windSpeedMps2: game.windSpeedMps2,
     ));
 
-    final ballNotifier = gameRef.componentsNotifier<BallComponent>();
-    ballNotifier.addListener(() {
-      final ball = ballNotifier.single;
-      if (ball == null) {
+    final throwableNotifier = gameRef.componentsNotifier<ThrowableComponent>();
+    throwableNotifier.addListener(() {
+      final throwable = throwableNotifier.single;
+      if (throwable == null) {
         binComponents.frontSurfaceComponent.priority = 1;
-        add(BallComponent(
-          radiusStartMetres: 0.2,
-          addScore: game.addScore,
-          onMiss: game.onMiss,
-          binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
-          windSpeedMps2: game.windSpeedMps2,
-        ));
+        game.gameViewModel.cycleThrowablesRandomly();
+        switch (game.gameViewModel.currentThrowableType) {
+          case ThrowableType.banana:
+            add(BananaComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
+            break;
+          case ThrowableType.can:
+            add(CanComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
+            break;
+          case ThrowableType.glassBottle:
+            add(GlassBottleComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
+            break;
+          case ThrowableType.paperBall:
+            add(PaperBallComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
+            break;
+          case ThrowableType.plasticBottle:
+            add(PlasticBottleComponent(
+              radiusStartMetres: 0.2,
+              addScore: game.addScore,
+              onMiss: game.onMiss,
+              binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
+              windSpeedMps2: game.windSpeedMps2,
+            ));
+            break;
+
+          default:
+            throw UnimplementedError();
+        }
       }
-      if (ball != null &&
-          ball.zPositionMetres >=
+      if (throwable != null &&
+          throwable.zPositionMetres >=
               EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres) {
         binComponents.frontSurfaceComponent.priority = 2;
-        ball.priority = 1;
+        throwable.priority = 1;
       }
     });
   }

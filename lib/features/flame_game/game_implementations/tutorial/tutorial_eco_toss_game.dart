@@ -1,9 +1,9 @@
 import 'package:eco_toss/features/flame_game/background/background_component.dart';
 import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
-import 'package:eco_toss/features/flame_game/ball/ball_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/tutorial/tutorial_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
+import 'package:eco_toss/features/flame_game/throwables/paper_ball_component.dart';
 import 'package:eco_toss/pages/tutorial_page/tutorial_page.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
       position: tutorialTextPosition,
     );
 
-    final ballNotifier = gameRef.componentsNotifier<BallComponent>();
+    final ballNotifier = gameRef.componentsNotifier<PaperBallComponent>();
     ballNotifier.addListener(() {
       final ball = ballNotifier.single;
       if (ball == null) {

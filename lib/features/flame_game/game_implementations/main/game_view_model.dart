@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/leaderboard/i_leaderboard_repository.dart';
 import 'package:eco_toss/data/score/i_score_repository.dart';
@@ -50,6 +52,17 @@ class GameViewModel extends ChangeNotifier {
         .values[(_currentBinType.value.index + 1) % BinType.values.length];
     notifyListeners();
   }
+
+  final ValueNotifier<ThrowableType> _currentThrowableType =
+      ValueNotifier(ThrowableType.paperBall);
+
+  ThrowableType get currentThrowableType => _currentThrowableType.value;
+
+  void cycleThrowablesRandomly() {
+    int randomIndex = Random().nextInt(ThrowableType.values.length);
+    _currentThrowableType.value = ThrowableType.values[randomIndex];
+    notifyListeners();
+  }
 }
 
 enum BinType {
@@ -58,4 +71,12 @@ enum BinType {
   plastic,
   glass,
   metal,
+}
+
+enum ThrowableType {
+  banana,
+  can,
+  glassBottle,
+  paperBall,
+  plasticBottle,
 }
