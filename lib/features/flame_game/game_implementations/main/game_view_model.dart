@@ -50,6 +50,18 @@ class GameViewModel extends ChangeNotifier {
         .values[(_currentBinType.value.index + 1) % BinType.values.length];
     notifyListeners();
   }
+
+  final ValueNotifier<ThrowableType> _currentThrowableType =
+      ValueNotifier(ThrowableType.paperBall);
+
+  ValueNotifier<ThrowableType> get currentThrowableType =>
+      _currentThrowableType;
+
+  void cycleThrowables() {
+    _currentThrowableType.value = ThrowableType.values[
+        (_currentThrowableType.value.index + 1) % ThrowableType.values.length];
+    notifyListeners();
+  }
 }
 
 enum BinType {
@@ -58,4 +70,12 @@ enum BinType {
   plastic,
   glass,
   metal,
+}
+
+enum ThrowableType {
+  banana,
+  can,
+  glassBottle,
+  paperBall,
+  plasticBottle,
 }
