@@ -20,6 +20,7 @@ abstract class ThrowableComponent
         Notifier,
         DragCallbacks {
   ThrowableComponent({
+    required this.imageFolderPath,
     required this.radiusStartMetres,
     required this.addScore,
     required this.onMiss,
@@ -29,6 +30,8 @@ abstract class ThrowableComponent
             anchor: Anchor.center,
             priority: 2,
             size: Vector2(radiusStartMetres, radiusStartMetres));
+
+  final String imageFolderPath;
 
   double radiusStartMetres;
   final double windSpeedMps2;
@@ -110,12 +113,12 @@ abstract class ThrowableComponent
   @override
   Future<void> onLoad() async {
     animations = {
-      ObjectState.thrown: await loadSpriteAnimationFromFilesToGame(
-          game, "throwables/paper_ball/", 48),
+      ObjectState.thrown:
+          await loadSpriteAnimationFromFilesToGame(game, imageFolderPath, 48),
       ObjectState.stationary: SpriteAnimation.spriteList(
         [
           await game.loadSprite(
-            'throwables/paper_ball/0001.png',
+            '$imageFolderPath/0001.png',
             srcSize: Vector2.all(1080),
             srcPosition: Vector2(0, 0),
           )
