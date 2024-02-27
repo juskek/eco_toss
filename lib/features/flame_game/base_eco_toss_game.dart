@@ -21,7 +21,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
   final AudioController audioController;
 
-  void addScore({int amount = 1});
+  void onBinned({int amount = 1});
 
   void onMiss();
 

@@ -18,7 +18,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
   late Vector2 tutorialTextPosition;
 
   @override
-  void addScore({int amount = 1}) {
+  void onBinned({int amount = 1}) {
     scoreNotifier.value += amount;
     audioController.playSfx(SfxType.score);
   }

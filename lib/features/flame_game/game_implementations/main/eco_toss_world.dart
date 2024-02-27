@@ -47,7 +47,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
 
     await add(PaperBallComponent(
       radiusStartMetres: 0.2,
-      addScore: game.addScore,
+      onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
       windSpeedMps2: game.windSpeedMps2,
@@ -63,7 +63,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
           case ThrowableType.banana:
             add(BananaComponent(
               radiusStartMetres: 0.2,
-              addScore: game.addScore,
+              onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
               windSpeedMps2: game.windSpeedMps2,
@@ -72,7 +72,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
           case ThrowableType.can:
             add(CanComponent(
               radiusStartMetres: 0.2,
-              addScore: game.addScore,
+              onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
               windSpeedMps2: game.windSpeedMps2,
@@ -81,7 +81,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
           case ThrowableType.glassBottle:
             add(GlassBottleComponent(
               radiusStartMetres: 0.2,
-              addScore: game.addScore,
+              onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
               windSpeedMps2: game.windSpeedMps2,
@@ -90,7 +90,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
           case ThrowableType.paperBall:
             add(PaperBallComponent(
               radiusStartMetres: 0.2,
-              addScore: game.addScore,
+              onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
               windSpeedMps2: game.windSpeedMps2,
@@ -99,7 +99,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
           case ThrowableType.plasticBottle:
             add(PlasticBottleComponent(
               radiusStartMetres: 0.2,
-              addScore: game.addScore,
+              onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
               windSpeedMps2: game.windSpeedMps2,
