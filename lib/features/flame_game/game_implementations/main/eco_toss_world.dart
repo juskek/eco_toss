@@ -4,6 +4,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
+import 'package:eco_toss/features/flame_game/bin/bin_label/bin_label_component.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
@@ -26,7 +27,6 @@ class EcoTossWorld extends BaseEcoTossWorld {
     final game = findGame()! as EcoTossGame;
     binComponents = createBinComponents(
         binType: game.gameViewModel.currentBinType.value, midpointXMetres: 1);
-
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
     add(binComponents.holeComponent);
@@ -44,6 +44,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
         add(binComponents.holeComponent);
       },
     );
+    add(BinLabelComponent());
 
     await add(PaperBallComponent(
       radiusStartMetres: 0.2,
