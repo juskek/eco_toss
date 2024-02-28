@@ -31,7 +31,9 @@ abstract class BinDimensions {
   final binHoleCoordinatesMetres =
       BinHoleCoordinatesMetres(midpointXMetres: midpointXMetres);
   return (
-    binLabelComponent: BinLabelComponent(),
+    binLabelComponent: BinLabelComponent(
+      midpointXMetres: midpointXMetres,
+    ),
     frontSurfaceComponent: BinFrontSurfaceComponent(binType: binType),
     backSurfaceComponent: BinBackSurfaceComponent(binType: binType),
     holeComponent: BinHoleComponent(

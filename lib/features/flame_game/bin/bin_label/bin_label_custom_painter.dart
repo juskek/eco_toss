@@ -8,7 +8,7 @@ class BinLabelCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black
+      ..color = Colors.red.withOpacity(0.5)
       ..style = PaintingStyle.fill;
 
     final path = Path()
@@ -17,9 +17,10 @@ class BinLabelCustomPainter extends CustomPainter {
       ..lineTo(size.width, size.height)
       ..lineTo(size.width, 0)
       ..close();
-
-    canvas.drawPath(path, paint);
+    const scale = 0.15;
+    canvas.scale(scale, scale);
     canvas.drawImage(image, Offset.zero, Paint());
+    canvas.drawPath(path, paint);
   }
 
   @override
