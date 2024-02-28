@@ -5,7 +5,7 @@ class CanComponent extends ThrowableComponent {
     super.imageFolderPath = "throwables/can/",
     required super.radiusStartMetres,
     required super.onMiss,
-    required super.addScore,
+    required super.onBinned,
     required super.binHoleCoordinatesMetres,
     required super.windSpeedMps2,
   });

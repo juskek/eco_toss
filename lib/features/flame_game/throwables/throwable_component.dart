@@ -22,7 +22,7 @@ abstract class ThrowableComponent
   ThrowableComponent({
     required this.imageFolderPath,
     required this.radiusStartMetres,
-    required this.addScore,
+    required this.onBinned,
     required this.onMiss,
     required this.binHoleCoordinatesMetres,
     required this.windSpeedMps2,
@@ -36,7 +36,7 @@ abstract class ThrowableComponent
   double radiusStartMetres;
   final double windSpeedMps2;
 
-  final void Function({int amount}) addScore;
+  final void Function({int amount}) onBinned;
   final void Function() onMiss;
 
   double timeSinceMissSeconds = 0;
@@ -292,7 +292,7 @@ abstract class ThrowableComponent
 
   void checkIfScored(double dt) {
     if (isBallSlightlyBelowHole()) {
-      addScore();
+      onBinned();
       removeFromParent();
     }
   }

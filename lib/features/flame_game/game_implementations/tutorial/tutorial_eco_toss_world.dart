@@ -18,7 +18,7 @@ class TutorialEcoTossWorld extends BaseEcoTossWorld {
 
     await add(PaperBallComponent(
       radiusStartMetres: 0.2,
-      addScore: game.addScore,
+      onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
       windSpeedMps2: game.windSpeedMps2,
@@ -31,7 +31,7 @@ class TutorialEcoTossWorld extends BaseEcoTossWorld {
         binComponents.frontSurfaceComponent.priority = 1;
         add(PaperBallComponent(
           radiusStartMetres: 0.2,
-          addScore: game.addScore,
+          onBinned: game.onBinned,
           onMiss: game.onMiss,
           binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
           windSpeedMps2: game.windSpeedMps2,

@@ -5,7 +5,7 @@ class BananaComponent extends ThrowableComponent {
     super.imageFolderPath = "throwables/banana/",
     required super.radiusStartMetres,
     required super.onMiss,
-    required super.addScore,
+    required super.onBinned,
     required super.binHoleCoordinatesMetres,
     required super.windSpeedMps2,
   });
