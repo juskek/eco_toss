@@ -5,6 +5,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_front_surface_component.dar
 import 'package:eco_toss/features/flame_game/bin/bin_hole_component.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_label/bin_label_component.dart';
+import 'package:eco_toss/features/flame_game/bin/create_bin_components.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
