@@ -7,9 +7,11 @@ import 'package:flutter/services.dart';
 class BinLabelComponent extends CustomPainterComponent {
   BinLabelComponent({
     required this.midpointXMetres,
+    required this.frontSurfaceTopEdgeXyPixels,
   });
 
   final double midpointXMetres;
+  final Vector2 frontSurfaceTopEdgeXyPixels;
 
   @override
   Future<void> onLoad() async {
@@ -17,7 +19,7 @@ class BinLabelComponent extends CustomPainterComponent {
     const width = 425;
     size = Vector2(width.toDouble(), height.toDouble());
     anchor = Anchor.center;
-    position = Vector2(width.toDouble() / 2, 0);
+    position = Vector2(width.toDouble() / 2, height.toDouble() / 2);
     priority = 2;
 
     final ByteData data =
@@ -37,6 +39,7 @@ class BinLabelComponent extends CustomPainterComponent {
   void update(double dt) {
     painter = BinLabelCustomPainter(
       image: image,
+      positionPixels: frontSurfaceTopEdgeXyPixels,
     );
 
     super.update(dt);

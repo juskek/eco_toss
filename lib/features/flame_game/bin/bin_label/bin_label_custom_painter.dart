@@ -1,20 +1,25 @@
 import 'dart:ui' as ui show Image;
 
+import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class BinLabelCustomPainter extends CustomPainter {
   final bool _showAnchor = true;
 
   final ui.Image image;
-  const BinLabelCustomPainter({required this.image});
+  final Vector2 positionPixels;
+
+  const BinLabelCustomPainter(
+      {required this.image, required this.positionPixels});
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.fill;
 
-    const scale = 0.3;
-    // const scale = 0.15;
+    const scale = 0.15;
+    canvas.translate(positionPixels.x, positionPixels.y + 25);
     canvas.scale(scale, scale);
     canvas.drawImage(image, Offset(-size.width / 2, -size.height / 2), Paint());
 

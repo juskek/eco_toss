@@ -15,11 +15,14 @@ import 'package:eco_toss/features/flame_game/game_implementations/main/game_view
     {required BinType binType, required double midpointXMetres}) {
   final binHoleCoordinatesMetres =
       BinHoleCoordinatesMetres(midpointXMetres: midpointXMetres);
-  return (
-    binLabelComponent: BinLabelComponent(
+
+  final frontSurfaceComponent = BinFrontSurfaceComponent(binType: binType);
+  final binLabelComponent = BinLabelComponent(
       midpointXMetres: midpointXMetres,
-    ),
-    frontSurfaceComponent: BinFrontSurfaceComponent(binType: binType),
+      frontSurfaceTopEdgeXyPixels: frontSurfaceComponent.topEdgeXyPixels);
+  return (
+    binLabelComponent: binLabelComponent,
+    frontSurfaceComponent: frontSurfaceComponent,
     backSurfaceComponent: BinBackSurfaceComponent(binType: binType),
     holeComponent: BinHoleComponent(
         midpointXMetres: midpointXMetres,
