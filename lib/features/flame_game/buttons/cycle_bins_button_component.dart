@@ -24,8 +24,9 @@ class CycleBinsButtonComponent extends ButtonComponent {
   }
 
   @override
-  void onTapUp(details) {
+  void onTapUp(event) {
     gameViewModel.cycleBins();
     // audioController.playSound('cycle_bins');
+    return super.onTapUp(event);
   }
 }
