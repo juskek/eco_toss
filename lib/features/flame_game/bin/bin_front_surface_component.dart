@@ -21,7 +21,6 @@ class BinFrontSurfaceComponent extends RectangleComponent {
     final sizeScale = getScaleFactor(BinDimensions.frontSurfaceZMetres);
 
     topEdgeXyPixels = Vector2(pixelCoordinates.x, pixelCoordinates.y - height);
-    print('topEdgeXyPixels: $topEdgeXyPixels');
 
     super.position = Vector2(pixelCoordinates.x, pixelCoordinates.y);
     super.size = Vector2(width * sizeScale, height * sizeScale);

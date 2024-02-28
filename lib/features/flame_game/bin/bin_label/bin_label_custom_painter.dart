@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' as ui show Image;
 
 import 'package:flame/components.dart';
@@ -18,9 +19,16 @@ class BinLabelCustomPainter extends CustomPainter {
       ..color = Colors.black
       ..style = PaintingStyle.fill;
 
-    const scale = 0.15;
-    canvas.translate(positionPixels.x, positionPixels.y + 25);
-    canvas.scale(scale, scale);
+    const scale = 0.13;
+    const paddingFromTopEdgeOfBin = 15;
+    canvas.translate(
+        positionPixels.x, positionPixels.y + paddingFromTopEdgeOfBin);
+
+    const rotationXDegrees = -25;
+    const rotationXRadians = rotationXDegrees * (pi / 180);
+    canvas
+      ..scale(scale, scale)
+      ..transform(Matrix4.rotationX(rotationXRadians).storage);
     canvas.drawImage(image, Offset(-size.width / 2, -size.height / 2), Paint());
 
     if (_showAnchor) {
