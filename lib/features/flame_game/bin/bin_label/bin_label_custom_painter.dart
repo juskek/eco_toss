@@ -10,7 +10,7 @@ class BinLabelCustomPainter extends CustomPainter {
 
   final bool _showAnchor = false;
   final scale = 0.12;
-  final paddingFromTopEdgeOfBin = 3;
+  final paddingFromTopEdgeOfBin = 10;
   final rotationXDegrees = 10;
 
   const BinLabelCustomPainter(
