@@ -5,10 +5,13 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class BinLabelCustomPainter extends CustomPainter {
-  final bool _showAnchor = true;
-
   final ui.Image image;
   final Vector2 positionPixels;
+
+  final bool _showAnchor = false;
+  final scale = 0.12;
+  final paddingFromTopEdgeOfBin = 3;
+  final rotationXDegrees = -25;
 
   const BinLabelCustomPainter(
       {required this.image, required this.positionPixels});
@@ -19,13 +22,10 @@ class BinLabelCustomPainter extends CustomPainter {
       ..color = Colors.black
       ..style = PaintingStyle.fill;
 
-    const scale = 0.13;
-    const paddingFromTopEdgeOfBin = 15;
     canvas.translate(
         positionPixels.x, positionPixels.y + paddingFromTopEdgeOfBin);
 
-    const rotationXDegrees = -25;
-    const rotationXRadians = rotationXDegrees * (pi / 180);
+    final rotationXRadians = rotationXDegrees * (pi / 180);
     canvas
       ..scale(scale, scale)
       ..transform(Matrix4.rotationX(rotationXRadians).storage);

@@ -18,6 +18,7 @@ import 'package:eco_toss/features/flame_game/game_implementations/main/game_view
 
   final frontSurfaceComponent = BinFrontSurfaceComponent(binType: binType);
   final binLabelComponent = BinLabelComponent(
+      binType: binType,
       midpointXMetres: midpointXMetres,
       frontSurfaceTopEdgeXyPixels: frontSurfaceComponent.topEdgeXyPixels);
   return (
