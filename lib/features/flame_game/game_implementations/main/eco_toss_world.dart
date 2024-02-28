@@ -17,6 +17,7 @@ import 'package:eco_toss/features/flame_game/throwables/throwable_component.dart
 
 class EcoTossWorld extends BaseEcoTossWorld {
   late ({
+    BinLabelComponent binLabelComponent,
     BinFrontSurfaceComponent frontSurfaceComponent,
     BinBackSurfaceComponent backSurfaceComponent,
     BinHoleComponent holeComponent,
@@ -29,22 +30,24 @@ class EcoTossWorld extends BaseEcoTossWorld {
         binType: game.gameViewModel.currentBinType.value, midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
+    add(binComponents.binLabelComponent);
     add(binComponents.holeComponent);
 
     game.gameViewModel.currentBinType.addListener(
       () {
         remove(binComponents.backSurfaceComponent);
         remove(binComponents.frontSurfaceComponent);
+        remove(binComponents.binLabelComponent);
         remove(binComponents.holeComponent);
         binComponents = createBinComponents(
             binType: game.gameViewModel.currentBinType.value,
             midpointXMetres: 1);
         add(binComponents.backSurfaceComponent);
         add(binComponents.frontSurfaceComponent);
+        add(binComponents.binLabelComponent);
         add(binComponents.holeComponent);
       },
     );
-    add(BinLabelComponent());
 
     await add(PaperBallComponent(
       radiusStartMetres: 0.2,
@@ -59,6 +62,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       final throwable = throwableNotifier.single;
       if (throwable == null) {
         binComponents.frontSurfaceComponent.priority = 1;
+        binComponents.binLabelComponent.priority = 1;
         game.gameViewModel.cycleThrowablesRandomly();
         switch (game.gameViewModel.currentThrowableType) {
           case ThrowableType.banana:
@@ -115,6 +119,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
           throwable.zPositionMetres >=
               EcoToss3DSpace.zMaxMetres - BinDimensions.depthMetres) {
         binComponents.frontSurfaceComponent.priority = 2;
+        binComponents.binLabelComponent.priority = 2;
         throwable.priority = 1;
       }
     });

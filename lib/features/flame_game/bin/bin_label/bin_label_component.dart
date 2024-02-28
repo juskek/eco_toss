@@ -10,6 +10,7 @@ class BinLabelComponent extends CustomPainterComponent {
   @override
   Future<void> onLoad() async {
     size = Vector2.all(50);
+    priority = 2;
 
     final ByteData data =
         await rootBundle.load('assets/images/labels/glass.png');
