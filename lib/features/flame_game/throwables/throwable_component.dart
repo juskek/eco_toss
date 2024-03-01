@@ -21,7 +21,7 @@ abstract class ThrowableComponent
         DragCallbacks {
   ThrowableComponent({
     required this.imageFolderPath,
-    required this.radiusStartMetres,
+    this.radiusStartPixels = 100,
     required this.onBinned,
     required this.onMiss,
     required this.binHoleCoordinatesMetres,
@@ -29,11 +29,11 @@ abstract class ThrowableComponent
   }) : super(
             anchor: Anchor.center,
             priority: 2,
-            size: Vector2(radiusStartMetres, radiusStartMetres));
+            size: Vector2(radiusStartPixels, radiusStartPixels));
 
   final String imageFolderPath;
 
-  double radiusStartMetres;
+  double radiusStartPixels;
   final double windSpeedMps2;
 
   final void Function({int amount}) onBinned;
@@ -176,13 +176,8 @@ abstract class ThrowableComponent
       Vector3(xPositionMetres, yPositionMetres, zPositionMetres),
     );
     super.position = Vector2(xyPixels.x, xyPixels.y);
-    super.size = Vector2(
-        radiusStartMetres *
-            EcoTossPositioning.xyzPixelsPerMetre *
-            getScaleFactor(zPositionMetres),
-        radiusStartMetres *
-            EcoTossPositioning.xyzPixelsPerMetre *
-            getScaleFactor(zPositionMetres));
+    super.size = Vector2(radiusStartPixels * getScaleFactor(zPositionMetres),
+        radiusStartPixels * getScaleFactor(zPositionMetres));
   }
 
   bool isBallSlightlyAboveHoleRim() {

@@ -50,8 +50,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
-    await add(PaperBallComponent(
-      radiusStartMetres: 0.2,
+    await add(CanComponent(
       onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -68,7 +67,6 @@ class EcoTossWorld extends BaseEcoTossWorld {
         switch (game.gameViewModel.currentThrowableType) {
           case ThrowableType.banana:
             add(BananaComponent(
-              radiusStartMetres: 0.2,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -77,7 +75,6 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.can:
             add(CanComponent(
-              radiusStartMetres: 0.2,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -86,7 +83,6 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.glassBottle:
             add(GlassBottleComponent(
-              radiusStartMetres: 0.2,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -95,7 +91,6 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.paperBall:
             add(PaperBallComponent(
-              radiusStartMetres: 0.2,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -104,7 +99,6 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.plasticBottle:
             add(PlasticBottleComponent(
-              radiusStartMetres: 0.2,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
