@@ -314,12 +314,12 @@ abstract class ThrowableComponent
   }
 
   void applyAirResistance() {
-    xVelocityMps -=
-        xVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
-    yVelocityMps -=
-        yVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
-    zVelocityMps -=
-        zVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
+    xVelocityMps +=
+        -xVelocityMps * EcoTossThrow.airResistanceVelocityMultiplier;
+    yVelocityMps +=
+        -yVelocityMps * EcoTossThrow.airResistanceVelocityMultiplier;
+    zVelocityMps +=
+        -zVelocityMps * EcoTossThrow.airResistanceVelocityMultiplier;
 
     if (xVelocityMps.abs() < 0.01) xVelocityMps = 0;
     if (yVelocityMps.abs() < 0.01) yVelocityMps = 0;
