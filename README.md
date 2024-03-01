@@ -258,3 +258,11 @@ or
 
 These warning come from the various plugins that are used by the template. They are not harmful
 and can be ignored. The warnings are meant for the plugin authors, not for you, the game developer.
+
+# Changing Display Name
+
+See following [link](https://stackoverflow.com/questions/49353199/how-can-i-change-the-app-display-name-build-with-flutter)
+
+# Changing Launcher Icons
+
+See "Setting the launcher icons like a native developer" at this [link](https://stackoverflow.com/questions/43928702/how-to-change-the-application-launcher-icon-on-flutter)

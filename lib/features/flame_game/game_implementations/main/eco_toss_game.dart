@@ -2,10 +2,8 @@ import 'package:eco_toss/features/audio/sounds.dart';
 import 'package:eco_toss/features/flame_game/background/background_component.dart';
 import 'package:eco_toss/features/flame_game/background/generate_cloud_component.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
-import 'package:eco_toss/features/flame_game/buttons/cycle_bins_button_component.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
-import 'package:eco_toss/features/flame_game/game_implementations/main/utils.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:eco_toss/pages/game_page/game_page.dart';
@@ -21,15 +19,8 @@ class EcoTossGame extends BaseEcoTossGame {
 
   @override
   void onBinned({int amount = 1}) {
-    final throwableType = gameViewModel.currentThrowableType;
-    final binType = gameViewModel.currentBinType;
-    if (isThrowableInCorrectBin(binType.value, throwableType)) {
-      scoreNotifier.value += amount;
-      audioController.playSfx(SfxType.score);
-      return;
-    }
-
-    onMiss();
+    scoreNotifier.value += amount;
+    audioController.playSfx(SfxType.score);
   }
 
   @override
@@ -89,9 +80,6 @@ class EcoTossGame extends BaseEcoTossGame {
         await gameViewModel.setHighScore(scoreNotifier.value);
       }
     });
-
-    camera.viewport.add(CycleBinsButtonComponent(gameViewModel,
-        audioController: audioController));
 
     return super.onLoad();
   }
