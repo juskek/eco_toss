@@ -118,7 +118,7 @@ abstract class ThrowableComponent
       ObjectState.stationary: SpriteAnimation.spriteList(
         [
           await game.loadSprite(
-            '$imageFolderPath/0001.png',
+            '${imageFolderPath}0001.png',
             srcSize: Vector2.all(1080),
             srcPosition: Vector2(0, 0),
           )
