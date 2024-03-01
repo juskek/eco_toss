@@ -50,7 +50,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
-    await add(CanComponent(
+    await add(PaperBallComponent(
       onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,

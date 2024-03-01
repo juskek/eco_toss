@@ -4,6 +4,7 @@ import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/data/leaderboard/i_leaderboard_repository.dart';
 import 'package:eco_toss/data/score/i_score_repository.dart';
 import 'package:eco_toss/data/user/i_user_repository.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/utils.dart';
 
 @injectable
 class GameViewModel extends ChangeNotifier {
@@ -43,15 +44,9 @@ class GameViewModel extends ChangeNotifier {
     _leaderboardRepository.postEntry(userId, userName!, currentHighScore!);
   }
 
-  final ValueNotifier<BinType> _currentBinType = ValueNotifier(BinType.general);
+  final ValueNotifier<BinType> _currentBinType = ValueNotifier(BinType.paper);
 
   ValueNotifier<BinType> get currentBinType => _currentBinType;
-
-  void cycleBins() {
-    _currentBinType.value = BinType
-        .values[(_currentBinType.value.index + 1) % BinType.values.length];
-    notifyListeners();
-  }
 
   final ValueNotifier<ThrowableType> _currentThrowableType =
       ValueNotifier(ThrowableType.paperBall);
@@ -61,6 +56,8 @@ class GameViewModel extends ChangeNotifier {
   void cycleThrowablesRandomly() {
     int randomIndex = Random().nextInt(ThrowableType.values.length);
     _currentThrowableType.value = ThrowableType.values[randomIndex];
+    _currentBinType.value =
+        getCorrectBinTypeForThrowable(_currentThrowableType.value);
     notifyListeners();
   }
 }
