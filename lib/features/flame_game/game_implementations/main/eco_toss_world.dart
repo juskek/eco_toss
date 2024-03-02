@@ -27,8 +27,8 @@ class EcoTossWorld extends BaseEcoTossWorld {
   @override
   Future<void> onLoad() async {
     final game = findGame()! as EcoTossGame;
-    binComponents = createBinComponents(
-        binType: game.gameViewModel.currentBinType.value, midpointXMetres: 1);
+    binComponents =
+        createBinComponents(binType: BinType.paper, midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
     add(binComponents.binLabelComponent);
@@ -50,7 +50,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
-    await add(PaperBallComponent(
+    add(PaperBallComponent(
       onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -66,7 +66,12 @@ class EcoTossWorld extends BaseEcoTossWorld {
         game.gameViewModel.cycleThrowablesRandomly();
         switch (game.gameViewModel.currentThrowableType) {
           case ThrowableType.banana:
+            if (game.spriteViewModel.bananaSprite == null) {
+              game.gameViewModel.cycleThrowablesRandomly();
+              return;
+            }
             add(BananaComponent(
+              spriteAnimation: game.spriteViewModel.bananaSprite!,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -74,7 +79,12 @@ class EcoTossWorld extends BaseEcoTossWorld {
             ));
             break;
           case ThrowableType.can:
+            if (game.spriteViewModel.canSprite == null) {
+              game.gameViewModel.cycleThrowablesRandomly();
+              return;
+            }
             add(CanComponent(
+              spriteAnimation: game.spriteViewModel.canSprite!,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -82,7 +92,12 @@ class EcoTossWorld extends BaseEcoTossWorld {
             ));
             break;
           case ThrowableType.glassBottle:
+            if (game.spriteViewModel.glassBottleSprite == null) {
+              game.gameViewModel.cycleThrowablesRandomly();
+              return;
+            }
             add(GlassBottleComponent(
+              spriteAnimation: game.spriteViewModel.glassBottleSprite!,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -91,6 +106,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.paperBall:
             add(PaperBallComponent(
+              spriteAnimation: game.spriteViewModel.paperBallSprite.value,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -98,7 +114,12 @@ class EcoTossWorld extends BaseEcoTossWorld {
             ));
             break;
           case ThrowableType.plasticBottle:
+            if (game.spriteViewModel.plasticBottleSprite == null) {
+              game.gameViewModel.cycleThrowablesRandomly();
+              return;
+            }
             add(PlasticBottleComponent(
+              spriteAnimation: game.spriteViewModel.plasticBottleSprite!,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,

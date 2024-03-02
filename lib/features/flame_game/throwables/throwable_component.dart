@@ -21,6 +21,7 @@ abstract class ThrowableComponent
         DragCallbacks {
   ThrowableComponent({
     required this.imageFolderPath,
+    this.spriteAnimation,
     this.radiusStartPixels = 100,
     required this.onBinned,
     required this.onMiss,
@@ -32,6 +33,9 @@ abstract class ThrowableComponent
             size: Vector2(radiusStartPixels, radiusStartPixels));
 
   final String imageFolderPath;
+
+  /// If null, will load from [imageFolderPath]
+  final SpriteAnimation? spriteAnimation;
 
   double radiusStartPixels;
   final double windSpeedMps2;
@@ -113,12 +117,12 @@ abstract class ThrowableComponent
   @override
   Future<void> onLoad() async {
     animations = {
-      ObjectState.thrown:
+      ObjectState.thrown: spriteAnimation ??
           await loadSpriteAnimationFromFilesToGame(game, imageFolderPath, 48),
       ObjectState.stationary: SpriteAnimation.spriteList(
         [
           await game.loadSprite(
-            '$imageFolderPath/0001.png',
+            '${imageFolderPath}0001.png',
             srcSize: Vector2.all(1080),
             srcPosition: Vector2(0, 0),
           )
@@ -314,8 +318,8 @@ abstract class ThrowableComponent
   }
 
   void applyAirResistance() {
-    xVelocityMps -=
-        xVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
+    xVelocityMps +=
+        -xVelocityMps * EcoTossThrow.airResistanceVelocityMultiplier;
     yVelocityMps -=
         yVelocityMps.abs() * EcoTossThrow.airResistanceVelocityMultiplier;
     zVelocityMps -=

@@ -15,9 +15,11 @@ class TutorialEcoTossWorld extends BaseEcoTossWorld {
         createBinComponents(binType: BinType.paper, midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
+    add(binComponents.binLabelComponent);
     add(binComponents.holeComponent);
 
-    await add(PaperBallComponent(
+    add(PaperBallComponent(
+      spriteAnimation: game.spriteViewModel.paperBallSprite.value,
       onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -30,6 +32,7 @@ class TutorialEcoTossWorld extends BaseEcoTossWorld {
       if (ball == null) {
         binComponents.frontSurfaceComponent.priority = 1;
         add(PaperBallComponent(
+          spriteAnimation: game.spriteViewModel.paperBallSprite.value,
           onBinned: game.onBinned,
           onMiss: game.onMiss,
           binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,

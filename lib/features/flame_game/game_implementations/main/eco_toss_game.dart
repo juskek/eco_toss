@@ -10,7 +10,8 @@ import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:flame/components.dart';
 
 class EcoTossGame extends BaseEcoTossGame {
-  EcoTossGame(this.gameViewModel, {required super.audioController})
+  EcoTossGame(this.gameViewModel,
+      {required super.spriteViewModel, required super.audioController})
       : super(world: EcoTossWorld());
   final GameViewModel gameViewModel;
 
@@ -54,7 +55,11 @@ class EcoTossGame extends BaseEcoTossGame {
       position: Vector2(0, size.y * 0.6),
     );
 
-    camera.viewport.add(windTextComponent);
+    spriteViewModel.paperBallSprite.addListener(() {
+      if (spriteViewModel.paperBallSprite.value != null) {
+        camera.viewport.add(windTextComponent);
+      }
+    });
 
     scoreNotifier.addListener(() async {
       windSpeedMps2 = 0;

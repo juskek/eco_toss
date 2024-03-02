@@ -9,7 +9,7 @@ class BackgroundOnlyGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     camera.backdrop.add(BackgroundComponent());
-    camera.backdrop.add(generateCloudComponent(speedMps: 2, size: size));
+    camera.backdrop.add(generateCloudComponent(speedMps: 0.3, size: size));
     camera.viewfinder.anchor = Anchor.center;
     camera.viewfinder.position = Vector2(0, 0);
   }

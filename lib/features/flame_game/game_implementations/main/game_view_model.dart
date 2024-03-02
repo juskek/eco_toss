@@ -56,8 +56,10 @@ class GameViewModel extends ChangeNotifier {
   void cycleThrowablesRandomly() {
     int randomIndex = Random().nextInt(ThrowableType.values.length);
     _currentThrowableType.value = ThrowableType.values[randomIndex];
+
     _currentBinType.value =
         getCorrectBinTypeForThrowable(_currentThrowableType.value);
+
     notifyListeners();
   }
 }

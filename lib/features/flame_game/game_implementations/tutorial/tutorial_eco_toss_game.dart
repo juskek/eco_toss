@@ -10,7 +10,8 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
-  TutorialEcoTossGame({required super.audioController})
+  TutorialEcoTossGame(
+      {required super.audioController, required super.spriteViewModel})
       : super(world: TutorialEcoTossWorld());
   final thrownNotifier = ValueNotifier<bool>(false);
   static TextComponent? instructionsText;
@@ -29,7 +30,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
   @override
   Future<void> onLoad() {
     camera.backdrop.add(BackgroundComponent());
-    camera.backdrop.add(generateCloudComponent(speedMps: 2, size: size));
+    camera.backdrop.add(generateCloudComponent(speedMps: 0.3, size: size));
     overlays.add(TutorialPage.welcomeOverlayKey);
 
     tutorialTextSize = Vector2(size.x, size.y * 0.5);
@@ -40,6 +41,12 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
       size: tutorialTextSize,
       position: tutorialTextPosition,
     );
+
+    spriteViewModel.paperBallSprite.addListener(() {
+      if (spriteViewModel.paperBallSprite.value != null) {
+        camera.viewport.add(TutorialEcoTossGame.instructionsText!);
+      }
+    });
 
     final ballNotifier = gameRef.componentsNotifier<PaperBallComponent>();
     ballNotifier.addListener(() {
