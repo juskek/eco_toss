@@ -42,6 +42,12 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
       position: tutorialTextPosition,
     );
 
+    spriteViewModel.paperBallSprite.addListener(() {
+      if (spriteViewModel.paperBallSprite.value != null) {
+        camera.viewport.add(TutorialEcoTossGame.instructionsText!);
+      }
+    });
+
     final ballNotifier = gameRef.componentsNotifier<PaperBallComponent>();
     ballNotifier.addListener(() {
       final ball = ballNotifier.single;

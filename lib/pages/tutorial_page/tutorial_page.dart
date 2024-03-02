@@ -30,7 +30,6 @@ class TutorialPage extends StatelessWidget {
               onPressed: () {
                 game.overlays.remove(welcomeOverlayKey);
                 assert(TutorialEcoTossGame.instructionsText != null);
-                game.camera.viewport.add(TutorialEcoTossGame.instructionsText!);
               },
             );
           },

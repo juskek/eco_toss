@@ -5,6 +5,7 @@ import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/sprite_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
+import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,20 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
     scoreNotifier.addListener(() {
       scoreComponent.text =
           scoreText.replaceFirst('0', '${scoreNotifier.value}');
+    });
+
+    final loadingTextComponent = TypingTextComponent(
+      text: 'Loading assets...',
+      size: Vector2(size.x, size.y * 0.5),
+      position: Vector2(0, size.y * 0.6),
+    );
+
+    camera.viewport.add(loadingTextComponent);
+
+    spriteViewModel.paperBallSprite.addListener(() {
+      if (spriteViewModel.paperBallSprite.value != null) {
+        camera.viewport.remove(loadingTextComponent);
+      }
     });
   }
 }
