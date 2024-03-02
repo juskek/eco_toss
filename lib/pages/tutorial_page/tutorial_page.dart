@@ -4,6 +4,7 @@ import 'package:eco_toss/features/audio/audio_controller.dart';
 import 'package:eco_toss/features/dialogs/onboarding_dialog.dart';
 import 'package:eco_toss/features/dialogs/welcome_dialog.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/sprite_view_model.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/tutorial/tutorial_eco_toss_game.dart';
 import 'package:flame/game.dart';
 import 'package:go_router/go_router.dart';
@@ -16,10 +17,12 @@ class TutorialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final spriteViewModel = context.read<SpriteViewModel>();
     return Scaffold(
       body: GameWidget<BaseEcoTossGame>(
         key: const Key('tutorial'),
         game: TutorialEcoTossGame(
+            spriteViewModel: spriteViewModel,
             audioController: context.read<AudioController>()),
         overlayBuilderMap: {
           welcomeOverlayKey: (BuildContext context, BaseEcoTossGame game) {

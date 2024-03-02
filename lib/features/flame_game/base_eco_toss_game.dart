@@ -2,6 +2,7 @@ import 'package:eco_toss/features/audio/audio_controller.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/sprite_view_model.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:flame/components.dart';
@@ -9,10 +10,15 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
-  BaseEcoTossGame({required this.audioController, super.world})
+  BaseEcoTossGame(
+      {required this.audioController,
+      required this.spriteViewModel,
+      super.world})
       : super(
           camera: EcoTossCameraComponent(),
         );
+
+  final SpriteViewModel spriteViewModel;
 
   double windSpeedMps2 = 0;
   Component? cloudComponent;
@@ -27,6 +33,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
   @override
   Future<void> onLoad() async {
+    await spriteViewModel.loadSpriteAnimationsToGame(this);
     camera.viewfinder.anchor = Anchor.center;
     camera.viewfinder.position = Vector2(0, 0);
 
