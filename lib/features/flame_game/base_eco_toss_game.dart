@@ -33,7 +33,8 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
   @override
   Future<void> onLoad() async {
-    await spriteViewModel.loadSpriteAnimationsToGame(this);
+    spriteViewModel.loadSpriteAnimationsToGame(this);
+
     camera.viewfinder.anchor = Anchor.center;
     camera.viewfinder.position = Vector2(0, 0);
 

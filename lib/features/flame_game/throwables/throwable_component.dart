@@ -6,6 +6,7 @@ import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
+import 'package:eco_toss/features/flame_game/utils/load_sprite_animation_from_files.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -20,7 +21,7 @@ abstract class ThrowableComponent
         DragCallbacks {
   ThrowableComponent({
     required this.imageFolderPath,
-    required this.spriteAnimation,
+    this.spriteAnimation,
     this.radiusStartPixels = 100,
     required this.onBinned,
     required this.onMiss,
@@ -30,8 +31,11 @@ abstract class ThrowableComponent
             anchor: Anchor.center,
             priority: 2,
             size: Vector2(radiusStartPixels, radiusStartPixels));
+
   final String imageFolderPath;
-  final SpriteAnimation spriteAnimation;
+
+  /// If null, will load from [imageFolderPath]
+  final SpriteAnimation? spriteAnimation;
 
   double radiusStartPixels;
   final double windSpeedMps2;
@@ -113,7 +117,8 @@ abstract class ThrowableComponent
   @override
   Future<void> onLoad() async {
     animations = {
-      ObjectState.thrown: spriteAnimation,
+      ObjectState.thrown: spriteAnimation ??
+          await loadSpriteAnimationFromFilesToGame(game, imageFolderPath, 48),
       ObjectState.stationary: SpriteAnimation.spriteList(
         [
           await game.loadSprite(

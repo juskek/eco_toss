@@ -50,8 +50,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
-    await add(PaperBallComponent(
-      spriteAnimation: game.spriteViewModel.paperBallSprite,
+    add(PaperBallComponent(
       onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -107,7 +106,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.paperBall:
             add(PaperBallComponent(
-              spriteAnimation: game.spriteViewModel.paperBallSprite,
+              spriteAnimation: game.spriteViewModel.paperBallSprite.value,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,

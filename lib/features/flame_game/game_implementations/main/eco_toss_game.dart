@@ -55,7 +55,20 @@ class EcoTossGame extends BaseEcoTossGame {
       position: Vector2(0, size.y * 0.6),
     );
 
-    camera.viewport.add(windTextComponent);
+    final loadingTextComponent = TypingTextComponent(
+      text: 'Loading assets...',
+      size: Vector2(size.x, size.y * 0.5),
+      position: Vector2(0, size.y * 0.6),
+    );
+
+    camera.viewport.add(loadingTextComponent);
+
+    spriteViewModel.paperBallSprite.addListener(() {
+      if (spriteViewModel.paperBallSprite.value != null) {
+        camera.viewport.remove(loadingTextComponent);
+        camera.viewport.add(windTextComponent);
+      }
+    });
 
     scoreNotifier.addListener(() async {
       windSpeedMps2 = 0;

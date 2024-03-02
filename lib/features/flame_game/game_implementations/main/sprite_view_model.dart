@@ -7,22 +7,23 @@ import 'package:flame/game.dart';
 class SpriteViewModel extends ChangeNotifier {
   SpriteViewModel();
 
-  SpriteAnimation? _paperBallSprite;
+  final ValueNotifier<SpriteAnimation?> _paperBallSprite = ValueNotifier(null);
   SpriteAnimation? _bananaSprite;
   SpriteAnimation? _glassBottleSprite;
   SpriteAnimation? _plasticBottleSprite;
   SpriteAnimation? _canSprite;
 
-  SpriteAnimation get paperBallSprite => _paperBallSprite!;
+  ValueNotifier<SpriteAnimation?> get paperBallSprite => _paperBallSprite;
   SpriteAnimation? get bananaSprite => _bananaSprite;
   SpriteAnimation? get glassBottleSprite => _glassBottleSprite;
   SpriteAnimation? get plasticBottleSprite => _plasticBottleSprite;
   SpriteAnimation? get canSprite => _canSprite;
 
   Future<void> loadSpriteAnimationsToGame(Game game) async {
-    _paperBallSprite = await loadSpriteAnimationFromFilesToGame(
-        game, "throwables/paper_ball/", 48);
-
+    loadSpriteAnimationFromFilesToGame(game, "throwables/paper_ball/", 48)
+        .then((value) {
+      _paperBallSprite.value = value;
+    });
     loadSpriteAnimationFromFilesToGame(game, "throwables/banana/", 48)
         .then((value) {
       _bananaSprite = value;
