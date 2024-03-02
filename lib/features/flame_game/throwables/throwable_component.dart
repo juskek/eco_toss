@@ -21,6 +21,7 @@ abstract class ThrowableComponent
         DragCallbacks {
   ThrowableComponent({
     required this.imageFolderPath,
+    this.spriteAnimation,
     this.radiusStartPixels = 100,
     required this.onBinned,
     required this.onMiss,
@@ -32,6 +33,8 @@ abstract class ThrowableComponent
             size: Vector2(radiusStartPixels, radiusStartPixels));
 
   final String imageFolderPath;
+
+  final SpriteAnimation? spriteAnimation;
 
   double radiusStartPixels;
   final double windSpeedMps2;
@@ -113,7 +116,7 @@ abstract class ThrowableComponent
   @override
   Future<void> onLoad() async {
     animations = {
-      ObjectState.thrown:
+      ObjectState.thrown: spriteAnimation ??
           await loadSpriteAnimationFromFilesToGame(game, imageFolderPath, 48),
       ObjectState.stationary: SpriteAnimation.spriteList(
         [

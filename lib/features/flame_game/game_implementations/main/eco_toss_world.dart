@@ -15,6 +15,7 @@ import 'package:eco_toss/features/flame_game/throwables/glass_bottle_component.d
 import 'package:eco_toss/features/flame_game/throwables/paper_ball_component.dart';
 import 'package:eco_toss/features/flame_game/throwables/plastic_bottle_component.dart';
 import 'package:eco_toss/features/flame_game/throwables/throwable_component.dart';
+import 'package:eco_toss/features/flame_game/utils/load_sprite_animation_from_files.dart';
 
 class EcoTossWorld extends BaseEcoTossWorld {
   late ({
@@ -50,7 +51,19 @@ class EcoTossWorld extends BaseEcoTossWorld {
       },
     );
 
+    final paperBallSprite = await loadSpriteAnimationFromFilesToGame(
+        game, "throwables/paper_ball/", 48);
+    final bananaSprite = await loadSpriteAnimationFromFilesToGame(
+        game, "throwables/banana/", 48);
+    final glassBottleSprite = await loadSpriteAnimationFromFilesToGame(
+        game, "throwables/glass_bottle/", 48);
+    final plasticBottleSprite = await loadSpriteAnimationFromFilesToGame(
+        game, "throwables/plastic_bottle/", 48);
+    final canSprite =
+        await loadSpriteAnimationFromFilesToGame(game, "throwables/can/", 48);
+
     await add(PaperBallComponent(
+      spriteAnimation: paperBallSprite,
       onBinned: game.onBinned,
       onMiss: game.onMiss,
       binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -67,6 +80,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
         switch (game.gameViewModel.currentThrowableType) {
           case ThrowableType.banana:
             add(BananaComponent(
+              spriteAnimation: bananaSprite,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -75,6 +89,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.can:
             add(CanComponent(
+              spriteAnimation: canSprite,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -83,6 +98,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.glassBottle:
             add(GlassBottleComponent(
+              spriteAnimation: glassBottleSprite,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -91,6 +107,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.paperBall:
             add(PaperBallComponent(
+              spriteAnimation: paperBallSprite,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
@@ -99,6 +116,7 @@ class EcoTossWorld extends BaseEcoTossWorld {
             break;
           case ThrowableType.plasticBottle:
             add(PlasticBottleComponent(
+              spriteAnimation: plasticBottleSprite,
               onBinned: game.onBinned,
               onMiss: game.onMiss,
               binHoleCoordinatesMetres: binComponents.binHoleCoordinatesMetres,
