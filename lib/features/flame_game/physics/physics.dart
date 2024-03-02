@@ -28,8 +28,8 @@ abstract class EcoTossThrow {
   static const climbAngleDegrees = 30.0;
   static const climbAngleRadians = climbAngleDegrees * pi / 180;
 
-  static const maxAngleDegrees = -180;
-  static const minAngleDegrees = -0;
+  static const maxAngleDegrees = -150;
+  static const minAngleDegrees = -30;
   static const maxAngleRadians = maxAngleDegrees * pi / 180;
   static const minAngleRadians = minAngleDegrees * pi / 180;
 
@@ -71,7 +71,7 @@ double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
 
 double generateRandomWindSpeed() {
   /// Scales to [0, maxWindSpeed) then shift to [-maxWindSpeed, maxWindSpeed)
-  double minMaxWindSpeed = 4;
-  // return Random().nextDouble() * minMaxWindSpeed * 2 - minMaxWindSpeed;
-  return minMaxWindSpeed;
+  double minMaxWindSpeed = 3.5;
+  return Random().nextDouble() * minMaxWindSpeed * 2 - minMaxWindSpeed;
+  // return minMaxWindSpeed;
 }
