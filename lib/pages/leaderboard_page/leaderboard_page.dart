@@ -30,10 +30,11 @@ class LeaderboardPage extends StatelessWidget {
             FutureBuilder(
               future: leaderboardViewModel.userRank,
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData) {
+                if (snapshot.connectionState == ConnectionState.done) {
                   return Text(
-                    'Rank ${snapshot.data.toString()}',
+                    snapshot.data == null
+                        ? "Unranked"
+                        : 'Rank ${snapshot.data.toString()}',
                     style: Theme.of(context).textTheme.headlineSmall,
                   );
                 } else {
@@ -86,7 +87,7 @@ class LeaderboardPage extends StatelessWidget {
               future: leaderboardViewModel.userScore,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  if (!snapshot.hasData) {
+                  if (!snapshot.hasData || snapshot.data == null) {
                     return const Text('Play a game to set your highscore!');
                   }
 

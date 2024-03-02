@@ -19,7 +19,7 @@ class LeaderboardRemoteDataSource {
     return leaderboardEntries;
   }
 
-  Future<int> getUserRank(String userId) async {
+  Future<int?> getUserRank(String userId) async {
     final querySnapshot =
         await leaderboard.orderBy("score", descending: true).limit(10).get();
 
@@ -30,7 +30,7 @@ class LeaderboardRemoteDataSource {
         return i + 1;
       }
     }
-    return -1;
+    return null;
   }
 
   Future<void> postEntry(String userId, String userName, int score) async {
