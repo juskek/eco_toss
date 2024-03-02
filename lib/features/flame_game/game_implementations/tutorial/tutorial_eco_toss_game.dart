@@ -29,7 +29,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
   @override
   Future<void> onLoad() {
     camera.backdrop.add(BackgroundComponent());
-    camera.backdrop.add(generateCloudComponent(speedMps: 2, size: size));
+    camera.backdrop.add(generateCloudComponent(speedMps: 0.3, size: size));
     overlays.add(TutorialPage.welcomeOverlayKey);
 
     tutorialTextSize = Vector2(size.x, size.y * 0.5);
