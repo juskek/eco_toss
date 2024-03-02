@@ -15,6 +15,7 @@ class TutorialEcoTossWorld extends BaseEcoTossWorld {
         createBinComponents(binType: BinType.paper, midpointXMetres: 1);
     add(binComponents.backSurfaceComponent);
     add(binComponents.frontSurfaceComponent);
+    add(binComponents.binLabelComponent);
     add(binComponents.holeComponent);
 
     add(PaperBallComponent(
