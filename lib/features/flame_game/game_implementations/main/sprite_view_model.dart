@@ -14,21 +14,30 @@ class SpriteViewModel extends ChangeNotifier {
   SpriteAnimation? _canSprite;
 
   SpriteAnimation get paperBallSprite => _paperBallSprite!;
-  SpriteAnimation get bananaSprite => _bananaSprite!;
-  SpriteAnimation get glassBottleSprite => _glassBottleSprite!;
-  SpriteAnimation get plasticBottleSprite => _plasticBottleSprite!;
-  SpriteAnimation get canSprite => _canSprite!;
+  SpriteAnimation? get bananaSprite => _bananaSprite;
+  SpriteAnimation? get glassBottleSprite => _glassBottleSprite;
+  SpriteAnimation? get plasticBottleSprite => _plasticBottleSprite;
+  SpriteAnimation? get canSprite => _canSprite;
 
   Future<void> loadSpriteAnimationsToGame(Game game) async {
     _paperBallSprite = await loadSpriteAnimationFromFilesToGame(
         game, "throwables/paper_ball/", 48);
-    _bananaSprite = await loadSpriteAnimationFromFilesToGame(
-        game, "throwables/banana/", 48);
-    _glassBottleSprite = await loadSpriteAnimationFromFilesToGame(
-        game, "throwables/glass_bottle/", 48);
-    _plasticBottleSprite = await loadSpriteAnimationFromFilesToGame(
-        game, "throwables/plastic_bottle/", 48);
-    _canSprite =
-        await loadSpriteAnimationFromFilesToGame(game, "throwables/can/", 48);
+
+    loadSpriteAnimationFromFilesToGame(game, "throwables/banana/", 48)
+        .then((value) {
+      _bananaSprite = value;
+    });
+    loadSpriteAnimationFromFilesToGame(game, "throwables/glass_bottle/", 48)
+        .then((value) {
+      _glassBottleSprite = value;
+    });
+    loadSpriteAnimationFromFilesToGame(game, "throwables/plastic_bottle/", 48)
+        .then((value) {
+      _plasticBottleSprite = value;
+    });
+    loadSpriteAnimationFromFilesToGame(game, "throwables/can/", 48)
+        .then((value) {
+      _canSprite = value;
+    });
   }
 }
