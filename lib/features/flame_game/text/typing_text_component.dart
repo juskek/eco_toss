@@ -2,17 +2,18 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class TypingTextComponent extends TextBoxComponent {
+  static const double fontSize = 30;
   TypingTextComponent({
     required String text,
     required super.size,
     required super.position,
   }) : super(
           text: text,
-          align: Anchor.topCenter,
+          align: Anchor.center,
           textRenderer: TextPaint(
             style: const TextStyle(
               fontFamily: 'Happy Monkey',
-              fontSize: 30,
+              fontSize: fontSize,
               color: Colors.white,
             ),
           ),
