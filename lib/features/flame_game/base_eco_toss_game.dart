@@ -24,6 +24,8 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
   double windSpeedMps2 = 0;
   Component? cloudComponent;
 
+  Vector2 scoreTextPixelPosition = Vector2(0, 0);
+
   final scoreNotifier = ValueNotifier(0);
 
   final AudioController audioController;
@@ -57,10 +59,14 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
       canvasSize.y / 2,
     );
 
+    scoreTextPixelPosition = Vector2(
+      viewportOrigin.x + binBackTopEdgeXYPixels.x,
+      viewportOrigin.y + binBackTopEdgeXYPixels.y - 50,
+    );
+
     final scoreComponent = TextComponent(
       text: scoreText,
-      position: Vector2(viewportOrigin.x + binBackTopEdgeXYPixels.x,
-          viewportOrigin.y + binBackTopEdgeXYPixels.y - 50),
+      position: scoreTextPixelPosition,
       anchor: Anchor.center,
       textRenderer: TextPaint(
         style: const TextStyle(
