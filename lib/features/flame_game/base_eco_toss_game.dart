@@ -43,12 +43,13 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
     const scoreText = 'Recycled: 0';
 
-    final textXYZMetres = Vector3(
+    final binBackTopEdgeXYZMetres = Vector3(
         EcoToss3DSpace.xMidMetres,
-        EcoToss3DSpace.yMinMetres + BinDimensions.heightMetres + 0.2,
+        EcoToss3DSpace.yMinMetres + BinDimensions.heightMetres,
         EcoToss3DSpace.zMaxMetres);
 
-    final textXYPixels = EcoTossPositioning.xyzMetresToXyPixels(textXYZMetres);
+    final binBackTopEdgeXYPixels =
+        EcoTossPositioning.xyzMetresToXyPixels(binBackTopEdgeXYZMetres);
 
     // Can't seem to set the origin of the viewport to be the centre of the screen, so this is a workaround
     final viewportOrigin = Vector2(
@@ -58,8 +59,8 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
     final scoreComponent = TextComponent(
       text: scoreText,
-      position: Vector2(
-          viewportOrigin.x + textXYPixels.x, viewportOrigin.y + textXYPixels.y),
+      position: Vector2(viewportOrigin.x + binBackTopEdgeXYPixels.x,
+          viewportOrigin.y + binBackTopEdgeXYPixels.y - 50),
       anchor: Anchor.center,
       textRenderer: TextPaint(
         style: const TextStyle(
