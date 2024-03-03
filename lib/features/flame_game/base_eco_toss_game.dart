@@ -46,11 +46,10 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
     final binBackTopEdgeXYPixels = getBinBackTopEdgePixels();
 
     // Can't seem to set the origin of the viewport to be the centre of the screen, so this is a workaround
-    final centreOfCanvas = getCentreOfCanvas(canvasSize);
 
     scoreTextPixelPosition = Vector2(
-      centreOfCanvas.x + binBackTopEdgeXYPixels.x,
-      centreOfCanvas.y + binBackTopEdgeXYPixels.y - 50,
+      binBackTopEdgeXYPixels.x,
+      binBackTopEdgeXYPixels.y - TypingTextComponent.fontSize,
     );
 
     final scoreComponent = TextComponent(
@@ -66,7 +65,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
       ),
     );
 
-    camera.viewport.add((scoreComponent));
+    world.add((scoreComponent));
 
     scoreNotifier.addListener(() {
       scoreComponent.text =
