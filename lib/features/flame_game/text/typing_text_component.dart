@@ -5,11 +5,12 @@ class TypingTextComponent extends TextBoxComponent {
   static const double fontSize = 30;
   TypingTextComponent({
     required String text,
-    required super.size,
+    super.size,
     required super.position,
   }) : super(
           text: text,
           align: Anchor.center,
+          anchor: Anchor.center,
           textRenderer: TextPaint(
             style: const TextStyle(
               fontFamily: 'Happy Monkey',

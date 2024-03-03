@@ -22,8 +22,6 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
   double windSpeedMps2 = 0;
   Component? cloudComponent;
 
-  Vector2 scoreTextPixelPosition = Vector2(0, 0);
-
   final scoreNotifier = ValueNotifier(0);
 
   final AudioController audioController;
@@ -45,9 +43,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
     final binBackTopEdgeXYPixels = getBinBackTopEdgePixels();
 
-    // Can't seem to set the origin of the viewport to be the centre of the screen, so this is a workaround
-
-    scoreTextPixelPosition = Vector2(
+    final scoreTextPixelPosition = Vector2(
       binBackTopEdgeXYPixels.x,
       binBackTopEdgeXYPixels.y - TypingTextComponent.fontSize,
     );

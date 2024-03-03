@@ -6,6 +6,7 @@ import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/utils.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
+import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:eco_toss/pages/game_page/game_page.dart';
 import 'package:flame/components.dart';
@@ -36,6 +37,8 @@ class EcoTossGame extends BaseEcoTossGame {
 
   @override
   Future<void> onLoad() async {
+    EcoTossPositioning.setCanvasSize(canvasSize.y, canvasSize.x);
+
     overlays.add(GamePage.backButtonKey);
     camera.backdrop.add(BackgroundComponent());
     cloudComponent = generateCloudComponent(speedMps: 0, size: size);
@@ -50,15 +53,22 @@ class EcoTossGame extends BaseEcoTossGame {
     );
     const windText = 'Wind Speed: 0';
 
+    final binBackTopEdgeXYPixels = getBinBackTopEdgePixels();
+
+    final windTextPixelPosition = Vector2(
+      binBackTopEdgeXYPixels.x,
+      binBackTopEdgeXYPixels.y - TypingTextComponent.fontSize * 3,
+    );
+
     windTextComponent = TypingTextComponent(
       text: windText,
-      size: Vector2(size.x, size.y * 0.5),
-      position: Vector2(0, size.y * 0.6),
+      size: Vector2(size.x, TypingTextComponent.fontSize * 2),
+      position: windTextPixelPosition,
     );
 
     spriteViewModel.paperBallSprite.addListener(() {
       if (spriteViewModel.paperBallSprite.value != null) {
-        camera.viewport.add(windTextComponent);
+        world.add(windTextComponent);
       }
     });
 
