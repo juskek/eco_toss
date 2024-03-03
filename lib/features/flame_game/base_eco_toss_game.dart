@@ -1,9 +1,7 @@
 import 'package:eco_toss/features/audio/audio_controller.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_world.dart';
-import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/eco_toss_camera_component.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/sprite_view_model.dart';
-import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:flame/components.dart';
@@ -45,23 +43,14 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
 
     const scoreText = 'Recycled: 0';
 
-    final binBackTopEdgeXYZMetres = Vector3(
-        EcoToss3DSpace.xMidMetres,
-        EcoToss3DSpace.yMinMetres + BinDimensions.heightMetres,
-        EcoToss3DSpace.zMaxMetres);
-
-    final binBackTopEdgeXYPixels =
-        EcoTossPositioning.xyzMetresToXyPixels(binBackTopEdgeXYZMetres);
+    final binBackTopEdgeXYPixels = getBinBackTopEdgePixels();
 
     // Can't seem to set the origin of the viewport to be the centre of the screen, so this is a workaround
-    final viewportOrigin = Vector2(
-      canvasSize.x / 2,
-      canvasSize.y / 2,
-    );
+    final centreOfCanvas = getCentreOfCanvas(canvasSize);
 
     scoreTextPixelPosition = Vector2(
-      viewportOrigin.x + binBackTopEdgeXYPixels.x,
-      viewportOrigin.y + binBackTopEdgeXYPixels.y - 50,
+      centreOfCanvas.x + binBackTopEdgeXYPixels.x,
+      centreOfCanvas.y + binBackTopEdgeXYPixels.y - 50,
     );
 
     final scoreComponent = TextComponent(
