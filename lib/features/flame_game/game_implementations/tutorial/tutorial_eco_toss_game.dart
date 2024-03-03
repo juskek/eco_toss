@@ -34,7 +34,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
     overlays.add(TutorialPage.welcomeOverlayKey);
 
     tutorialTextSize = Vector2(size.x, size.y * 0.5);
-    tutorialTextPosition = Vector2(0, size.y * 0.8);
+    tutorialTextPosition = Vector2(size.x / 2, size.y * 0.8);
 
     instructionsText = TypingTextComponent(
       text: 'Swipe to throw the paper ball',

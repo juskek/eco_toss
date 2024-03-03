@@ -71,7 +71,7 @@ abstract class BaseEcoTossGame extends FlameGame<BaseEcoTossWorld> {
     final loadingTextComponent = TypingTextComponent(
       text: 'Loading assets...',
       size: Vector2(size.x, size.y * 0.5),
-      position: Vector2(0, size.y * 0.6),
+      position: Vector2(size.x / 2, size.y * 0.6),
     );
 
     camera.viewport.add(loadingTextComponent);
