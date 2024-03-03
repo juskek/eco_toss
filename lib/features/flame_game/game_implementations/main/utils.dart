@@ -16,3 +16,14 @@ BinType getCorrectBinTypeForThrowable(ThrowableType throwableType) {
       throw UnimplementedError();
   }
 }
+
+String windSpeedDoubleToPrettyString(double windSpeedMps2) {
+  if (windSpeedMps2 == 0) {
+    return '0';
+  }
+  final windSpeedMps2String = windSpeedMps2.toStringAsFixed(1);
+  if (windSpeedMps2String.contains('0.0')) {
+    return '0';
+  }
+  return windSpeedMps2String;
+}

@@ -4,6 +4,7 @@ import 'package:eco_toss/features/flame_game/background/generate_cloud_component
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_world.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/main/game_view_model.dart';
+import 'package:eco_toss/features/flame_game/game_implementations/main/utils.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/text/typing_text_component.dart';
 import 'package:eco_toss/pages/game_page/game_page.dart';
@@ -47,7 +48,7 @@ class EcoTossGame extends BaseEcoTossGame {
       size: Vector2(size.x, size.y * 0.5),
       position: Vector2(0, size.y * 0.8),
     );
-    const windText = 'Wind Speed: 0 m/s';
+    const windText = 'Wind Speed: 0';
 
     windTextComponent = TypingTextComponent(
       text: windText,
@@ -68,7 +69,7 @@ class EcoTossGame extends BaseEcoTossGame {
         windSpeedMps2 = generateRandomWindSpeed();
       }
       windTextComponent.text = windText.replaceFirst(
-          '0', windSpeedMps2 == 0 ? '0' : windSpeedMps2.toStringAsFixed(1));
+          '0', windSpeedDoubleToPrettyString(windSpeedMps2));
       camera.backdrop.remove(cloudComponent!);
       cloudComponent =
           generateCloudComponent(speedMps: windSpeedMps2, size: size);
