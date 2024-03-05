@@ -22,16 +22,8 @@ class EcoTossGame extends BaseEcoTossGame {
 
   @override
   void onBinned({int amount = 1}) {
-    final throwableType = gameViewModel.currentThrowableType;
-    final binType = gameViewModel.currentBinType.value;
-    final binIndex = gameViewModel.currentBinIndex.value;
-    if (isThrowableInCorrectBin(binType[binIndex], throwableType)) {
-      scoreNotifier.value += amount;
-      audioController.playSfx(SfxType.score);
-      return;
-    }
-
-    onMiss();
+    scoreNotifier.value += amount;
+    audioController.playSfx(SfxType.score);
   }
 
   @override
@@ -81,26 +73,17 @@ class EcoTossGame extends BaseEcoTossGame {
     });
 
     scoreNotifier.addListener(() async {
-      if (scoreNotifier.value == 0) {
-        gameViewModel.stopRandomBinTypeChanges();
-        windSpeedMps2 = 0;
-        camera.backdrop.remove(cloudComponent!);
-        cloudComponent =
-            generateCloudComponent(speedMps: windSpeedMps2, size: size);
-        camera.backdrop.add(cloudComponent!);
-        windTextComponent.text = windText.replaceFirst(
-            '0', windSpeedDoubleToPrettyString(windSpeedMps2));
-      }
+      windSpeedMps2 = 0;
 
-      if (scoreNotifier.value > 0) {
+      if (scoreNotifier.value != 0) {
         windSpeedMps2 = generateRandomWindSpeed();
-        camera.backdrop.remove(cloudComponent!);
-        cloudComponent =
-            generateCloudComponent(speedMps: windSpeedMps2, size: size);
-        camera.backdrop.add(cloudComponent!);
-        windTextComponent.text = windText.replaceFirst(
-            '0', windSpeedDoubleToPrettyString(windSpeedMps2));
       }
+      windTextComponent.text = windText.replaceFirst(
+          '0', windSpeedDoubleToPrettyString(windSpeedMps2));
+      camera.backdrop.remove(cloudComponent!);
+      cloudComponent =
+          generateCloudComponent(speedMps: windSpeedMps2, size: size);
+      camera.backdrop.add(cloudComponent!);
 
       if (scoreNotifier.value == gameViewModel.previousHighScore + 1) {
         camera.viewport.add(highScoreTextComponent);
@@ -111,10 +94,6 @@ class EcoTossGame extends BaseEcoTossGame {
 
       if (scoreNotifier.value > gameViewModel.previousHighScore) {
         await gameViewModel.setHighScore(scoreNotifier.value);
-      }
-
-      if (scoreNotifier.value > 2) {
-        gameViewModel.randomlyChangeBins = true;
       }
     });
 

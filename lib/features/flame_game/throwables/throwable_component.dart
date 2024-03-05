@@ -4,7 +4,6 @@ import 'package:eco_toss/features/audio/sounds.dart';
 import 'package:eco_toss/features/flame_game/base_eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/bin/bin_hole_coordinates.dart';
-import 'package:eco_toss/features/flame_game/game_implementations/main/eco_toss_game.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:eco_toss/features/flame_game/positioning/positioning.dart';
 import 'package:eco_toss/features/flame_game/utils/load_sprite_animation_from_files.dart';
@@ -102,13 +101,7 @@ abstract class ThrowableComponent
       }
 
       isThrown = true;
-
       game.audioController.playSfx(SfxType.toss);
-
-      final ecoTossGame = findGame()!;
-      if (ecoTossGame is EcoTossGame) {
-        ecoTossGame.gameViewModel.cancelBinTypeChangeTimer();
-      }
 
       current = ObjectState.thrown;
       xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
