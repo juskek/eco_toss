@@ -1,8 +1,22 @@
+import 'package:eco_toss/features/flame_game/bin/bin_dimensions.dart';
 import 'package:eco_toss/features/flame_game/physics/physics.dart';
 import 'package:flame/components.dart';
 import 'package:logging/logging.dart';
 
 final _log = Logger('Positioning');
+
+Vector2 getCentreOfCanvas(Vector2 canvasSize) {
+  return Vector2(canvasSize.x / 2, canvasSize.y / 2);
+}
+
+Vector2 getBinBackTopEdgePixels() {
+  final binBackTopEdgeXYZMetres = Vector3(
+      EcoToss3DSpace.xMidMetres,
+      EcoToss3DSpace.yMinMetres + BinDimensions.heightMetres,
+      EcoToss3DSpace.zMaxMetres);
+
+  return EcoTossPositioning.xyzMetresToXyPixels(binBackTopEdgeXYZMetres);
+}
 
 abstract class EcoTossPositioning {
   static double? _height;
