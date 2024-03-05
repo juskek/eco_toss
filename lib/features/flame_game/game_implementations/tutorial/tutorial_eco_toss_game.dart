@@ -37,7 +37,7 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
     tutorialTextPosition = Vector2(size.x / 2, size.y * 0.8);
 
     instructionsText = TypingTextComponent(
-      text: 'Swipe to throw the paper ball',
+      text: 'Swipe to throw the paper ball into the bin!',
       size: tutorialTextSize,
       position: tutorialTextPosition,
     );
@@ -58,27 +58,25 @@ class TutorialEcoTossGame extends BaseEcoTossGame with HasGameRef {
         thrownNotifier.value = true;
       }
     });
-
     thrownNotifier.addListener(() {
-      if (thrownNotifier.value) {
-        assert(instructionsText != null);
+      if (thrownNotifier.value && scoreNotifier.value == 0) {
         camera.viewport.remove(instructionsText!);
-        Future.delayed(const Duration(seconds: 2), () {
-          if (scoreNotifier.value == 0) {
-            instructionsText = TypingTextComponent(
-                text:
-                    "Good throw! To score points, throw the paper ball into the bin. Let's aim for 3 points!",
-                size: size,
-                position: tutorialTextPosition);
-          } else {
-            instructionsText = TypingTextComponent(
-                text:
-                    "Great! You scored a point by throwing the paper ball into the bin! Let's try to get 3 points.",
-                size: size,
-                position: tutorialTextPosition);
-          }
-          camera.viewport.add(instructionsText!);
-        });
+        instructionsText = TypingTextComponent(
+            text: "Try using long swipes for better accuracy.",
+            size: size,
+            position: tutorialTextPosition);
+        camera.viewport.add(instructionsText!);
+      }
+    });
+
+    scoreNotifier.addListener(() {
+      if (scoreNotifier.value == 1) {
+        camera.viewport.remove(instructionsText!);
+        instructionsText = TypingTextComponent(
+            text: "Score! Let's try to get 3 points.",
+            size: size,
+            position: tutorialTextPosition);
+        camera.viewport.add(instructionsText!);
       }
     });
 
