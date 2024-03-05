@@ -10,7 +10,7 @@ publish_to: "none"
 # In iOS, X represents CFBundleVersion
 # Version Control works by setting X, and updating the Firestore /admin/minVersionNo document
 # See AppVersionRepository.checkIfAppUpdateIsNecessary() for logic
-version: 0.1.7+8
+version: 0.1.8+9
 
 environment:
   sdk: "^3.2.3"
