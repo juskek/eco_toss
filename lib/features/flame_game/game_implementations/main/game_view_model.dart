@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:eco_toss/common_imports.dart';
@@ -44,23 +45,64 @@ class GameViewModel extends ChangeNotifier {
     _leaderboardRepository.postEntry(userId, userName!, currentHighScore!);
   }
 
-  final ValueNotifier<BinType> _currentBinType = ValueNotifier(BinType.paper);
+  final ValueNotifier<List<BinType>> _currentBinType =
+      ValueNotifier([BinType.paper]);
 
-  ValueNotifier<BinType> get currentBinType => _currentBinType;
+  ValueNotifier<List<BinType>> get currentBinType => _currentBinType;
+
+  final ValueNotifier<int> currentBinIndex = ValueNotifier(0);
 
   final ValueNotifier<ThrowableType> _currentThrowableType =
       ValueNotifier(ThrowableType.paperBall);
 
   ThrowableType get currentThrowableType => _currentThrowableType.value;
 
-  void cycleThrowablesRandomly() {
-    int randomIndex = Random().nextInt(ThrowableType.values.length);
-    _currentThrowableType.value = ThrowableType.values[randomIndex];
+  Timer? binTypeChangeTimer;
 
-    _currentBinType.value =
+  bool randomlyChangeBins = false;
+
+  void cycleThrowablesRandomly() {
+    _currentThrowableType.value =
+        ThrowableType.values[Random().nextInt(ThrowableType.values.length)];
+
+    final correctBinType =
         getCorrectBinTypeForThrowable(_currentThrowableType.value);
 
+    if (!randomlyChangeBins) {
+      _currentBinType.value = [correctBinType];
+      notifyListeners();
+      return;
+    }
+
+    _currentBinType.value = [
+      correctBinType,
+      getAnotherRandomBinType(correctBinType)
+    ];
+
+    currentBinIndex.value = Random().nextInt(2);
+
+    binTypeChangeTimer ??= Timer.periodic(const Duration(seconds: 2), (timer) {
+      currentBinIndex.value = currentBinIndex.value == 0 ? 1 : 0;
+    });
+
     notifyListeners();
+  }
+
+  void startRandomBinTypeChanges() {
+    randomlyChangeBins = true;
+  }
+
+  void stopRandomBinTypeChanges() {
+    randomlyChangeBins = false;
+    _currentBinType.value = [
+      getCorrectBinTypeForThrowable(_currentThrowableType.value)
+    ];
+    currentBinIndex.value = 0;
+  }
+
+  void cancelBinTypeChangeTimer() {
+    binTypeChangeTimer?.cancel();
+    binTypeChangeTimer = null;
   }
 }
 

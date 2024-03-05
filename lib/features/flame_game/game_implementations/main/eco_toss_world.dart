@@ -34,19 +34,40 @@ class EcoTossWorld extends BaseEcoTossWorld {
     add(binComponents.binLabelComponent);
     add(binComponents.holeComponent);
 
+    game.gameViewModel.currentBinIndex.addListener(
+      () {
+        if (game.gameViewModel.randomlyChangeBins) {
+          remove(binComponents.backSurfaceComponent);
+          remove(binComponents.frontSurfaceComponent);
+          remove(binComponents.binLabelComponent);
+          remove(binComponents.holeComponent);
+          binComponents = createBinComponents(
+              binType: game.gameViewModel.currentBinType
+                  .value[game.gameViewModel.currentBinIndex.value],
+              midpointXMetres: 1);
+          add(binComponents.backSurfaceComponent);
+          add(binComponents.frontSurfaceComponent);
+          add(binComponents.binLabelComponent);
+          add(binComponents.holeComponent);
+        }
+      },
+    );
     game.gameViewModel.currentBinType.addListener(
       () {
-        remove(binComponents.backSurfaceComponent);
-        remove(binComponents.frontSurfaceComponent);
-        remove(binComponents.binLabelComponent);
-        remove(binComponents.holeComponent);
-        binComponents = createBinComponents(
-            binType: game.gameViewModel.currentBinType.value,
-            midpointXMetres: 1);
-        add(binComponents.backSurfaceComponent);
-        add(binComponents.frontSurfaceComponent);
-        add(binComponents.binLabelComponent);
-        add(binComponents.holeComponent);
+        if (!game.gameViewModel.randomlyChangeBins) {
+          remove(binComponents.backSurfaceComponent);
+          remove(binComponents.frontSurfaceComponent);
+          remove(binComponents.binLabelComponent);
+          remove(binComponents.holeComponent);
+          binComponents = createBinComponents(
+              binType: game.gameViewModel.currentBinType
+                  .value[game.gameViewModel.currentBinIndex.value],
+              midpointXMetres: 1);
+          add(binComponents.backSurfaceComponent);
+          add(binComponents.frontSurfaceComponent);
+          add(binComponents.binLabelComponent);
+          add(binComponents.holeComponent);
+        }
       },
     );
 
