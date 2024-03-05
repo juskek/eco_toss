@@ -49,7 +49,7 @@ class EcoTossGame extends BaseEcoTossGame {
     highScoreTextComponent = TypingTextComponent(
       text: 'New high score!',
       size: Vector2(size.x, size.y * 0.5),
-      position: Vector2(0, size.y * 0.8),
+      position: Vector2(size.x / 2, size.y * 0.8),
     );
     const windText = 'Wind Speed: 0';
 
