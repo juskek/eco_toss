@@ -51,7 +51,7 @@ class EcoTossGame extends BaseEcoTossGame {
       size: Vector2(size.x, size.y * 0.5),
       position: Vector2(size.x / 2, size.y * 0.8),
     );
-    const windText = 'Wind Speed: 0';
+    const windText = 'Wind Speed: 0 m/s direction';
 
     final binBackTopEdgeXYPixels = getBinBackTopEdgePixels();
 
@@ -61,7 +61,7 @@ class EcoTossGame extends BaseEcoTossGame {
     );
 
     windTextComponent = TypingTextComponent(
-      text: windText,
+      text: windText.replaceFirst('direction', ''),
       size: Vector2(size.x, TypingTextComponent.fontSize * 2),
       position: windTextPixelPosition,
     );
@@ -78,8 +78,21 @@ class EcoTossGame extends BaseEcoTossGame {
       if (scoreNotifier.value != 0) {
         windSpeedMps2 = generateRandomWindSpeed();
       }
-      windTextComponent.text = windText.replaceFirst(
-          '0', windSpeedDoubleToPrettyString(windSpeedMps2));
+
+      final windSpeedTextValue = windSpeedDoubleToPrettyString(windSpeedMps2);
+
+      final windSpeedDirectionText = windSpeedTextValue == '0'
+          ? ''
+          : windSpeedMps2 > 0
+              ? "👉"
+              : '👈';
+
+      final windTextWithValue = windText.replaceFirst('0', windSpeedTextValue);
+      final windTextWithDirection = windTextWithValue.replaceFirst(
+        'direction',
+        windSpeedDirectionText,
+      );
+      windTextComponent.text = windTextWithDirection;
       camera.backdrop.remove(cloudComponent!);
       cloudComponent =
           generateCloudComponent(speedMps: windSpeedMps2, size: size);
