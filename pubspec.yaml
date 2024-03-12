@@ -13,7 +13,7 @@ publish_to: "none"
 version: 0.2.1+13
 
 environment:
-  sdk: "^3.2.3"
+  sdk: "3.2.3"
   flutter: "3.16.6"
   # Also,
   # use XCode 15.1
