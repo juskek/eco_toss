@@ -3,7 +3,7 @@ import 'package:eco_toss/features/flame_game/utils/floor_far_edge.dart';
 import 'package:eco_toss/features/flame_game/utils/show_xyz_dimensions.dart';
 import 'package:flame/components.dart';
 
-const bool showGameTuningUtils = false;
+const bool showGameTuningUtils = true;
 
 abstract class BaseEcoTossWorld extends World
     with HasCollisionDetection, HasGameRef<BaseEcoTossGame> {
