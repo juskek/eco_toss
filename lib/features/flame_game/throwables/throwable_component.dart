@@ -153,7 +153,7 @@ abstract class ThrowableComponent
 
     applyWind(dt);
 
-    applyAirResistance();
+    // applyAirResistance(dt);
 
     applyGravity(dt);
 
@@ -317,7 +317,7 @@ abstract class ThrowableComponent
     removeFromParent();
   }
 
-  void applyAirResistance() {
+  void applyAirResistance(double dt) {
     xVelocityMps +=
         -xVelocityMps * EcoTossThrow.airResistanceVelocityMultiplier;
     yVelocityMps -=

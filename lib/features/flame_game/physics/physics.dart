@@ -44,8 +44,8 @@ abstract class EcoTossThrow {
   static const bounceEnergyYVelocityMultiplier = 0.5;
   static const bounceEnergyZVelocityMultiplier = 0.3;
 
-  static const velocityMps = 7.0;
-  static const zVelocityMps = 8.5;
+  static const velocityMps = 4.0;
+  static const zVelocityMps = 4.5;
 }
 
 const scaleStart = 3.0;
