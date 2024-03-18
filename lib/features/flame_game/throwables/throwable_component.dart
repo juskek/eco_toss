@@ -124,7 +124,7 @@ abstract class ThrowableComponent
         [
           await game.loadSprite(
             '${imageFolderPath}0001.png',
-            srcSize: Vector2.all(1080),
+            srcSize: Vector2.all(throwableImagePixelSize),
             srcPosition: Vector2(0, 0),
           )
         ],

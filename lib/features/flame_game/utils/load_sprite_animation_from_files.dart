@@ -1,6 +1,8 @@
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 
+const double throwableImagePixelSize = 540;
+
 Future<SpriteAnimation> loadSpriteAnimationFromFilesToGame(
     Game game, String folderPath, int numberOfFiles) async {
   List<Sprite> sprites = [];
@@ -9,7 +11,7 @@ Future<SpriteAnimation> loadSpriteAnimationFromFilesToGame(
     String frameNumber = i.toString().padLeft(4, '0');
     Sprite sprite = await game.loadSprite(
       '$folderPath$frameNumber.png',
-      srcSize: Vector2.all(1080),
+      srcSize: Vector2.all(throwableImagePixelSize),
       srcPosition: Vector2(0, 0),
     );
     sprites.add(sprite);
@@ -29,7 +31,7 @@ Future<SpriteAnimation> loadSpriteAnimationFromFilesToWidget(
     String frameNumber = i.toString().padLeft(4, '0');
     sprites.add(await Sprite.load(
       '$folderPath$frameNumber.png',
-      srcSize: Vector2.all(1080),
+      srcSize: Vector2.all(throwableImagePixelSize),
       srcPosition: Vector2(0, 0),
     ));
   }
