@@ -105,7 +105,8 @@ abstract class ThrowableComponent
 
       current = ObjectState.thrown;
       xVelocityMps = EcoTossThrow.xVelocityMps * cos(-averageAngle);
-      yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
+      yVelocityMps = EcoTossThrow.yVelocityMps;
+      // yVelocityMps = EcoTossThrow.yVelocityMps * sin(-averageAngle);
       zVelocityMps = EcoTossThrow.zVelocityMps;
 
       _angles.clear();
@@ -291,6 +292,7 @@ abstract class ThrowableComponent
 
   void checkIfScored(double dt) {
     if (isBallSlightlyBelowHole()) {
+      print('x: $xPositionMetres, y: $yPositionMetres, z: $zPositionMetres');
       onBinned();
       removeFromParent();
     }
