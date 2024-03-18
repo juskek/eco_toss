@@ -42,16 +42,17 @@ abstract class EcoTossThrow {
 
   static const bounceEnergyXVelocityMultiplier = 0.5;
   static const bounceEnergyYVelocityMultiplier = 0.5;
-  static const bounceEnergyZVelocityMultiplier = 0.3;
+  static const bounceEnergyZVelocityMultiplier = 0.05;
 
-  static const velocityMps = 7.0;
-  static const zVelocityMps = 8.5;
+  static const xVelocityMps = 5.0;
+  static const yVelocityMps = 8.0;
+  static const zVelocityMps = 4.0;
 }
 
 const scaleStart = 3.0;
 const scaleEnd = 1.0;
 
-const gravityMps2 = 9.81;
+const gravityMps2 = 18;
 
 const scaleRate = (scaleStart - scaleEnd) /
     (EcoToss3DSpace.zMaxMetres - EcoToss3DSpace.zMinMetres);
@@ -72,6 +73,6 @@ double applyGravityToYVelocity(double timeSeconds, double yVelocityMps) {
 double generateRandomWindSpeed() {
   /// Scales to [0, maxWindSpeed) then shift to [-maxWindSpeed, maxWindSpeed)
   double minMaxWindSpeed = 3.5;
-  return Random().nextDouble() * minMaxWindSpeed * 2 - minMaxWindSpeed;
   // return minMaxWindSpeed;
+  return Random().nextDouble() * minMaxWindSpeed * 2 - minMaxWindSpeed;
 }

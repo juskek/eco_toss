@@ -104,8 +104,9 @@ abstract class ThrowableComponent
       game.audioController.playSfx(SfxType.toss);
 
       current = ObjectState.thrown;
-      xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
-      yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
+      xVelocityMps = EcoTossThrow.xVelocityMps * cos(-averageAngle);
+      yVelocityMps = EcoTossThrow.yVelocityMps;
+      // yVelocityMps = EcoTossThrow.yVelocityMps * sin(-averageAngle);
       zVelocityMps = EcoTossThrow.zVelocityMps;
 
       _angles.clear();
@@ -153,7 +154,7 @@ abstract class ThrowableComponent
 
     applyWind(dt);
 
-    applyAirResistance();
+    // applyAirResistance(dt);
 
     applyGravity(dt);
 
@@ -291,6 +292,7 @@ abstract class ThrowableComponent
 
   void checkIfScored(double dt) {
     if (isBallSlightlyBelowHole()) {
+      print('x: $xPositionMetres, y: $yPositionMetres, z: $zPositionMetres');
       onBinned();
       removeFromParent();
     }
@@ -317,7 +319,7 @@ abstract class ThrowableComponent
     removeFromParent();
   }
 
-  void applyAirResistance() {
+  void applyAirResistance(double dt) {
     xVelocityMps +=
         -xVelocityMps * EcoTossThrow.airResistanceVelocityMultiplier;
     yVelocityMps -=

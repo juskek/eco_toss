@@ -59,8 +59,12 @@ abstract class EcoTossPositioning {
     return _width!;
   }
 
-  static double get xyzPixelsPerMetre =>
-      width / (EcoToss3DSpace.xMaxMetres - EcoToss3DSpace.xMinMetres);
+  static double get xyzPixelsPerMetre => 195.0;
+  // static double get xyzPixelsPerMetre {
+  //   print(
+  //       "pixelsPerMetre ${width / (EcoToss3DSpace.xMaxMetres - EcoToss3DSpace.xMinMetres)}");
+  //   return width / (EcoToss3DSpace.xMaxMetres - EcoToss3DSpace.xMinMetres);
+  // }
 
   static double xSizeMetresToPixels(double xSizeMetres) {
     return xSizeMetres * xyzPixelsPerMetre;
