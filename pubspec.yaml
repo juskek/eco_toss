@@ -61,7 +61,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
     - assets/images/throwables/
     - assets/images/throwables/banana/
     - assets/images/throwables/can/

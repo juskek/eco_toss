@@ -7,8 +7,8 @@ abstract class BinDimensions {
 
   /// The scale factor for the bin's back surface image.
   /// This is used to scale the image to match the bin's logical size (in metres).
-  static const binBackSurfaceImageScale = 0.25;
-  static const binFrontSurfaceImageScale = 0.25;
+  static const binBackSurfaceImageScale = 0.5;
+  static const binFrontSurfaceImageScale = 0.5;
   static const binBackSurfaceImageYCorrectionPixels = 50.0;
   static const binFrontSurfaceImageYCorrectionPixels = 5.0;
 }
