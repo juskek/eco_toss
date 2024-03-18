@@ -76,6 +76,19 @@ class SettingsPage extends StatelessWidget {
                       ],
                     ),
                     _gap,
+                    Text('Others',
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Tutorial'),
+                        FilledButton.tonal(
+                            onPressed: () => context.go('/tutorial'),
+                            child: const Text('Teach me again!'))
+                      ],
+                    ),
+                    _gap,
                     Text('Credits',
                         style: Theme.of(context).textTheme.bodyLarge),
                     const Divider(),
