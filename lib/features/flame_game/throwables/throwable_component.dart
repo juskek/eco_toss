@@ -104,7 +104,7 @@ abstract class ThrowableComponent
       game.audioController.playSfx(SfxType.toss);
 
       current = ObjectState.thrown;
-      xVelocityMps = EcoTossThrow.velocityMps * cos(-averageAngle);
+      xVelocityMps = EcoTossThrow.xVelocityMps * cos(-averageAngle);
       yVelocityMps = EcoTossThrow.velocityMps * sin(-averageAngle);
       zVelocityMps = EcoTossThrow.zVelocityMps;
 
