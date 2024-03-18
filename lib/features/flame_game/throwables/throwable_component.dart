@@ -189,7 +189,7 @@ abstract class ThrowableComponent
     // checks if the ball is within a certain +- threshold of each edge of the hole,
     // and if it is within a certain threshold of the top of the hole
 
-    const yThresholdMetres = 0.15;
+    const yThresholdMetres = 0.25;
     // ignore if ball y position is not near the top of the bin
     if (yPositionMetres < binHoleCoordinatesMetres.frontLeftCornerMetres.y ||
         yPositionMetres >
@@ -197,7 +197,7 @@ abstract class ThrowableComponent
                 yThresholdMetres) {
       return false;
     }
-    const thresholdMetres = 0.05;
+    const thresholdMetres = 0.06;
     // front edge
     if (zPositionMetres >= binHoleCoordinatesMetres.frontLeftCornerMetres.z - thresholdMetres &&
         zPositionMetres <=
