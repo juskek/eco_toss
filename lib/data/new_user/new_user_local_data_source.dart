@@ -8,9 +8,7 @@ class NewUserLocalDataSource {
 
   Future<bool> get hasPlayedTutorial async {
     // await box.put('hasPlayedTutorial', false);
-    // return await box.get('hasPlayedTutorial', defaultValue: false) as bool;
-    // removing tutorial for now because it is bugged
-    return true;
+    return await box.get('hasPlayedTutorial', defaultValue: false) as bool;
   }
 
   Future<bool> get hasOnboarded async {
