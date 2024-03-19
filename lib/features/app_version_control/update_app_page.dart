@@ -1,5 +1,6 @@
 import 'package:eco_toss/atomic/atoms/eco_toss_logo_atom.dart';
 import 'package:eco_toss/atomic/atoms/eco_toss_title_atom.dart';
+import 'package:eco_toss/atomic/atoms/spacer_atom.dart';
 import 'package:eco_toss/atomic/responsive_screen.dart';
 import 'package:eco_toss/common_imports.dart';
 import 'package:eco_toss/features/flame_game/game_implementations/home_page/background_only_game.dart';
@@ -31,12 +32,9 @@ class UpdateAppPage extends StatelessWidget {
               rectangularMenuArea: Center(
                   child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "We've released new changes, update your app to get the latest features!",
-                      textAlign: TextAlign.center,
-                    ),
+                  const Text(
+                    "We've released new changes, update your app to get the latest features!",
+                    textAlign: TextAlign.center,
                   ),
                   if (Responsive.isIOS())
                     FilledButton.icon(
@@ -49,7 +47,8 @@ class UpdateAppPage extends StatelessWidget {
                         label: const Text('Update on Google Play'),
                         icon: const Icon(SimpleIcons.googleplay),
                         onPressed: () => StoreRedirect.redirect(
-                            androidAppId: 'tech.kek.socialgames.app')),
+                            androidAppId: 'com.justinkek.eco_toss')),
+                  const SpacerAtom.large(),
                 ],
               )))
         ],
