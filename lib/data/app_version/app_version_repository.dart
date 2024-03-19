@@ -29,4 +29,14 @@ class AppVersionRepository implements IAppVersionRepository {
       return AppVersionStatus.deprecated;
     }
   }
+
+  @override
+  Future<int> getInstalledVersionNo() async {
+    try {
+      return await _appVersionLocalDataSource.getInstalledVersionNo();
+    } catch (e) {
+      debugPrint('Error in getInstalledVersionNo: $e');
+      return -1;
+    }
+  }
 }

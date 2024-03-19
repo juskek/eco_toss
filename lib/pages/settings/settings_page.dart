@@ -1,4 +1,5 @@
 import 'package:eco_toss/atomic/atoms/padding_atom.dart';
+import 'package:eco_toss/features/app_version_control/app_version_control_view_model.dart';
 import 'package:eco_toss/features/name/name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +15,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appVersionControlViewModel =
+        context.read<AppVersionControlViewModel>();
     final settings = context.watch<SettingsController>();
     final palette = context.watch<Palette>();
 
@@ -86,6 +89,24 @@ class SettingsPage extends StatelessWidget {
                         FilledButton.tonal(
                             onPressed: () => context.go('/tutorial'),
                             child: const Text('Teach me again!'))
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Version'),
+                        FutureBuilder(
+                          future: appVersionControlViewModel
+                              .getInstalledVersionNo(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return Text(snapshot.data.toString());
+                            } else {
+                              return const Text('Loading...');
+                            }
+                          },
+                        ),
                       ],
                     ),
                     _gap,
