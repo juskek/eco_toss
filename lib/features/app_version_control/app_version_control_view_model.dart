@@ -12,4 +12,8 @@ class AppVersionControlViewModel extends ChangeNotifier {
   Future<AppVersionStatus> checkAppVersionStatus() async {
     return await _appVersionRepository.checkIfAppUpdateIsNecessary();
   }
+
+  Future<int> getInstalledVersionNo() async {
+    return await _appVersionRepository.getInstalledVersionNo();
+  }
 }
